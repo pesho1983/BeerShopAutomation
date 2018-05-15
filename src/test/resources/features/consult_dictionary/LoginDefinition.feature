@@ -1,6 +1,6 @@
 Feature: Login Functionality
   In order to purchase beers
-  As an customer
+  As a customer
   I want to be able to login
 
   Scenario: Successful login
