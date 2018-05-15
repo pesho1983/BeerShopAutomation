@@ -31,4 +31,5 @@ public class LoginSteps {
     public void assertUserIsOnCatalogPage() {
         Assert.assertEquals("http://192.168.10.158/BeerShop/catalog.php#", loginPage.getDriver().getCurrentUrl());
     }
+
 }

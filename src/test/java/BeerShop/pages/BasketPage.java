@@ -1,0 +1,81 @@
+package BeerShop.pages;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
+import net.serenitybdd.core.pages.WebElementFacade;
+import net.thucydides.core.annotations.DefaultUrl;
+import net.thucydides.core.pages.PageObject;
+
+
+@DefaultUrl("http://192.168.10.158/BeerShop/viewCart.php")
+public class BasketPage extends PageObject {
+    @FindBy(xpath = "//tbody/tr[1]/td[2]")
+    private WebElementFacade firstProductPrice;
+
+    @FindBy(xpath = "//tr/td[text()]")
+    private WebElementFacade productName;
+
+    @FindBy(xpath = "//tfoot/tr/td/a")
+    private WebElementFacade backToCatalogBtn;
+
+    @FindBy(xpath = "//input[@class=\"form-control text-center\"]")
+    private WebElementFacade quantity;
+
+    @FindBy(xpath = "//p")
+    private WebElementFacade quantityEmpty;
+
+    @FindBy(xpath = "//a[@href=\"checkout.php\"]")
+    private WebElementFacade checkout;
+
+    @FindBy(id = "wallet")
+    private WebElementFacade walletBtn;
+
+    @FindBy(xpath = "//div[@class=\"alert alert-danger\"]")
+    private WebElementFacade errorMessageBox;
+
+
+    @FindBy(xpath = "//p[contains(text(), 'Your order')]")
+    private WebElementFacade successOrderMsgBox;
+
+    @FindBy(xpath = "//a [@class =\"btn btn-success orderBtn\"]")
+    private WebElementFacade placeOrderBtn;
+
+    public WebElementFacade getPlaceOrderBtn() {
+        return placeOrderBtn;
+    }
+
+    public WebElementFacade getFirstProductPrice() {
+        return firstProductPrice;
+    }
+
+    public WebElementFacade getWalletBtn() {
+        return walletBtn;
+    }
+
+    public WebElementFacade getCheckout() {
+        return checkout;
+    }
+
+    public WebElementFacade getQuantityEmpty() {
+        return quantityEmpty;
+    }
+
+    public WebElementFacade getQuantity() {
+        return quantity;
+    }
+
+    public WebElementFacade getBackToCatalogBtn() {
+        return backToCatalogBtn;
+    }
+
+    public WebElementFacade getProductName() {
+        return productName;
+    }
+
+    public String getSuccesMsgText() {
+        return successOrderMsgBox.getText();
+    }
+
+    public String getErrorOrderMsgBox() {
+        return errorMessageBox.getText();
+    }
+}
