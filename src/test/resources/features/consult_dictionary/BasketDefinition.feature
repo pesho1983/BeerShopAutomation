@@ -1,142 +1,142 @@
-Feature: Basket functionality
+Feature: basket functionality
   In order to make orders
   As a user
   I want to be able to purchase products from my shopping cart
 
 
-  Scenario: Empty Basket
-    Given The user is logged in:
+  Scenario: empty Basket
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    When The user navigates to basket page
+    When a user navigates to basket page
     Then Informational message "Your cart is empty....." should appear
 
-  Scenario: Add single product
-    Given The user is logged in:
+  Scenario: add single product
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    When The user adds product to shopping cart
-    Then The user should be redirected to "Basket"
-    And The product is present
+    When user adds product to shopping cart
+    Then user should be redirected to "Basket"
+    And the product is present
 
-  Scenario: Add multiple beers
-    Given Given The user is logged in:
+  Scenario: add multiple beers
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    When The user adds multiple products to shopping cart
-    Then The user should be redirected to "Basket"
-    And The products are present
+    When a user adds multiple products to shopping cart
+    Then a user should be redirected to "Basket"
+    And the products are present
 
-  Scenario: Back to Catalog from Basket Page
-    Given Given The user is logged in:
+  Scenario: back to Catalog from Basket Page
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And User is on the "Basket" page
-    When Pressing "Continue Shopping" button is clicked
-    Then The user is redirected to "Catalog"
+    And user is on the "Basket" page
+    When pressing "Continue Shopping" button is clicked
+    Then a user is redirected to "Catalog"
 
-  Scenario: Redirect to "Wallet"
-    Given Given The user is logged in:
+  Scenario: redirect to "Wallet"
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And User is on the "Basket" page
-    When Pressing the wallet icon
-    Then The user is redirected to wallet page
+    And user is on the "Basket" page
+    When pressing the wallet icon
+    Then a user is redirected to wallet page
 
-  Scenario: Removing product
-    Given The user is logged in:
+  Scenario: removing product
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And User is on the "Basket" page
-    And Product is added to the basket
-    When Pressing on the trash button icon
-    Then The product is removed from the "Basket"
+    And user is on the "Basket" page
+    And product is added to the basket
+    When pressing on the trash button icon
+    Then the product is removed from the "Basket"
 
-  Scenario: Redirecting to "Checkout"
-    Given The user is logged in:
+  Scenario: redirecting to "Checkout"
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And User is on the "Basket" page
-    And Product is added to the basket
-    When Pressing the "Checkout" button
-    Then The user is redirected to "checkout page"
+    And user is on the "Basket" page
+    And product is added to the basket
+    When pressing the "Checkout" button
+    Then a user is redirected to "checkout page"
 
-  Scenario: Change positive quantity
-    Given The user is logged in:
+  Scenario: change positive quantity
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And User is on the "Basket" page
-    And Product is added to the basket
-    When The user increases the quantity
-    Then The product quantity should be changed
+    And user is on the "Basket" page
+    And product is added to the basket
+    When a user increases the quantity
+    Then the product quantity should be changed
 
-  Scenario: Change with negative quantity
-    Given The user is logged in:
+  Scenario: change with negative quantity
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And User is on the "Basket" page
-    And Product is added to the basket
-    When The user sets quantity to negative number
-    Then An alert message appears
-    And Product quantity remains unchanged
+    And user is on the "Basket" page
+    And product is added to the basket
+    When a user sets quantity to negative number
+    Then an alert message appears
+    And product quantity remains unchanged
 
-  Scenario: Change quantity to zero
-    Given The user is logged in:
+  Scenario: change quantity to zero
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And User is on the "Basket" page
-    And Product is added to the basket
-    When The user sets quantity to zero
-    Then The product is removed from cart
+    And user is on the "Basket" page
+    And product is added to the basket
+    When a user sets quantity to zero
+    Then the product is removed from cart
 
-  Scenario: Calculate product subtotal
-    Given The user is logged in:
+  Scenario: calculate product subtotal
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And User is on the "Basket" page
-    And Product is added to the basket
-    When The user increases the quantity
-    Then The product subtotal should be calculated
+    And user is on the "Basket" page
+    And product is added to the basket
+    When a user increases the quantity
+    Then the product subtotal should be calculated
 
-  Scenario: Calculate basket total
-    Given The user is logged in:
+  Scenario: calculate basket total
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And User is on the "Basket" page
-    When Adding multiple product to the basket
-    Then Basket total price is summed
+    And user is on the "Basket" page
+    When adding multiple product to the basket
+    Then basket total price is summed
 
-  Scenario: Checkout shipping details
-    Given The user is logged in:
+  Scenario: checkout shipping details
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And User is on the "Basket" page
-    When Pressing the "Checkout" button
-    Then The shipping details are displayed
-    And The information corresponds to the logged user
+    And user is on the "Basket" page
+    When pressing the "Checkout" button
+    Then the shipping details are displayed
+    And the information corresponds to the logged user
 
-  Scenario: Place order successfully
-    Given The user is logged in:
+  Scenario: place order successfully
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And On the "Checkout" page
-    When Pressing the "Place order" button
-    Then The user is redirected to an order success page
-    And The success order message appears
+    And on the "Checkout" page
+    When pressing the "Place order" button
+    Then a user is redirected to an order success page
+    And the success order message appears
 
-  Scenario: Place order with insufficient funds
-    Given The user is logged in:
+  Scenario: place order with insufficient funds
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And On the "Checkout" page
-    When Pressing the "Place order" button
-    Then An error message about insufficient funds appears
+    And on the "Checkout" page
+    When pressing the "Place order" button
+    Then an error message about insufficient funds appears
 
-  Scenario: Insufficient amount of beers
-    Given The user is logged in:
+  Scenario: insufficient amount of beers
+    Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And On the "Checkout" page
-    When Pressing the "Place order" button
-    Then An error message about insufficient amount appears
+    And on the "Checkout" page
+    When pressing the "Place order" button
+    Then an error message about insufficient amount appears
 
