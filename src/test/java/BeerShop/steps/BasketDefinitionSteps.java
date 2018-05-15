@@ -1,6 +1,7 @@
 package BeerShop.steps;
 
 import BeerShop.steps.serenity.BasketSteps;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -59,12 +60,6 @@ public class BasketDefinitionSteps {
 
     @And("^The products are present$")
     public void theProductsArePresent() {
-
-
-    }
-
-    @And("^On the Basket Page$")
-    public void onTheBasketPage() {
 
 
     }
@@ -216,6 +211,11 @@ public class BasketDefinitionSteps {
     @Then("^An error message about insufficient amount appears$")
     public void anErrorMessageAboutInsufficientAmountAppears() {
 
+
+    }
+
+    @And("^User is on the \"([^\"]*)\" page$")
+    public void userIsOnThePage(String arg0) {
 
     }
 }

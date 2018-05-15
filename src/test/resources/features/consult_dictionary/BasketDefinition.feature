@@ -31,7 +31,7 @@ Feature: Basket functionality
     Given Given The user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And On the Basket Page
+    And User is on the "Basket" page
     When Pressing "Continue Shopping" button is clicked
     Then The user is redirected to "Catalog"
 
@@ -39,7 +39,7 @@ Feature: Basket functionality
     Given Given The user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And On the Basket Page
+    And User is on the "Basket" page
     When Pressing the wallet icon
     Then The user is redirected to wallet page
 
@@ -47,7 +47,7 @@ Feature: Basket functionality
     Given The user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And On the Basket Page
+    And User is on the "Basket" page
     And Product is added to the basket
     When Pressing on the trash button icon
     Then The product is removed from the "Basket"
@@ -56,7 +56,7 @@ Feature: Basket functionality
     Given The user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And On the Basket Page
+    And User is on the "Basket" page
     And Product is added to the basket
     When Pressing the "Checkout" button
     Then The user is redirected to "checkout page"
@@ -65,7 +65,7 @@ Feature: Basket functionality
     Given The user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And On the Basket Page
+    And User is on the "Basket" page
     And Product is added to the basket
     When The user increases the quantity
     Then The product quantity should be changed
@@ -74,7 +74,7 @@ Feature: Basket functionality
     Given The user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And On the Basket Page
+    And User is on the "Basket" page
     And Product is added to the basket
     When The user sets quantity to negative number
     Then An alert message appears
@@ -84,7 +84,7 @@ Feature: Basket functionality
     Given The user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And On the Basket Page
+    And User is on the "Basket" page
     And Product is added to the basket
     When The user sets quantity to zero
     Then The product is removed from cart
@@ -93,7 +93,7 @@ Feature: Basket functionality
     Given The user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And On the Basket Page
+    And User is on the "Basket" page
     And Product is added to the basket
     When The user increases the quantity
     Then The product subtotal should be calculated
@@ -102,7 +102,7 @@ Feature: Basket functionality
     Given The user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And On the Basket Page
+    And User is on the "Basket" page
     When Adding multiple product to the basket
     Then Basket total price is summed
 
@@ -110,7 +110,7 @@ Feature: Basket functionality
     Given The user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    And On the Basket Page
+    And User is on the "Basket" page
     When Pressing the "Checkout" button
     Then The shipping details are displayed
     And The information corresponds to the logged user
