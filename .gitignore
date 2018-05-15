@@ -5,6 +5,8 @@
  
 # Intellij
 .idea
+build
+history
 *.iml
 *.iws
  
