@@ -1,17 +1,11 @@
 package BeerShop.pages;
 
-import net.thucydides.core.annotations.DefaultUrl;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import net.serenitybdd.core.pages.WebElementFacade;
-import java.util.stream.Collectors;
-
 import net.serenitybdd.core.annotations.findby.FindBy;
-
+import net.serenitybdd.core.pages.WebElementFacade;
+import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 
-import java.util.List;
-
+@DefaultUrl("http://192.168.10.158/BeerShop/login.php")
 public class LoginPage extends PageObject {
 
     @FindBy(id="inputEmail")
@@ -21,10 +15,10 @@ public class LoginPage extends PageObject {
     private WebElementFacade password;
 
     @FindBy(name="login")
-    private WebElementFacade submitButton;
+    private WebElementFacade signIn;
 
-    @FindBy(id = "profile")
-    private WebElementFacade profileNavLink;
+    @FindBy(className = "extraPlace")
+    private WebElementFacade note;
 
     public WebElementFacade getUsername() {
         return username;
@@ -34,11 +28,11 @@ public class LoginPage extends PageObject {
         return password;
     }
 
-    public WebElementFacade getSubmitButton() {
-        return submitButton;
+    public WebElementFacade getNote() {
+        return note;
     }
+    public WebElementFacade getSignIn() {
+        return signIn;
 
-    public WebElementFacade getProfileNavLink() {
-        return profileNavLink;
     }
 }
