@@ -2,6 +2,8 @@ package BeerShop.steps.serenity;
 
 import BeerShop.pages.WalletPage;
 import net.thucydides.core.annotations.Step;
+import org.junit.Assert;
+
 import java.util.Map;
 
 public class WalletSteps {
@@ -19,7 +21,7 @@ public class WalletSteps {
     }
 
     @Step
-    public void checkCurrentBalance() {
-        walletPage.getCurrentBalance().getText();
+    public void assertCurrentBalance() {
+       walletPage.getCurrentBalance().getText();
     }
 }

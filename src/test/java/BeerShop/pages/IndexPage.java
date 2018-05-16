@@ -14,4 +14,6 @@ public class IndexPage extends PageObject {
     public WebElementFacade getLoginNavLink() {
         return loginNavLink;
     }
+
+
 }

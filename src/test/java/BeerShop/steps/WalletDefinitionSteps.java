@@ -1,13 +1,16 @@
 package BeerShop.steps;
 
+import BeerShop.pages.WalletPage;
 import BeerShop.steps.serenity.IndexSteps;
 import BeerShop.steps.serenity.LoginSteps;
+import BeerShop.steps.serenity.WalletSteps;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
+import org.junit.Assert;
 
 import java.util.Map;
 
@@ -17,6 +20,11 @@ public class WalletDefinitionSteps {
     IndexSteps indexSteps;
     @Steps
     LoginSteps loginSteps;
+    @Steps
+    WalletSteps walletSteps;
+    @Steps
+    WalletPage walletPage;
+
 
     @Given("^the user is logged in with valid credentials:$")
     public void theUserIsLoggedInWithValidCredentials(Map<String, String> data){
@@ -26,22 +34,37 @@ public class WalletDefinitionSteps {
         loginSteps.pressSubmitButton();
     }
 
-    @And("^the user is on wallet page$")
-    public void theUserIsOnWalletPage() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @And("^the user is on wallet page with zero funds:$")
+    public void theUserIsOnWalletPage(Map<String, String> data){
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        loginSteps.clickOnWalletLink();
+        walletSteps.addMoney(data);
+        walletSteps.pressDepositButton();
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @When("^adding additional funds to the personal account:$")
-    public void addingAdditionalFundsToThePersonalAccount() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void addingAdditionalFundsToThePersonalAccount(Map<String, String> data) {
+        walletSteps.addMoney(data);
+        walletSteps.pressDepositButton();
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Then("^the funds are added to users personal account$")
-    public void theFundsAreAddedToUsersPersonalAccount() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void theFundsAreAddedToUsersPersonalAccount()  {
+        Assert.assertEquals("Current balance: BGN 100.00",walletPage.getCurrentBalance().getText());
     }
 
     @Then("^current balance will increased with additional funds$")

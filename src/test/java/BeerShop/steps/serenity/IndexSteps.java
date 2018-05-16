@@ -15,4 +15,6 @@ public class IndexSteps {
     public void clickOnLoginNavLink() {
         indexPage.getLoginNavLink().click();
     }
+
+
 }
