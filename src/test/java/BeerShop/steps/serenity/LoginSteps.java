@@ -13,6 +13,7 @@ public class LoginSteps {
 
     @Step
     public void openSite(){
+
         loginPage.open();
     }
 
