@@ -24,6 +24,9 @@ public class LoginPage extends PageObject {
     @FindBy(name="login")
     private WebElementFacade submitButton;
 
+    @FindBy(id = "profile")
+    private WebElementFacade profileNavLink;
+
     public WebElementFacade getUsername() {
         return username;
     }
@@ -34,5 +37,9 @@ public class LoginPage extends PageObject {
 
     public WebElementFacade getSubmitButton() {
         return submitButton;
+    }
+
+    public WebElementFacade getProfileNavLink() {
+        return profileNavLink;
     }
 }

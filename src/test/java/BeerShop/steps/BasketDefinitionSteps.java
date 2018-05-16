@@ -90,12 +90,6 @@ public class BasketDefinitionSteps {
         basketSteps.clickOnWalletButton();
     }
 
-//    @Then("^user should be redirected to \"([^\"]*)\"$")
-//    public void theUserIsRedirectedToWalletPage(String wallet) {
-//        Assert.assertEquals(wallet, basketSteps.getTitle());
-//
-//    }
-
     @And("^product is added to the basket$")
     public void productIsAddedToTheBasket() {
         basketSteps.clickOnAddToCart(1);
