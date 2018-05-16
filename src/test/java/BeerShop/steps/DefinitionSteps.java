@@ -14,17 +14,9 @@ public class DefinitionSteps {
 
     @Given("the user is on the Wikionary home page")
     public void givenTheUserIsOnTheWikionaryHomePage() {
-        anna.is_the_home_page();
+        anna.enters();
     }
 
-    @When("the user looks up the definition of the word '(.*)'")
-    public void whenTheUserLooksUpTheDefinitionOf(String word) {
-        anna.looks_for(word);
-    }
 
-    @Then("they should see the definition '(.*)'")
-    public void thenTheyShouldSeeADefinitionContainingTheWords(String definition) {
-        anna.should_see_definition(definition);
-    }
 
 }
