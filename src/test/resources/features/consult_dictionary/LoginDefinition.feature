@@ -6,7 +6,7 @@ Feature: Login Functionality
   Scenario: Successful login
     Given I am on Login page
     When I enter valid username and password:
-    |username|admin1|
-    |password|parola123A!|
+      | username | admin1      |
+      | password | parola123A! |
     And Click on Sign In button
     Then I should be logged in
