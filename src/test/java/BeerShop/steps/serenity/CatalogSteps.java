@@ -11,4 +11,5 @@ public class CatalogSteps {
     public void clickOnAddToCart(int product){
         catalogPage.clickOnAddToCart(product);
     }
+
 }

@@ -12,6 +12,7 @@ import net.thucydides.core.pages.PageObject;
 
 import java.util.List;
 
+@DefaultUrl("http://192.168.10.158/BeerShop/login.php")
 public class LoginPage extends PageObject {
 
     @FindBy(id="inputEmail")

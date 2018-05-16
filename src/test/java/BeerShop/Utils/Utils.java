@@ -1,5 +1,7 @@
 package BeerShop.Utils;
 
+import BeerShop.pages.BasketPage;
+import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 
 public class Utils {
