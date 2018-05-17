@@ -36,6 +36,10 @@ public class LoginSteps {
     @Step
     public void clickOnProfileNavLink() {
         loginPage.getProfileNavLink().click();
+    }
 
+    @Step
+    public void openSite(){
+        loginPage.open();
     }
 }

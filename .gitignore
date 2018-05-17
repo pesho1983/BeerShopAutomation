@@ -4,7 +4,9 @@
 .settings/
  
 # Intellij
-.idea/
+.idea
+build
+history
 *.iml
 *.iws
  
@@ -14,3 +16,4 @@
 # Maven
 log/
 target/
+.gradle
