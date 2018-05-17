@@ -1,5 +1,6 @@
 package BeerShop.steps;
 
+import BeerShop.pages.IndexPage;
 import BeerShop.pages.PasswordChangePage;
 import BeerShop.steps.serenity.*;
 import cucumber.api.java.en.And;
@@ -7,9 +8,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
-import org.junit.Assert;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class PasswordChangeDefinitionSteps {
 
@@ -23,11 +24,12 @@ public class PasswordChangeDefinitionSteps {
     ChangeProfileSteps changeProfileSteps;
     @Steps
     PasswordChangeSteps passwordChangeSteps;
-    @Steps
-    PasswordChangePage passwordChangePage;
+
+
 
     @Given("^I am on Profile page logged in with:$")
     public void iAmOnProfilePage(Map<String, String> data) {
+
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
         loginSteps.enterUsernameAndPassword(data);
@@ -45,7 +47,7 @@ public class PasswordChangeDefinitionSteps {
         changeProfileSteps.clickOnChangePasswordButton();
     }
 
-    @When("^I enter valid oldPassword, newPassword and confirmPassword:$")
+    @When("^I enter correct oldPassword, newPassword and confirmPassword:$")
     public void iEnterValidOldPasswordNewPasswordAndConfirmPassword(Map<String, String> data){
         passwordChangeSteps.enterOldPassNewPassAndConfirmPass(data);
     }
@@ -55,11 +57,19 @@ public class PasswordChangeDefinitionSteps {
         passwordChangeSteps.clickOnSaveButton();
     }
 
-    @Then("^password is successfully changed$")
-    public void passwordIsSuccessfullyChanged()  {
-        Assert.assertEquals("Your profile has been updated.", passwordChangePage.getSuccessMessage());
+    @Then("^I should see message \"([^\"]*)\"$")
+    public void passwordIsSuccessfullyChanged(String message)  {
+        passwordChangeSteps.assertSuccessMessageText(message);
+}
+
+
+    @When("^I enter wrong oldPassword:$")
+    public void iEnterWrongOldPassword(Map<String, String> data) {
+        passwordChangeSteps.enterOldPassNewPassAndConfirmPass(data);
     }
 
-
-
+    @Then("^I should see \"([^\"]*)\" message$")
+    public void iShouldSeeAnWrongPasswordMessage(String message) {
+        passwordChangeSteps.assertWrongPasswordMessage(message);
+    }
 }

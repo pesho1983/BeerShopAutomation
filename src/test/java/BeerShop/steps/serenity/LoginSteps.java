@@ -18,6 +18,12 @@ public class LoginSteps {
     }
 
     @Step
+    public void enterUsernameAndPassword(String username, String password){
+        loginPage.getUsername().type(username);
+        loginPage.getPassword().type(password);
+    }
+
+    @Step
     public void pressSubmitButton(){
         loginPage.getSubmitButton().click();
     }

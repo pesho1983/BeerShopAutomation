@@ -6,12 +6,25 @@ Feature: Password Change Functionality
   Scenario: Successful change password
     Given I am on Profile page logged in with:
       | username | admin2      |
+      | password | parola123!A |
+    And click on change Info button
+    And click on change Password button
+    When I enter correct oldPassword, newPassword and confirmPassword:
+      | oldPassword     | parola123!A |
+      | newPassword     | parola123A! |
+      | confirmPassword | parola123A! |
+    And click on Save button
+    Then I should see message "Your profile has been updated."
+
+  Scenario: Change password with invalid data for old password
+    Given I am on Profile page logged in with:
+      | username | admin2      |
       | password | parola123A! |
     And click on change Info button
     And click on change Password button
-    When I enter valid oldPassword, newPassword and confirmPassword:
-      | oldPassword     | parola123A! |
-      | newPassword     | parola123!A |
-      | confirmPassword | parola123!A |
+    When I enter wrong oldPassword:
+      | oldPassword     | wrongPass   |
+      | newPassword     | parola123A! |
+      | confirmPassword | parola123A! |
     And click on Save button
-    Then password is successfully changed
+    Then I should see "Wrong password!" message

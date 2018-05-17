@@ -2,7 +2,7 @@ package BeerShop.steps.serenity;
 
 import BeerShop.pages.PasswordChangePage;
 import net.thucydides.core.annotations.Step;
-
+import org.junit.Assert;
 import java.util.Map;
 
 public class PasswordChangeSteps {
@@ -21,5 +21,13 @@ public class PasswordChangeSteps {
         passwordChangePage.getSaveButton().click();
     }
 
+    @Step
+    public void assertSuccessMessageText(String succsessMessage) {
+        Assert.assertEquals(succsessMessage,passwordChangePage.getSuccessMessage().getText());
+    }
 
+    @Step
+    public void assertWrongPasswordMessage(String wrongMessage){
+        Assert.assertEquals(wrongMessage, passwordChangePage.getWrongPassword().getText());
+    }
 }

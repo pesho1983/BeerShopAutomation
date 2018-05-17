@@ -6,7 +6,7 @@ import net.serenitybdd.core.pages.WebElementFacade;
 
 public class ProfilePage extends PageObject {
 
-    @FindBy(xpath = "//a[contains(text(), \"Change\")]")
+    @FindBy(xpath = "//a[@href='changeProfile.php']")
     private WebElementFacade changeInfoButton;
 
     public WebElementFacade getChangeInfoButton() {
