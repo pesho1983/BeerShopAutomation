@@ -1,5 +1,7 @@
 package BeerShop.steps;
 
+import BeerShop.Utils.ShippingDetails;
+import BeerShop.Utils.Utils;
 import BeerShop.steps.serenity.BasketSteps;
 import BeerShop.steps.serenity.LoginSteps;
 import cucumber.api.PendingException;
@@ -9,13 +11,13 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
-
 import java.util.Map;
 
 public class BasketDefinitionSteps {
     private static String name;
     private static String result;
     private static int subtotal;
+    private Utils utils;
 
     @Steps
     BasketSteps basketSteps;
@@ -70,7 +72,7 @@ public class BasketDefinitionSteps {
     }
 
     @And("^user is on the \"Basket\" page$")
-    public void userIsOnThePage() {
+    public void userIsOnTheBasketPage() {
         basketSteps.openBasketPage();
     }
 
@@ -143,25 +145,30 @@ public class BasketDefinitionSteps {
         Assert.assertEquals(basketSteps.getCartTotal(), basketSteps.calculateCartTotal());
     }
 
+    @And("^user is on the \"Checkout\" page$")
+    public void userIsOnTheCheckoutPage() {
+        basketSteps.clickOnCheckout();
+    }
+
     @When("^pressing the \"Place order\" button$")
     public void pressingThePlaceOrderButton()  {
         basketSteps.clickOnPlaceOrder();
     }
 
-    @Then("^the shipping details are displayed$")
-    public void theShippingDetailsAreDisplayed() {
+    @Then("^the \"([^\"]*)\" are displayed$")
+    public void theShippingDetailsAreDisplayed(String shippingDetails) {
+        Assert.assertEquals(shippingDetails, basketSteps.getShippingDetails(ShippingDetails.TITLE));
     }
 
     @And("^the information corresponds to the logged user$")
     public void theInformationCorrespondsToTheLoggedUser() {
+        //Assert is temporary hardcoded, because profile steps are not yet implemented, will be changed after.
+        Assert.assertEquals("Petar", basketSteps.getShippingDetails(ShippingDetails.FIRST_NAME));
     }
 
-    @Then("^a user is redirected to an order success page$")
-    public void aUserIsRedirectedToAnOrderSuccessPage() {
-    }
-
-    @And("^the success order message appears$")
-    public void theSuccessOrderMessageAppears() {
+    @And("^the \"([^\"]*)\" message appears$")
+    public void theSuccessOrderMessageAppears(String orderSuccess) {
+        Assert.assertEquals(orderSuccess, basketSteps.getOrderSuccessMessage());
     }
 
     @Then("^an error message about insufficient funds appears$")
@@ -171,5 +178,6 @@ public class BasketDefinitionSteps {
     @Then("^an error message about insufficient amount appears$")
     public void anErrorMessageAboutInsufficientAmountAppears() {
     }
+
 
 }

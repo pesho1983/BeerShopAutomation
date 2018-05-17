@@ -23,7 +23,7 @@ public class CatalogPage extends PageObject {
     public WebElementFacade getProduct() {
         return productName;
     }
-
+    
     public void clickOnAddToCart(int product){
         String result = Utils.productIndividualXpath(this.getProductBox(), "]]");
         String targetProduct = result + "][" + product + "]" + "/a";

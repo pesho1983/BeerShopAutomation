@@ -48,6 +48,9 @@ public class BasketPage extends PageObject {
     @FindBy(xpath = "//a [@class =\"btn btn-success orderBtn\"]")
     private WebElementFacade placeOrderBtn;
 
+    @FindBy(xpath = "//div[@class=\"shipAddr\"]")
+    private WebElementFacade shippingDetails;
+
     public WebElementFacade getPlaceOrderBtn() {
         return placeOrderBtn;
     }
@@ -94,6 +97,10 @@ public class BasketPage extends PageObject {
 
     public WebElementFacade getProductName() {
         return productName;
+    }
+
+    public WebElementFacade getShippingDetails() {
+        return shippingDetails;
     }
 
     public String getSuccesMsgText() {

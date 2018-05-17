@@ -1,5 +1,6 @@
 package BeerShop.steps.serenity;
 
+import BeerShop.Utils.ShippingDetails;
 import BeerShop.Utils.Utils;
 import BeerShop.pages.BasketPage;
 import BeerShop.pages.CatalogPage;
@@ -11,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 
+import javax.rmi.CORBA.Util;
 import java.lang.reflect.Array;
 
 import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
@@ -131,10 +133,39 @@ public class BasketSteps {
         basketPage.getPlaceOrderBtn().click();
     }
 
+    @Step
+    public String getShippingDetails(ShippingDetails parameter){
+        String element;
+        switch (parameter) {
+            case TITLE:
+                return basketPage.getShippingDetails().findElement(By.xpath("h4")).getText();
+            case FIRST_NAME:
+                element =  basketPage.getShippingDetails().findElement(By.xpath("p[1]")).getText();
+                return Utils.replaceWordWithWhitespace(element, "First Name: ");
+            case LAST_NAME:
+                element =  basketPage.getShippingDetails().findElement(By.xpath("p[2]")).getText();
+                return Utils.replaceWordWithWhitespace(element, "Last Name: ");
+            case PHONE:
+                element = basketPage.getShippingDetails().findElement(By.xpath("p[3]")).getText();
+                return Utils.replaceWordWithWhitespace(element, "Phone: ");
+            case ADDRESS:
+                element =  basketPage.getShippingDetails().findElement(By.xpath("p[4]")).getText();
+                return Utils.replaceWordWithWhitespace(element, "Address: ");
+            default: break;
+        }
+        return null;
+    }
+
+    @Step
+    public String getOrderSuccessMessage(){
+        return Utils.replaceWordWithRegex(basketPage.getSuccesMsgText(), "Order ID is #(\\d+)");
+    }
+
     private String removeSuffixFromPrice(WebElementFacade target){
         String result = target.getText();
         return result.substring(0, result.length() - 3);
     }
+
 
 
 }

@@ -10,5 +10,12 @@ public class Utils {
         String toRemove = targetProduct.substring(0, 78);
         return targetProduct.replace(toRemove, "").replace(replace, "");
     }
+
+    public static String replaceWordWithWhitespace(String text, String toReplace){
+        return text.replace(toReplace, "");
+    }
+    public static String replaceWordWithRegex(String text, String regex){
+        return text.replaceAll(regex, "");
+    }
 }
 
