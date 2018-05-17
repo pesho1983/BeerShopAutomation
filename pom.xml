@@ -9,9 +9,8 @@
     <name>Sample Serenity project using Cucumber and WebDriver</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <serenity.version>1.8.3</serenity.version>
-        <serenity.cucumber.version>1.6.6</serenity.cucumber.version>
-        <webdriver.driver>chrome</webdriver.driver>
+        <serenity.version>1.9.16</serenity.version>
+        <serenity.cucumber.version>1.9.7</serenity.cucumber.version>
     </properties>
     <repositories>
         <repository>
@@ -76,10 +75,6 @@
                     <includes>
                         <include>**/*.java</include>
                     </includes>
-                    <argLine>-Xmx512m</argLine>
-                    <systemPropertyVariables>
-                        <webdriver.driver>${webdriver.driver}</webdriver.driver>
-                    </systemPropertyVariables>
                 </configuration>
                 <executions>
                     <execution>
@@ -116,3 +111,4 @@
         </plugins>
     </build>
 </project>
+
