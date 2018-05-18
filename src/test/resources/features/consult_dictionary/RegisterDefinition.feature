@@ -12,9 +12,9 @@ Feature: Register Functionality
       | firstname | Ivan                                |
       | lastname  | Stoev                               |
       | email     | [9a]                                |
-      | phone     | [10]                          |
+      | phone     | [10]                                |
       | address   | Sofia, j.k.Ivan Vazov, ul.Balsha N1 |
-      | age       | [2]                                  |
+      | age       | [3]                                 |
 
     And click on register button
     Then user is redirected to login "http://192.168.10.158/BeerShop/login.php#" url
