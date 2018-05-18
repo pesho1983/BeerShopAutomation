@@ -9,6 +9,9 @@ import net.thucydides.core.pages.PageObject;
 @DefaultUrl("http://192.168.10.158/BeerShop/register.php")
 
 public class RegisterPage extends PageObject {
+    @FindBy(id = "agreement-error")
+    private WebElementFacade errorMessage;
+
     @FindBy(id = "register_submit")
     private WebElementFacade registerSubmit;
 
@@ -25,13 +28,13 @@ public class RegisterPage extends PageObject {
     private WebElementFacade password;
 
     @FindBy(id = "confirmPass")
-    private WebElementFacade confirmPass;
+    private WebElementFacade confirmpass;
 
     @FindBy(id = "firstName")
     private WebElementFacade firstname;
 
     @FindBy(id = "lastName")
-    private WebElementFacade lasnname;
+    private WebElementFacade lastname;
 
     @FindBy(id = "email")
     private WebElementFacade email;
@@ -54,15 +57,15 @@ public class RegisterPage extends PageObject {
     }
 
     public WebElementFacade getConfirmPass() {
-        return confirmPass;
+        return confirmpass;
     }
 
     public WebElementFacade getFirstname() {
         return firstname;
     }
 
-    public WebElementFacade getLasnname() {
-        return lasnname;
+    public WebElementFacade getLastname() {
+        return lastname;
     }
 
     public WebElementFacade getEmail() {
@@ -91,5 +94,9 @@ public class RegisterPage extends PageObject {
 
     public WebElementFacade getRegisterSubmit() {
         return registerSubmit;
+    }
+
+    public WebElementFacade getErrorMessage() {
+        return errorMessage;
     }
 }

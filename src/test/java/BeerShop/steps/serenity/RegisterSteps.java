@@ -1,5 +1,6 @@
 package BeerShop.steps.serenity;
 
+import BeerShop.Utils.Randomizer;
 import BeerShop.pages.RegisterPage;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
@@ -10,6 +11,7 @@ public class RegisterSteps {
 
     RegisterPage registerPage;
 
+
     @Step
     public void openRegisterPage() {
         registerPage.open();
@@ -17,22 +19,47 @@ public class RegisterSteps {
 
     @Step
     public void fillValidData(Map<String, String> data) {
-        registerPage.getUsername().type(data.get("username"));
+        registerPage.getUsername().type(Randomizer.randomizeValue(data.get("username")));
         registerPage.getPassword().type(data.get("password"));
         registerPage.getConfirmPass().type(data.get("password"));
         registerPage.getFirstname().type(data.get("firstname"));
-        registerPage.getLasnname().type(data.get("lastname"));
+        registerPage.getLastname().type(data.get("lastname"));
+        registerPage.getEmail().type(Randomizer.randomizeValue(data.get("email").concat("@abv.bg")));
+        registerPage.getAddress().type(data.get("address"));
+        registerPage.getPhone().type(Randomizer.randomizeValue(data.get("phone")));
+        registerPage.getAge().type(Randomizer.randomizeValue(data.get("age")));
+        registerPage.getAgreement().click();
+        registerPage.getGdpr().click();
+    }
+
+    @Step
+    public void fillInvalidData(Map<String, String> data) {
+        registerPage.getUsername().type(data.get("username"));
+        registerPage.getPassword().type(data.get("password"));
+        registerPage.getConfirmPass().type(data.get("confirmpass"));
+        registerPage.getFirstname().type(data.get("firstname"));
+        registerPage.getLastname().type(data.get("lastname"));
+        registerPage.getEmail().type(data.get("email"));
+        registerPage.getAddress().type(data.get("address"));
+        registerPage.getPhone().type(data.get("phone"));
+        registerPage.getAge().type(data.get("age"));
+        registerPage.getAgreement().click();
+        registerPage.getGdpr().click();
+    }
+
+    @Step
+    public void fillInvalidDataWithoutCheckbox(Map<String, String> data) {
+        registerPage.getUsername().type(data.get("username"));
+        registerPage.getPassword().type(data.get("password"));
+        registerPage.getConfirmPass().type(data.get("confirmpass"));
+        registerPage.getFirstname().type(data.get("firstname"));
+        registerPage.getLastname().type(data.get("lastname"));
         registerPage.getEmail().type(data.get("email"));
         registerPage.getAddress().type(data.get("address"));
         registerPage.getPhone().type(data.get("phone"));
         registerPage.getAge().type(data.get("age"));
     }
 
-    @Step
-    public void agreeWithTerms() {
-        registerPage.getAgreement().click();
-        registerPage.getGdpr().click();
-    }
 
     @Step
     public void register() {
@@ -40,8 +67,17 @@ public class RegisterSteps {
     }
 
     @Step
-    public void result(){
-        Assert.assertEquals("http://192.168.10.158/BeerShop/login.php#", registerPage.getDriver().getCurrentUrl());
+    public void successRegister(String url) {
+        Assert.assertEquals(url, registerPage.getDriver().getCurrentUrl());
     }
 
+    @Step
+    public void deniedRegisterWithCheckbox(String url) {
+        Assert.assertEquals(url, registerPage.getDriver().getCurrentUrl());
+    }
+
+    @Step
+    public void deniedRegisterWithoutCheckbox(String url) {
+        Assert.assertEquals(url, registerPage.getDriver().getCurrentUrl());
+    }
 }
