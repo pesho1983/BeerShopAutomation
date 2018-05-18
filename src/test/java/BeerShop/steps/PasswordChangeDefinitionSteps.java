@@ -1,8 +1,7 @@
 package BeerShop.steps;
 
-import BeerShop.pages.IndexPage;
-import BeerShop.pages.PasswordChangePage;
 import BeerShop.steps.serenity.*;
+import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -10,7 +9,6 @@ import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class PasswordChangeDefinitionSteps {
 
@@ -24,7 +22,6 @@ public class PasswordChangeDefinitionSteps {
     ChangeProfileSteps changeProfileSteps;
     @Steps
     PasswordChangeSteps passwordChangeSteps;
-
 
 
     @Given("^I am on Profile page logged in with:$")
@@ -48,28 +45,48 @@ public class PasswordChangeDefinitionSteps {
     }
 
     @When("^I enter correct oldPassword, newPassword and confirmPassword:$")
-    public void iEnterValidOldPasswordNewPasswordAndConfirmPassword(Map<String, String> data){
+    public void iEnterValidOldPasswordNewPasswordAndConfirmPassword(Map<String, String> data) {
         passwordChangeSteps.enterOldPassNewPassAndConfirmPass(data);
     }
 
     @And("^click on Save button$")
-    public void clickOnSaveButton()  {
+    public void clickOnSaveButton() {
         passwordChangeSteps.clickOnSaveButton();
     }
 
     @Then("^I should see message \"([^\"]*)\"$")
-    public void passwordIsSuccessfullyChanged(String message)  {
+    public void passwordIsSuccessfullyChanged(String message) {
         passwordChangeSteps.assertSuccessMessageText(message);
-}
+    }
 
 
     @When("^I enter wrong oldPassword:$")
-    public void iEnterWrongOldPassword(Map<String, String> data) {
+    public void iEnterWrongOldPassword(@Transpose Map<String, String> data) {
         passwordChangeSteps.enterOldPassNewPassAndConfirmPass(data);
     }
 
     @Then("^I should see \"([^\"]*)\" message$")
     public void iShouldSeeAnWrongPasswordMessage(String message) {
         passwordChangeSteps.assertWrongPasswordMessage(message);
+    }
+
+    @When("^I enter wrong data:$")
+    public void iEnterWrongOldPasswordOldPasswordNewPasswordConfirmPassword(@Transpose Map<String, String> data) {
+        passwordChangeSteps.enterOldPassNewPassAndConfirmPass(data);
+    }
+
+    @When("^I press Back to your profile button$")
+    public void iPressBackToYourProfileButton() {
+        passwordChangeSteps.clickOnBackToProfileButton();
+    }
+
+    @Then("^I should be redirected to \"([^\"]*)\"$")
+    public void iShouldBeRedirectedToProfilePage(String defaultUrl) {
+        passwordChangeSteps.assertProfilePageURL(defaultUrl);
+    }
+
+    @Then("^I should see \"([^\"]*)\" (.*) message$")
+    public void iShouldSeeValidationMessage(String defaultValidation, int fieldNum) {
+        passwordChangeSteps.assertPasswordFieldValidationMessage(defaultValidation, fieldNum);
     }
 }
