@@ -30,12 +30,12 @@ public class LoginDefinitionSteps {
     }
 
     @And("^Click on Sign In button$")
-    public void clickOnSignInButton() throws Throwable {
+    public void clickOnSignInButton()  {
         loginSteps.pressSubmitButton();
     }
 
     @Then("^I should be logged in$")
-    public void iShouldBeLoggedIn() throws Throwable {
+    public void iShouldBeLoggedIn()  {
         loginSteps.assertUserIsOnCatalogPage();
     }
 

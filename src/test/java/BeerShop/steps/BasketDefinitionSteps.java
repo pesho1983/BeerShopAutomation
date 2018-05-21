@@ -4,7 +4,9 @@ import BeerShop.Utils.ShippingDetails;
 import BeerShop.Utils.Utils;
 import BeerShop.steps.serenity.BasketSteps;
 import BeerShop.steps.serenity.LoginSteps;
+import cucumber.api.DataTable;
 import cucumber.api.PendingException;
+import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,12 +14,13 @@ import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 import java.util.Map;
+import java.util.Random;
+import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
+
 
 public class BasketDefinitionSteps {
     private static String name;
     private static String result;
-    private static int subtotal;
-    private Utils utils;
 
     @Steps
     BasketSteps basketSteps;
@@ -33,7 +36,7 @@ public class BasketDefinitionSteps {
 
     }
 
-    @When("^a user navigates to basket page$")
+    @When("^the user navigates to basket page$")
     public void aUserNavigatesToBasketPage() {
         basketSteps.openBasketPage();
     }
@@ -51,7 +54,7 @@ public class BasketDefinitionSteps {
 
     @Then("^user should be redirected to \"([^\"]*)\"$")
     public void userShouldBeRedirectedTo(String title) {
-        Assert.assertEquals(title, basketSteps.getTitle());
+        Assert.assertEquals(title, getDriver().getTitle());
     }
 
     @And("^the product is present$")
@@ -59,7 +62,7 @@ public class BasketDefinitionSteps {
         Assert.assertEquals(name, basketSteps.getFirstProductName());
     }
 
-    @When("^a user adds multiple products to shopping cart$")
+    @When("^(?:user|the user) adds multiple products to shopping cart$")
     public void aUserAddsMultipleProductsToShoppingCart() {
         basketSteps.clickOnAddToCart(1);
         basketSteps.clickContinueShopping();
@@ -71,45 +74,35 @@ public class BasketDefinitionSteps {
         Assert.assertEquals(2, basketSteps.getProductCount());
     }
 
-    @And("^user is on the \"Basket\" page$")
-    public void userIsOnTheBasketPage() {
-        basketSteps.openBasketPage();
+   @When("^user is on the \"([^\"]*)\" page$")
+   public void userIsOnTheBasketPage(String targetPage) {
+       switch(targetPage){
+           case "Basket": basketSteps.openBasketPage();
+       }
+   }
+
+    @And("^user clicks the \"([^\"]*)\" (?:button|icon)")
+    public void userClicksTheButton(String buttonName) {
+        buttonName = buttonName.replace("\"", "");
+        switch (buttonName) {
+            case "Checkout": basketSteps.clickOnCheckout(); break;
+            case "Continue Shopping": basketSteps.clickContinueShopping(); break;
+            case "Place order" : basketSteps.clickOnPlaceOrder(); break;
+            case "Wallet" : basketSteps.clickOnWalletButton(); break;
+            case "Thrash" : basketSteps.removeProduct(); break;
+            default: break;
+        }
     }
 
-    @When("^pressing \"Continue Shopping\" button is clicked$")
-    public void pressingButtonIsClicked() {
-        basketSteps.clickContinueShopping();
-
-    }
-
-    @Then("^the user is redirected to \"([^\"]*)\"$")
-    public void theUserIsRedirectedTo(String title) {
-        Assert.assertEquals(title, basketSteps.getTitle());
-    }
-
-    @When("^pressing the wallet icon$")
-    public void pressingTheWalletIcon() {
-        basketSteps.clickOnWalletButton();
-    }
-
-    @And("^product is added to the basket$")
+    @And("^(?:user|the user) had added product in his basket")
     public void productIsAddedToTheBasket() {
-        basketSteps.clickOnAddToCart(1);
-    }
-
-    @When("^pressing on the trash button icon$")
-    public void pressingOnTheTrashButtonIcon() {
-        basketSteps.removeProduct();
+        Random random = new Random();
+        basketSteps.clickOnAddToCart(random.nextInt(12) + 1);
     }
 
     @Then("^the product is removed from the \"Basket\"$")
     public void theProductIsRemovedFromTheBasket() {
         Assert.assertEquals("Your cart is empty.....", basketSteps.getEmptyBasketMessage());
-    }
-
-    @When("^pressing the \"Checkout\" button$")
-    public void pressingTheCheckoutButton() {
-        basketSteps.clickOnCheckout();
     }
 
     @When("^the user changes the quantity:$")
@@ -135,24 +128,15 @@ public class BasketDefinitionSteps {
 
     @Then("^the product subtotal should be calculated$")
     public void theProductSubtotalShouldBeCalculated() {
-        subtotal = Integer.parseInt(result) * Integer.parseInt(basketSteps.getPrice());
-        int actualSubtotal = Integer.parseInt(basketSteps.getSubtotal());
-        Assert.assertEquals(subtotal, actualSubtotal);
+        float subtotal = Float.parseFloat(result) * Float.parseFloat(basketSteps.getPrice());
+        float actualSubtotal = Float.parseFloat(basketSteps.getSubtotal());
+        Assert.assertEquals(subtotal, actualSubtotal, 0.1);
+
     }
 
     @Then("^basket total price is summed$")
     public void basketTotalPriceIsSummed() {
-        Assert.assertEquals(basketSteps.getCartTotal(), basketSteps.calculateCartTotal());
-    }
-
-    @And("^user is on the \"Checkout\" page$")
-    public void userIsOnTheCheckoutPage() {
-        basketSteps.clickOnCheckout();
-    }
-
-    @When("^pressing the \"Place order\" button$")
-    public void pressingThePlaceOrderButton()  {
-        basketSteps.clickOnPlaceOrder();
+        Assert.assertEquals(basketSteps.getCartTotal(), basketSteps.calculateCartTotal(), 0.1);
     }
 
     @Then("^the \"([^\"]*)\" are displayed$")
@@ -160,24 +144,20 @@ public class BasketDefinitionSteps {
         Assert.assertEquals(shippingDetails, basketSteps.getShippingDetails(ShippingDetails.TITLE));
     }
 
-    @And("^the information corresponds to the logged user$")
+    @Then("^the information corresponds to the logged user$")
     public void theInformationCorrespondsToTheLoggedUser() {
         //Assert is temporary hardcoded, because profile steps are not yet implemented, will be changed after.
         Assert.assertEquals("Petar", basketSteps.getShippingDetails(ShippingDetails.FIRST_NAME));
     }
 
-    @And("^the \"([^\"]*)\" message appears$")
+    @Then("^the \"([^\"]*)\" message appears$")
     public void theSuccessOrderMessageAppears(String orderSuccess) {
         Assert.assertEquals(orderSuccess, basketSteps.getOrderSuccessMessage());
     }
 
-    @Then("^an error message about insufficient funds appears$")
-    public void anErrorMessageAboutInsufficientFundsAppears() {
+    @Then("^an error (?:message containing|message) \"([^\"]*)\" appears$")
+    public void anErrorMessageAboutInsufficientFundsAppears(String message) {
+            Assert.assertEquals(true, basketSteps.getErrorMessage().contains(message));
+
     }
-
-    @Then("^an error message about insufficient amount appears$")
-    public void anErrorMessageAboutInsufficientAmountAppears() {
-    }
-
-
 }

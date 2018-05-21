@@ -6,14 +6,13 @@ import BeerShop.pages.BasketPage;
 import BeerShop.pages.CatalogPage;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
-import org.jruby.RubyProcess;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.rmi.CORBA.Util;
-import java.lang.reflect.Array;
 
 import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 
@@ -39,6 +38,9 @@ public class BasketSteps {
 
     @Step
     public void clickOnAddToCart(int product){
+        if(product > 8){
+            ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,500)", "");
+        }
         catalogPage.clickOnAddToCart(product);
     }
 
@@ -68,8 +70,8 @@ public class BasketSteps {
     @Step
     public void removeProduct(){
         basketPage.getRemoveProduct().click();
-        Alert alert = getDriver().switchTo().alert();
-        alert.accept();
+        Utils.acceptAlert();
+
     }
 
     @Step
@@ -84,9 +86,9 @@ public class BasketSteps {
         basketPage.getQuantity().sendKeys("" + quantity);
         basketPage.getQuantity().sendKeys(Keys.ENTER);
         if(Integer.parseInt(quantity) < 0 ){
-            Alert alert = getDriver().switchTo().alert();
-            alert.accept();
+            Utils.acceptAlert();
         }
+        basketPage.open();
     }
 
     @Step
@@ -110,20 +112,22 @@ public class BasketSteps {
     }
 
     @Step
-    public int getCartTotal(){
+    public float getCartTotal(){
         String wholeWord = basketPage.getCartTotal().getText();
-        return Integer.parseInt(basketPage.getCartTotal().getText().substring(6, wholeWord.length() - 3));
+        return Float.parseFloat(basketPage.getCartTotal().getText().substring(6, wholeWord.length() - 3));
     }
 
     @Step
-    public int calculateCartTotal(){
-        int cartTotal = 0;
-        Object[] total = basketPage.findAll(By.xpath("//tbody/tr/td[4]")).toArray();
+    public float calculateCartTotal(){
+        float cartTotal = 0;
+        Object[] total = basketPage.findAll(By.xpath("//tbody/tr")).toArray();
+        int targetElement = 1;
         for (Object element: total
              ) {
-            String xpath = Utils.productIndividualXpath((WebElementFacade)element, "]") + "]";
+            String xpath = Utils.productIndividualXpath((WebElementFacade)element, "]") + "[" + targetElement + "]/td[4]";
             String productSubtotal = basketPage.find(By.xpath(xpath)).getText();
-            cartTotal += Integer.parseInt(productSubtotal.substring(0, productSubtotal.length() - 3));
+            cartTotal += Float.parseFloat(productSubtotal.substring(0, productSubtotal.length() - 3));
+            targetElement++;
         }
         return cartTotal;
     }
@@ -158,7 +162,12 @@ public class BasketSteps {
 
     @Step
     public String getOrderSuccessMessage(){
-        return Utils.replaceWordWithRegex(basketPage.getSuccesMsgText(), "Order ID is #(\\d+)");
+        return Utils.replaceWordWithRegex(basketPage.getSuccesMsgText(), " Order ID is #(\\d+)");
+    }
+
+    @Step
+    public String getErrorMessage(){
+        return basketPage.getErrorOrderMsgBox();
     }
 
     private String removeSuffixFromPrice(WebElementFacade target){

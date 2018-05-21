@@ -1,8 +1,11 @@
 package BeerShop.Utils;
 
-import BeerShop.pages.BasketPage;
-import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 
 public class Utils {
     public static String productIndividualXpath(WebElementFacade target, String replace){
@@ -16,6 +19,13 @@ public class Utils {
     }
     public static String replaceWordWithRegex(String text, String regex){
         return text.replaceAll(regex, "");
+    }
+
+    public static void acceptAlert(){
+        WebDriverWait wait = new WebDriverWait(getDriver(), 3000);
+        wait.until(ExpectedConditions.alertIsPresent());
+        Alert alert = getDriver().switchTo().alert();
+        alert.accept();
     }
 }
 

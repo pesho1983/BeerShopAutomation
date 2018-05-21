@@ -3,141 +3,107 @@ Feature: basket functionality
   As a user
   I want to be able to purchase products from my shopping cart
 
-  @Ignore
-  Scenario: empty Basket
+  Background:
     Given a user is logged in:
       | username | pesho       |
       | password | parola123A! |
-    When a user navigates to basket page
+
+  Scenario: Empty basket by default
+    When the user navigates to basket page
     Then informational message "Your cart is empty....." should appear
-  @Ignore
-  Scenario Outline: add single product
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
+
+  Scenario Outline: Add single product to basket
     When user adds product <productId> to shopping cart
     Then user should be redirected to "Basket"
     And the product is present
     Examples:
       | productId |
-     | 1         |
-#      | 2         |
-#      | 3         |
-  @Ignore
-  Scenario: add multiple beers
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    When a user adds multiple products to shopping cart
+      | 1         |
+      | 2         |
+      | 3         |
+
+  Scenario: Add multiple beers to basket
+    When the user adds multiple products to shopping cart
     Then the products are present
-  @Ignore
-  Scenario: back to Catalog from Basket Page
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    And user is on the "Basket" page
-    When pressing "Continue Shopping" button is clicked
+
+  Scenario: Back to catalog from basket
+    Given user had added product in his basket
+    When user clicks the "Continue Shopping" button
     Then user should be redirected to "Catalog"
-  @Ignore
-  Scenario: redirect to "Wallet"
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    And user is on the "Basket" page
-    When pressing the wallet icon
+
+  Scenario: Redirect to "Wallet" from basket
+    Given user is on the "Basket" page
+    When user clicks the "Wallet" icon
     Then user should be redirected to "Personal wallet"
-  @Ignore
-  Scenario: removing product
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    And product is added to the basket
-    When pressing on the trash button icon
+
+  Scenario: Removing product from basket
+    Given user had added product in his basket
+    When user clicks the "Thrash" icon
     Then the product is removed from the "Basket"
-  @Ignore
-  Scenario: redirect to "Checkout"
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    And product is added to the basket
-    When pressing the "Checkout" button
-    Then the user is redirected to "Checkout"
-  @Ignore
-  Scenario: change positive quantity
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    And product is added to the basket
+
+  Scenario: Redirect to "Checkout" from basket
+    Given user had added product in his basket
+    When user clicks the "Checkout" button
+    Then user should be redirected to "Checkout"
+
+  Scenario: Change product quantity with positive number
+    Given user had added product in his basket
     When the user changes the quantity:
       | quantity | 50 |
     Then the product quantity should be changed
-  @Ignore
-  Scenario: change with negative quantity
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    And product is added to the basket
+
+  Scenario: Change product quantity with negative number
+    Given user had added product in his basket
     When the user changes the quantity:
       | quantity | -500 |
     Then product quantity remains unchanged
-  @Ignore
-  Scenario: change quantity to zero
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    And product is added to the basket
+
+  Scenario: Set product quantity to zero
+    Given user had added product in his basket
     When the user changes the quantity:
       | quantity | 0 |
     Then the product is removed from cart
-  @Ignore
-  Scenario: calculate product subtotal
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    And product is added to the basket
+
+  Scenario: Calculate product subtotal
+    Given user had added product in his basket
     When the user changes the quantity:
       | quantity | 50 |
     Then the product subtotal should be calculated
-  @Ignore
-  Scenario: calculate basket total
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    When a user adds multiple products to shopping cart
+
+  Scenario: Calculate basket total
+    When user adds multiple products to shopping cart
     Then basket total price is summed
-  @Ignore
-  Scenario: checkout shipping details
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    And product is added to the basket
-    When pressing the "Checkout" button
+
+  Scenario: Checkout shows correct shipping details
+    Given user had added product in his basket
+    When user clicks the "Checkout" button
     Then the "Shipping Details" are displayed
     And the information corresponds to the logged user
 
-  Scenario: place order successfully
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    And product is added to the basket
-    And pressing the "Checkout" button
-    When pressing the "Place order" button
+    #TODO: Add a step for depositing money in wallet to guarantee the user has enough funds
+  Scenario: Place order successfully
+    Given user had added product in his basket
+    When user clicks the "Checkout" button
+    And user clicks the "Place order" button
     Then user should be redirected to "Order Success"
     And the "Your order has submitted successfully." message appears
 
-  Scenario: place order with insufficient funds
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    And user is on the "Checkout" page
-    When pressing the "Place order" button
-    Then an error message about insufficient funds appears
+    #TODO: Add a step to remove all funds from user account when wallet steps are implemented.
+  Scenario: Place order with insufficient funds
+    Given user had added product in his basket
+    When the user changes the quantity:
+      | quantity | 10000 |
+    And user clicks the "Checkout" button
+    And user clicks the "Place order" button
+    Then an error message "You don't have enough funds in your account to make this order!" appears
 
-  Scenario: insufficient amount of beers
-    Given a user is logged in:
-      | username | pesho       |
-      | password | parola123A! |
-    And user is on the "Checkout" page
-    When pressing the "Place order" button
-    Then an error message about insufficient amount appears
+
+  Scenario: Place order with insufficient amount of beers in stock
+    Given user had added product in his basket
+    When the user changes the quantity:
+    |quantity|1000|
+    When user clicks the "Checkout" button
+    And user clicks the "Place order" button
+    Then an error message containing "We don't have" appears
+
 

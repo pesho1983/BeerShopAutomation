@@ -57,7 +57,7 @@ public class PasswordChangeDefinitionSteps {
 
     @Then("^password is successfully changed$")
     public void passwordIsSuccessfullyChanged()  {
-        Assert.assertEquals("Your profile has been updated.", passwordChangePage.getSuccessMessage());
+        Assert.assertEquals("Your profile has been updated.", passwordChangePage.getSuccessMessage().getText());
     }
 
 
