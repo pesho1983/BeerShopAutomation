@@ -13,13 +13,28 @@ public class CatalogPage extends PageObject {
     @FindBy(xpath = "//div [@class=\"product justify-content-md-center\"]")
     private WebElementFacade productBox;
 
+    @FindBy(xpath = ".//div [@class=\"product justify-content-md-center\"]/h2[text()]")
+    private WebElementFacade productName;
+
     public WebElementFacade getProductBox() {
         return productBox;
     }
 
-    public void clickOnAddToCart(int product){
+    public WebElementFacade getProduct() {
+        return productName;
+    }
+
+    public void clickOnAddToCart(int product) {
         String result = Utils.productIndividualXpath(this.getProductBox(), "]]");
         String targetProduct = result + "][" + product + "]" + "/a";
         this.getDriver().findElement(By.xpath(targetProduct)).click();
+    }
+
+    public String getProductName(int product) {
+        String productName = this.getProduct().getWrappedElement().toString();
+        String toRemove = productName.substring(0, 78);
+        String result = productName.replace(toRemove, "").replace("]/h2[text()]", "");
+        String targetProductName = result + "[" + product + "]" + "/h2";
+        return this.getDriver().findElement(By.xpath(targetProductName)).getText();
     }
 }

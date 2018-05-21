@@ -28,8 +28,6 @@ public class LoginPage extends PageObject {
     @FindBy(id = "profile")
     private WebElementFacade profileNavLink;
 
-
-
     @FindBy(xpath = "//div[@class='alert alert-danger']")
     private WebElementFacade wrongUserOrPassBox;
 

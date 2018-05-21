@@ -1,7 +1,9 @@
 package BeerShop.steps;
 
 
+
 import BeerShop.steps.serenity.AdministratorSteps;
+import BeerShop.steps.serenity.CatalogSteps;
 import BeerShop.steps.serenity.LoginSteps;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -20,6 +22,8 @@ public class AdministratorDefinitionSteps {
     @Steps
     LoginSteps loginSteps;
 
+    @Steps
+    CatalogSteps catalogSteps;
 
     @Given("^I am on the log in page$")
     public void iAmOnTheLogInPage() {
@@ -55,6 +59,7 @@ public class AdministratorDefinitionSteps {
 
     @Given("^You are logged in as administrator:$")
     public void youAreLoggedInAsAdministrator(Map<String, String> data) {
+        loginSteps.navigateToLoginPage();
         loginSteps.enterUsernameAndPassword(data);
         loginSteps.pressSubmitButton();
     }
@@ -67,12 +72,14 @@ public class AdministratorDefinitionSteps {
     @And("^Filling the beer description:$")
     public void fillingTheBeerDescription(Map<String, String> data) {
         adminSteps.fillingBeerDescriptionForm(data);
+        adminSteps.generateRandomImage();
         adminSteps.clickSaveBeerBtn();
     }
 
     @Then("^Product is loaded to the catalog$")
     public void productIsLoadedToTheCatalog() {
-
+        catalogSteps.redirectToCatalog();
+        Assert.assertEquals("TestBeer1912", catalogSteps.getProductName(1));
     }
 
     @Then("^Pop up error message appears$")
@@ -92,8 +99,32 @@ public class AdministratorDefinitionSteps {
 
     @Then("^You are redirected to the beer catalog$")
     public void youAreRedirectedToTheBeerCatalog() {
-
+        Assert.assertEquals("Catalog", catalogSteps.getTitle());
     }
 
 
+    @And("^Filling the <beerName>$")
+    public void fillingTheBeerName() {
+
+    }
+
+    @Then("^Successful message pops up$")
+    public void successfulMessagePopsUp() {
+        Assert.assertEquals("Uploaded successfully.", adminSteps.successfulBeerMsgText());
+    }
+
+    @And("^changing the beer picture$")
+    public void changingTheBeerPicture() {
+
+    }
+
+    @And("^Pressing the delete button for a single beer$")
+    public void pressingTheDeleteButtonForASingleBeer() {
+
+    }
+
+    @Then("^Confirmation pop up appears$")
+    public void confirmationPopUpAppears() {
+
+    }
 }

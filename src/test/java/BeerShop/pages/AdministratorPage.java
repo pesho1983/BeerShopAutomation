@@ -1,12 +1,15 @@
 package BeerShop.pages;
 
+import BeerShop.Utils.Utils;
 import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.WebElement;
 
+
 public class AdministratorPage extends PageObject {
+
 
     @FindBy(xpath = "//a[contains(. ,'ADD BEER')]")
     private WebElementFacade addBeerBtn;
@@ -38,16 +41,24 @@ public class AdministratorPage extends PageObject {
     @FindBy(xpath = "//a[contains(., 'Back to ')]")
     private WebElementFacade backToCatalogBtn;
 
-    public WebElementFacade getProfileUsername() {
-        return profileUsername;
-    }
+    @FindBy(name = "picture")
+    private WebElementFacade beerPicture;
+
 
     @FindBy(id = "profile")
     private WebElementFacade profileUsername;
 
+
+    @FindBy(xpath = "//div[contains(text(), \"Uploaded successfully.\")]")
+    private WebElementFacade SuccessBeerMsg;
+
     public void getNthEditBeerBtn(int n) {
         WebElement editBtn = this.getDriver().findElement(By.xpath("(//a[contains(.,'Edit')])[" + n + "]"));
 
+    }
+
+    public WebElementFacade getProfileUsername() {
+        return profileUsername;
     }
 
     public void getNthDeleteBeerBtn(int n) {
@@ -86,11 +97,20 @@ public class AdministratorPage extends PageObject {
         return newProductPicture;
     }
 
+    public WebElementFacade getSuccessBeerMsg() {
+        return SuccessBeerMsg;
+    }
+
     public WebElementFacade getNewProductSavebtn() {
         return newProductSavebtn;
     }
 
     public WebElementFacade getBackToCatalogBtn() {
         return backToCatalogBtn;
+    }
+
+    public void uploadImg(String imgLocation) {
+        beerPicture.sendKeys(imgLocation);
+
     }
 }

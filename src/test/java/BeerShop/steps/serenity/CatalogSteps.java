@@ -8,7 +8,21 @@ public class CatalogSteps {
 
 
     @Step
-    public void clickOnAddToCart(int product){
+    public void redirectToCatalog(){
+        catalogPage.open();
+    }
+    @Step
+    public void clickOnAddToCart(int product) {
         catalogPage.clickOnAddToCart(product);
+    }
+
+    @Step
+    public String getProductName(int product) {
+       return catalogPage.getProductName(product);
+    }
+
+    @Step
+    public String getTitle(){
+        return catalogPage.getTitle();
     }
 }

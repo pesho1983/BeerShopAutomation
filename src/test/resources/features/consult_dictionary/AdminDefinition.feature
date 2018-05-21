@@ -25,11 +25,11 @@ Feature: Admin panel
       | password | parola123A! |
     When You are on the "Add beer" page
     And Filling the beer description:
-      | beerName        | TestBeer                                       |
+      | beerName        | TestBeer1912                                   |
       | beerDescription | <----------BEER TEST TEXT GOES HERE----------> |
       | beerPrice       | 1.99                                           |
       | beerQuantity    | 100                                            |
-    Then Product is loaded to the catalog
+    Then Successful message pops up
 
   Scenario: Creating product without name
     Given You are logged in as administrator:
@@ -50,10 +50,10 @@ Feature: Admin panel
       | password | parola123A! |
     When You are on the "Add beer" page
     And Filling the beer description:
-      | beerName        | TestBeer |
-      | beerDescription |          |
-      | beerPrice       | 1.99     |
-      | beerQuantity    | 100      |
+      | beerName        | TestBeer32 |
+      | beerDescription |            |
+      | beerPrice       | 1.99       |
+      | beerQuantity    | 100        |
     Then Pop up error message appears
     And process is stopped
 
@@ -63,7 +63,7 @@ Feature: Admin panel
       | password | parola123A! |
     When You are on the "Add beer" page
     And Filling the beer description:
-      | beerName        | TestBeer                                       |
+      | beerName        | TestBeer 33                                    |
       | beerDescription | <----------BEER TEST TEXT GOES HERE----------> |
       | beerPrice       |                                                |
       | beerQuantity    | 100                                            |
@@ -89,7 +89,7 @@ Feature: Admin panel
       | password | parola123A! |
     When You are on the "Add beer" page
     And Filling the beer description:
-      | beerName        | TestBeer                                       |
+      | beerName        | TestBeer11                                     |
       | beerDescription | <----------BEER TEST TEXT GOES HERE----------> |
       | beerPrice       | 2                                              |
       | beerQuantity    | 100                                            |

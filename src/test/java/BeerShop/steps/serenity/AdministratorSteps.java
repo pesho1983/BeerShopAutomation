@@ -1,8 +1,10 @@
 package BeerShop.steps.serenity;
 
+import BeerShop.Utils.Utils;
 import BeerShop.pages.AdministratorPage;
 import net.thucydides.core.annotations.Step;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class AdministratorSteps {
@@ -35,6 +37,11 @@ public class AdministratorSteps {
     }
 
     @Step
+    public String successfulBeerMsgText() {
+        return adminPage.getSuccessBeerMsg().getText();
+    }
+
+    @Step
     public void fillingBeerDescriptionForm(Map<String, String> data) {
         adminPage.getNewProductName().type(data.get("beerName"));
         adminPage.getNewProductDescription().type(data.get("beerDescription"));
@@ -43,7 +50,14 @@ public class AdministratorSteps {
     }
 
     @Step
-    public void clickSaveBeerBtn(){
-        adminPage.getNewProductSavebtn();
+    public void clickSaveBeerBtn() {
+        adminPage.getNewProductSavebtn().click();
     }
+
+    @Step
+    public void generateRandomImage() {
+        adminPage.uploadImg(Utils.getRandomImageFromFolder());
+    }
+
+
 }
