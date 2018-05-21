@@ -8,21 +8,17 @@ import net.thucydides.core.pages.PageObject;
 @DefaultUrl("http://192.168.10.158/BeerShop/index.php")
 public class IndexPage extends PageObject {
 
-<<<<<<< HEAD
-        @FindBy(id="login")
-        private WebElementFacade login;
+
+    @FindBy(id = "login")
+    private WebElementFacade login;
+        
+
+    @FindBy(id = "login")
+    private WebElementFacade loginNavLink;
+
 
     public WebElementFacade getLogin() {
         return login;
     }
-=======
-    @FindBy(id = "login")
-    private WebElementFacade loginNavLink;
 
-    public WebElementFacade getLoginNavLink() {
-        return loginNavLink;
-    }
-
-
->>>>>>> e49df27184fe5f182fb04723af8b18a1696e6b03
 }
