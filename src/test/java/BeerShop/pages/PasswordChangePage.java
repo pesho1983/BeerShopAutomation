@@ -30,13 +30,13 @@ public class PasswordChangePage extends PageObject {
     private WebElementFacade backToProfileButton;
 
     @FindBy(id="old_password-error")
-    private  WebElementFacade oldPasswordValidationMessage;
+    private WebElementFacade oldPasswordValidationMessage;
 
     @FindBy(id="password-error")
-    private  WebElementFacade newPasswordValidationMessage;
+    private WebElementFacade newPasswordValidationMessage;
 
     @FindBy(id="confirmPass-error")
-    private  WebElementFacade confirmPasswordValidationMessage;
+    private WebElementFacade confirmPasswordValidationMessage;
 
 
     public WebElementFacade getNewPasswordValidationMessage() {

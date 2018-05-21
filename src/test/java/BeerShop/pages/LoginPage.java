@@ -27,6 +27,18 @@ public class LoginPage extends PageObject {
     @FindBy(id = "profile")
     private WebElementFacade profileNavLink;
 
+    @FindBy(xpath = "//strong")
+    private WebElementFacade wrongUsernameOrPasswordMessage;
+
+    @FindBy(id="inputEmail-error")
+    private WebElementFacade usernameValidationMessage;
+
+    @FindBy(id="password-error")
+    private WebElementFacade passwordValidationMessage;
+
+    @FindBy(name="remember")
+    private WebElementFacade rememberMeCheckbox;
+
     public WebElementFacade getUsername() {
         return username;
     }
@@ -41,5 +53,21 @@ public class LoginPage extends PageObject {
 
     public WebElementFacade getProfileNavLink() {
         return profileNavLink;
+    }
+
+    public WebElementFacade getWrongUsernameOrPasswordMessage() {
+        return wrongUsernameOrPasswordMessage;
+    }
+
+    public WebElementFacade getUsernameValidationMessage() {
+        return usernameValidationMessage;
+    }
+
+    public WebElementFacade getPasswordValidationMessage() {
+        return passwordValidationMessage;
+    }
+
+    public WebElementFacade getRememberMeCheckBox() {
+        return rememberMeCheckbox;
     }
 }

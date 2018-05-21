@@ -10,6 +10,8 @@ import net.thucydides.core.annotations.Steps;
 
 import java.util.Map;
 
+import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
+
 public class PasswordChangeDefinitionSteps {
 
     @Steps
@@ -87,6 +89,11 @@ public class PasswordChangeDefinitionSteps {
 
     @Then("^I should see \"([^\"]*)\" (.*) message$")
     public void iShouldSeeValidationMessage(String defaultValidation, int fieldNum) {
+        String currentPageTitle = getDriver().getTitle();
+        switch (currentPageTitle){
+            case "Login":
+                loginSteps.assertUsernameValidationMessage(fieldNum);
+        }
         passwordChangeSteps.assertPasswordFieldValidationMessage(defaultValidation, fieldNum);
     }
 }

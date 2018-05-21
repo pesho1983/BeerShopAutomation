@@ -2,6 +2,7 @@ package BeerShop.steps;
 
 import BeerShop.steps.serenity.IndexSteps;
 import BeerShop.steps.serenity.LoginSteps;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -30,14 +31,24 @@ public class LoginDefinitionSteps {
     }
 
     @And("^Click on Sign In button$")
-    public void clickOnSignInButton() throws Throwable {
+    public void clickOnSignInButton() {
         loginSteps.pressSubmitButton();
     }
 
     @Then("^I should be logged in$")
-    public void iShouldBeLoggedIn() throws Throwable {
+    public void iShouldBeLoggedIn() {
         loginSteps.assertUserIsOnCatalogPage();
     }
 
+
+    @When("^I enter invalid (.*) and (.*)$")
+    public void iEnterInvalidUsernameAndPassword(String username, String password) {
+        loginSteps.enterUsernameAndPassword(username, password);
+    }
+
+    @Then("^I should see \"([^\"]*)\" message$")
+    public void iShouldSeeMessage(String defaultMessage) {
+        loginSteps.assertWrongUsernameAndPasswordMessage(defaultMessage);
+    }
 
 }
