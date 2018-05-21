@@ -1,15 +1,14 @@
 package BeerShop.steps.serenity;
 
-import BeerShop.pages.AdminPage;
+import BeerShop.pages.AdminPanelPage;
 import BeerShop.pages.IndexPage;
 import BeerShop.pages.LoginPage;
 import net.thucydides.core.annotations.Step;
-import org.junit.Assert;
 
 public class IndexPageSteps {
     IndexPage indexPage;
     LoginPage loginPage;
-    AdminPage adminPage;
+    AdminPanelPage adminPanelPage;
 
     @Step
     public void goToHomePage() {

@@ -4,13 +4,13 @@ Feature: Add new beer
     Given you are logged in as administrator with valid data:
       | username | admin       |
       | password | parola123A! |
-    When admin  clicks on add beers
+    When admin clicks on add beers
     And beer all beer credentials are filled:
-      | name        | FF             |
+      | name        | Gogo            |
       | description | hkhkhkhgkgkgkk |
-      | price       | 20             |
-      | quantity    | 800            |
-    Then beer is successfully added to the  list
+      | price       | 3            |
+      | quantity    | 500           |
+    Then successful "Uploaded successfully." message appears.
 
 
 

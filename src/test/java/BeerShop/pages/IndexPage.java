@@ -11,7 +11,7 @@ public class IndexPage extends PageObject {
 
     @FindBy(id = "login")
     private WebElementFacade login;
-        
+
 
     @FindBy(id = "login")
     private WebElementFacade loginNavLink;

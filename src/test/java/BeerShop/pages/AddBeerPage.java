@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 
 @DefaultUrl("http://192.168.10.158/BeerShop/addBeer.php")
-public class AdminProfilePage extends PageObject {
+public class AddBeerPage extends PageObject {
 
 
     @FindBy(name="name")
