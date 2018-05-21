@@ -41,8 +41,7 @@ Feature: Admin panel
       | beerDescription | <----------BEER TEST TEXT GOES HERE----------> |
       | beerPrice       | 1.99                                           |
       | beerQuantity    | 100                                            |
-    Then Pop up error message appears
-    And process is stopped
+    Then process is stopped and user remains on "Create a new beer" page
 
   Scenario: Creating product without description
     Given You are logged in as administrator:
@@ -54,8 +53,7 @@ Feature: Admin panel
       | beerDescription |            |
       | beerPrice       | 1.99       |
       | beerQuantity    | 100        |
-    Then Pop up error message appears
-    And process is stopped
+    Then process is stopped and user remains on "Create a new beer" page
 
   Scenario: Creating product without price
     Given You are logged in as administrator:
@@ -67,8 +65,7 @@ Feature: Admin panel
       | beerDescription | <----------BEER TEST TEXT GOES HERE----------> |
       | beerPrice       |                                                |
       | beerQuantity    | 100                                            |
-    Then Pop up error message appears
-    And process is stopped
+    Then process is stopped and user remains on "Create a new beer" page
 
   Scenario: Creating product without quantity
     Given You are logged in as administrator:
@@ -80,21 +77,19 @@ Feature: Admin panel
       | beerDescription | <----------BEER TEST TEXT GOES HERE----------> |
       | beerPrice       | 2                                              |
       | beerQuantity    |                                                |
-    Then Pop up error message appears
-    And process is stopped
+    Then process is stopped and user remains on "Create a new beer" page
 
   Scenario: Creating product without picture
     Given You are logged in as administrator:
       | username | admin       |
       | password | parola123A! |
     When You are on the "Add beer" page
-    And Filling the beer description:
+    And Complete the beer description without picture:
       | beerName        | TestBeer11                                     |
       | beerDescription | <----------BEER TEST TEXT GOES HERE----------> |
       | beerPrice       | 2                                              |
       | beerQuantity    | 100                                            |
-    Then Pop up error message appears
-    And process is stopped
+    Then process is stopped and user remains on "Create a new beer" page
 
   Scenario: "Back to products" redirect button
     Given You are logged in as administrator:
@@ -102,14 +97,14 @@ Feature: Admin panel
       | password | parola123A! |
     When You are on the "Add beer" page
     And Pressing the "Back to products" button
-    Then You are redirected to the beer catalog
+    Then You are redirected to "All Beers" page
 
   Scenario Outline: Edit beer name
     Given You are logged in as administrator:
       | username | admin       |
       | password | parola123A! |
-    And Filling the <beerName>
-    Then Successful message pops up
+    When Filling the beer name <beerName>
+    Then Successful message "Record was updated." pops up
     Examples:
       | beerName |
       | EDIT     |
@@ -118,8 +113,8 @@ Feature: Admin panel
     Given You are logged in as administrator:
       | username | admin       |
       | password | parola123A! |
-    And Filling the <beerDescription>
-    Then Successful message pops up
+    When Filling the beer description <beerDescription>
+    Then Successful message "Record was updated." pops up
     Examples:
       | beerDescription  |
       | DESCRIPTION EDIT |
@@ -128,8 +123,8 @@ Feature: Admin panel
     Given You are logged in as administrator:
       | username | admin       |
       | password | parola123A! |
-    And Filling the <beerPrice>
-    Then Successful message pops up
+    When Filling the beer price <beerPrice>
+    Then Successful message "Record was updated." pops up
     Examples:
       | beerPrice |
       | 5.12      |
@@ -138,8 +133,8 @@ Feature: Admin panel
     Given You are logged in as administrator:
       | username | admin       |
       | password | parola123A! |
-    And Filling the <beerQuantity>
-    Then Successful message pops up
+    When Filling the beer quantity <beerQuantity>
+    Then Successful message "Record was updated." pops up
     Examples:
       | beerQuantity |
       | 55           |
@@ -148,15 +143,15 @@ Feature: Admin panel
     Given You are logged in as administrator:
       | username | admin       |
       | password | parola123A! |
-    When You are on the "Edit beer" page
+    When You are on the Edit beer page
     And changing the beer picture
-    Then Pop up error message appears
+    Then Successful message "Record was updated." pops up
 
   Scenario: Delete beer
     Given You are logged in as administrator:
       | username | admin       |
       | password | parola123A! |
-    When You are on the "Edit beer" page
+    When You are on the Edit beer page
     And Pressing the delete button for a single beer
-    Then Confirmation pop up appears
+    Then Successful message "Record was deleted." on beer deletion pops
 

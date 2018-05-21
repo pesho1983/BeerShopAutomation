@@ -32,9 +32,6 @@ public class Utils {
             if (image.isFile()) {
                 String newName = generateRandomImagePath();
                 if (image.renameTo(new File(newName))) {
-                    System.out.println("Rename successful to " + newName);
-                } else {
-                    System.out.println("Rename failed: " + newName);
                 }
             }
         }

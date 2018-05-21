@@ -1,6 +1,5 @@
 package BeerShop.pages;
 
-import BeerShop.Utils.Utils;
 import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
@@ -44,6 +43,19 @@ public class AdministratorPage extends PageObject {
     @FindBy(name = "picture")
     private WebElementFacade beerPicture;
 
+    public WebElementFacade getEditBeerSuccessMessage() {
+        return editBeerSuccessMessage;
+    }
+
+    @FindBy(xpath = "//div[contains(text(), 'deleted')]")
+    private WebElementFacade deletedBeerMessageElement;
+
+    public WebElementFacade getDeletedBeerMessageElement() {
+        return deletedBeerMessageElement;
+    }
+
+    @FindBy(xpath = "//div[contains(text(),'Record was updated.')]")
+    private WebElementFacade editBeerSuccessMessage;
 
     @FindBy(id = "profile")
     private WebElementFacade profileUsername;
@@ -52,8 +64,8 @@ public class AdministratorPage extends PageObject {
     @FindBy(xpath = "//div[contains(text(), \"Uploaded successfully.\")]")
     private WebElementFacade SuccessBeerMsg;
 
-    public void getNthEditBeerBtn(int n) {
-        WebElement editBtn = this.getDriver().findElement(By.xpath("(//a[contains(.,'Edit')])[" + n + "]"));
+    public WebElement getNthEditBeerBtn(int n) {
+        return this.getDriver().findElement(By.xpath("(//a[contains(.,'Edit')])[" + n + "]"));
 
     }
 
@@ -61,8 +73,8 @@ public class AdministratorPage extends PageObject {
         return profileUsername;
     }
 
-    public void getNthDeleteBeerBtn(int n) {
-        WebElement editBtn = this.getDriver().findElement(By.xpath("(//a[contains(.,'Delete')])[" + n + "]"));
+    public WebElement getNthDeleteBeerBtn(int n) {
+        return this.getDriver().findElement(By.xpath("(//a[contains(.,'Delete')])[" + n + "]"));
     }
 
     public WebElementFacade getAddBeerBtn() {
