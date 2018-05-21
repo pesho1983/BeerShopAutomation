@@ -39,7 +39,7 @@ public class BasketSteps {
     @Step
     public void clickOnAddToCart(int product){
         if(product > 8){
-            ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,500)", "");
+            Utils.javascriptWindowScroll(500);
         }
         catalogPage.clickOnAddToCart(product);
     }
@@ -47,7 +47,7 @@ public class BasketSteps {
     @Step
     public String getCatalogProductName(int product){
         if(product > 8){
-            ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0,500)", "");
+            Utils.javascriptWindowScroll(500);
         }
         return catalogPage.getProductName(product);
     }

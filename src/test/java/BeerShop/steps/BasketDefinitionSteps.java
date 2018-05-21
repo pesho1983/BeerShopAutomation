@@ -1,18 +1,17 @@
 package BeerShop.steps;
 
 import BeerShop.Utils.ShippingDetails;
-import BeerShop.Utils.Utils;
 import BeerShop.steps.serenity.BasketSteps;
 import BeerShop.steps.serenity.LoginSteps;
-import cucumber.api.DataTable;
-import cucumber.api.PendingException;
-import cucumber.api.Transpose;
+import BeerShop.steps.serenity.ProfileSteps;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
+import sun.java2d.cmm.Profile;
+
 import java.util.Map;
 import java.util.Random;
 import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
@@ -20,6 +19,7 @@ import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver
 
 public class BasketDefinitionSteps {
     private static String name;
+    private static String userFirstName;
     private static String result;
 
     @Steps
@@ -27,6 +27,9 @@ public class BasketDefinitionSteps {
 
     @Steps
     LoginSteps loginSteps;
+
+    @Steps
+    ProfileSteps profileSteps;
 
     @Given("^a user is logged in:$")
     public void aUserIsLoggedIn(Map<String, String> data) {
@@ -147,7 +150,8 @@ public class BasketDefinitionSteps {
     @Then("^the information corresponds to the logged user$")
     public void theInformationCorrespondsToTheLoggedUser() {
         //Assert is temporary hardcoded, because profile steps are not yet implemented, will be changed after.
-        Assert.assertEquals("Petar", basketSteps.getShippingDetails(ShippingDetails.FIRST_NAME));
+        userFirstName = basketSteps.getShippingDetails(ShippingDetails.FIRST_NAME);
+        Assert.assertEquals(profileSteps.getUserFirstName(), userFirstName);
     }
 
     @Then("^the \"([^\"]*)\" message appears$")
@@ -157,7 +161,6 @@ public class BasketDefinitionSteps {
 
     @Then("^an error (?:message containing|message) \"([^\"]*)\" appears$")
     public void anErrorMessageAboutInsufficientFundsAppears(String message) {
-            Assert.assertEquals(true, basketSteps.getErrorMessage().contains(message));
-
+        Assert.assertEquals(true, basketSteps.getErrorMessage().contains(message));
     }
 }

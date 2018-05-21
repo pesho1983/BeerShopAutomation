@@ -2,6 +2,7 @@ package BeerShop.Utils;
 
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -26,6 +27,13 @@ public class Utils {
         wait.until(ExpectedConditions.alertIsPresent());
         Alert alert = getDriver().switchTo().alert();
         alert.accept();
+    }
+
+    public static void javascriptWindowScroll(int scrollBy){
+        String script = "window.scrollBy(0,%s)";
+        script = String.format(script, scrollBy);
+
+        ((JavascriptExecutor) getDriver()).executeScript(script, "");
     }
 }
 
