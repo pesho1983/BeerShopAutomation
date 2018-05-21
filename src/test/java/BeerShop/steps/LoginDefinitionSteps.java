@@ -24,9 +24,9 @@ public class LoginDefinitionSteps {
         indexSteps.clickOnLoginNavLink();
     }
 
-    @When("^I enter valid username and password:$")
-    public void iEnterValidUsernameAndPassword(Map<String, String> data){
-        loginSteps.enterUsernameAndPassword(data);
+    @When("^I enter valid (.*) and (.*)$")
+    public void iEnterValidUsernameAndPassword(String username, String password){
+        loginSteps.enterUsernameAndPassword(username, password);
     }
 
     @And("^Click on Sign In button$")
