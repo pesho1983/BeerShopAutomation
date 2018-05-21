@@ -8,7 +8,7 @@ import net.thucydides.core.annotations.DefaultUrl;
 @DefaultUrl("http://192.168.10.158/BeerShop/profile.php")
 public class ProfilePage extends PageObject {
 
-    @FindBy(xpath = "//a[contains(text(), \"Change\")]")
+    @FindBy(xpath = "//a[@href='changeProfile.php']")
     private WebElementFacade changeInfoButton;
 
     @FindBy(xpath = "//div/p[contains(text(), \"First name:\")]")

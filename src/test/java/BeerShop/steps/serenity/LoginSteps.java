@@ -11,10 +11,18 @@ public class LoginSteps {
 
     LoginPage loginPage;
 
+
+
     @Step
     public void enterUsernameAndPassword(Map<String, String> data){
         loginPage.getUsername().type(data.get("username"));
         loginPage.getPassword().type(data.get("password"));
+    }
+
+    @Step
+    public void enterUsernameAndPassword(String username, String password){
+        loginPage.getUsername().type(username);
+        loginPage.getPassword().type(password);
     }
 
     @Step
