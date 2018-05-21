@@ -1,6 +1,6 @@
 Feature: Register Functionality
   In order to login the site
-  as an and user
+  as an user
   I would like to be able to register
 
   #Positive path
