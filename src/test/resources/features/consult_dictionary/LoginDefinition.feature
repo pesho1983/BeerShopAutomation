@@ -5,31 +5,42 @@ Feature: Login Functionality
 
   Scenario Outline: Login with valid data
     Given I am on Login page
-    When I enter valid <username> and <password>
-    And Click on Sign In button
-    Then I should be logged in
+    When I enter <username> and <password>
+    And click on Sign In button
+    Then I should be logged in and redirected to Catalog page
     Examples:
       | username | password    |
-      | admin1   | parola123A! |
-      | admin2   | parola123!A |
+      | login1   | parola123A! |
+      | login2   | parola123!A |
 
   Scenario Outline: Login with invalid data
     Given I am on Login page
-    When I enter invalid <username> and <password>
-    And Click on Sign In button
-    Then I should see "Wrong username or password!" message
+    When I enter <username> and <password>
+    And click on Sign In button
+    Then I should see <validation> <message> on Login page
     Examples:
-      | username | password    |
-      | admi     | parola123A! |
-      | admin2   | ola123!A    |
+      | username | password    | validation | message                     |
+      | admi     | parola123A! | errorLogin | Wrong username or password! |
+      | admin2   | ola123!A    | errorLogin | Wrong username or password! |
 
   Scenario Outline: Check fields validations with empty data
     Given I am on Login page
-    When I enter invalid <username> and <password>
-    And Click on Sign In button
-    Then I should see "This field is required." <validation> message
+    When I enter <username> and <password>
+    And click on Sign In button
+    Then I should see <validation> <message> on Login page
     Examples:
-      | username | password    | validation |
-      |          | parola123A! | 0          |
-      | admin2   |             | 1          |
-      |          |             | 2          |
+      | username | password    | validation             | message                 |
+      |          | parola123A! | usernameValidation     | This field is required. |
+      | admin2   |             | passwordValidation     | This field is required. |
+      |          |             | userAndPassValidations | This field is required. |
+
+  Scenario Outline: Check remember me functionality
+    Given I am on Login page
+    When I enter <username> and <password>
+    And click on Remember me checkbox an press Sign In button
+    And I open new browser session
+    Then I should be logged in site with same <username>
+    Examples:
+      | username | password    |
+      | login1   | parola123A! |
+      | login2   | parola123!A |

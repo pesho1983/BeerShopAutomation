@@ -9,8 +9,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
-import java.util.Map;
-
 public class LoginDefinitionSteps {
 
     @Steps
@@ -25,30 +23,39 @@ public class LoginDefinitionSteps {
         indexSteps.clickOnLoginNavLink();
     }
 
-    @When("^I enter valid (.*) and (.*)$")
-    public void iEnterValidUsernameAndPassword(String username, String password){
+    @When("^I enter (.*) and (.*)$")
+    public void iEnterUsernameAndPassword(String username, String password){
         loginSteps.enterUsernameAndPassword(username, password);
     }
 
-    @And("^Click on Sign In button$")
+    @And("^click on Sign In button$")
     public void clickOnSignInButton() {
         loginSteps.pressSubmitButton();
     }
 
-    @Then("^I should be logged in$")
-    public void iShouldBeLoggedIn() {
+    @Then("^I should be logged in and redirected to Catalog page$")
+    public void iShouldBeLoggedInAndRedirectedToCatalogPage() {
         loginSteps.assertUserIsOnCatalogPage();
     }
 
-
-    @When("^I enter invalid (.*) and (.*)$")
-    public void iEnterInvalidUsernameAndPassword(String username, String password) {
-        loginSteps.enterUsernameAndPassword(username, password);
+    @Then("^I should see (.*) (.*) on Login page$")
+    public void iShouldSeeValidationMessageOnLoginPage(String validation, String defaultMessage)  {
+        loginSteps.assertValidationMessage(validation, defaultMessage);
     }
 
-    @Then("^I should see \"([^\"]*)\" message$")
-    public void iShouldSeeMessage(String defaultMessage) {
-        loginSteps.assertWrongUsernameAndPasswordMessage(defaultMessage);
+    @And("^I open new browser session$")
+    public void iOpenNewBrowserSession() {
+        indexSteps.openURL();
     }
 
+    @Then("^I should be logged in site with same (.*)$")
+    public void iShouldBeLoggedInSiteWithSameCredentials(String username)  {
+        loginSteps.assertLoggedInWithSameUser(username);
+    }
+
+    @And("^click on Remember me checkbox an press Sign In button$")
+    public void clickOnRememberMeCheckboxAnPressSignInButton() {
+        loginSteps.checkRememberMeCheckbox();
+        loginSteps.pressSubmitButton();
+    }
 }

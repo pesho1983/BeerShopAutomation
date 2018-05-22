@@ -1,18 +1,14 @@
 package BeerShop.steps.serenity;
 
+import BeerShop.pages.IndexPage;
 import BeerShop.pages.LoginPage;
-import BeerShop.pages.PasswordChangePage;
-import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
 import java.util.Map;
 
 public class LoginSteps {
-
     LoginPage loginPage;
-    PasswordChangePage passwordChangePage;
 
     @Step
     public void enterUsernameAndPassword(Map<String, String> data){
@@ -37,6 +33,11 @@ public class LoginSteps {
     }
 
     @Step
+    public void clickOnWalletLink(){
+        loginPage.getWalletLink().click();
+    }
+
+    @Step
     public void clickOnProfileNavLink() {
         loginPage.getProfileNavLink().click();
     }
@@ -47,43 +48,32 @@ public class LoginSteps {
     }
 
     @Step
-    public void assertWrongUsernameAndPasswordMessage(String defaulMessage){
-        Assert.assertEquals(defaulMessage, loginPage.getWrongUsernameOrPasswordMessage().getText());
-    }
-
-    @Step
-    public void assertValidationMessage(String defaulMessage, int fieldNume) {
-        Assert.assertEquals(defaulMessage, loginPage.getUsernameValidationMessage().getText());
-        WebElementFacade oldPassValidation = passwordChangePage.getOldPasswordValidationMessage();
-        WebElementFacade newPassValidation = passwordChangePage.getNewPasswordValidationMessage();
-        WebElementFacade confirmPassValidation = passwordChangePage.getConfirmPasswordValidationMessage();
-        if (fieldNum == 0) {
-
-            Assert.assertEquals(defaultValidation,oldPassValidation.getText());
+    public void assertValidationMessage(String validation, String defaulMessage) {
+        switch (validation){
+            case "errorLogin":
+                Assert.assertEquals(defaulMessage,loginPage.getWrongUsernameOrPasswordMessage().getText());
+                break;
+            case "usernameValidation":
+                Assert.assertEquals(defaulMessage,loginPage.getUsernameValidationMessage().getText());
+                break;
+            case "passwordValidation":
+                Assert.assertEquals(defaulMessage,loginPage.getPasswordValidationMessage().getText());
+                break;
+            case "userAndPassValidations":
+                Assert.assertEquals(defaulMessage,loginPage.getUsernameValidationMessage().getText());
+                Assert.assertEquals(defaulMessage,loginPage.getPasswordValidationMessage().getText());
+                break;
         }
-        else if (fieldNum == 1){
 
-            Assert.assertEquals(defaultValidation,newPassValidation.getText());
-        }
-        else if (fieldNum == 2){
-
-            Assert.assertEquals(defaultValidation,confirmPassValidation.getText());
-        }
-        else if (fieldNum == 3){
-
-            Assert.assertEquals(defaultValidation,oldPassValidation.getText());
-            Assert.assertEquals(defaultValidation,newPassValidation.getText());
-            Assert.assertEquals(defaultValidation,confirmPassValidation.getText());
-        }
-    }
-
-    @Step
-    public void assertPasswordValidationMessage(String defaulMessage) {
-        Assert.assertEquals(defaulMessage, loginPage.getPasswordValidationMessage().getText());
     }
 
     @Step
     public void checkRememberMeCheckbox() {
         loginPage.getRememberMeCheckBox().click();
+    }
+
+    @Step
+    public void assertLoggedInWithSameUser(String username){
+        Assert.assertEquals(username, loginPage.getProfileUsermame().getText());
     }
 }
