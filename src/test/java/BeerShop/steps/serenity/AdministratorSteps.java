@@ -3,6 +3,7 @@ package BeerShop.steps.serenity;
 import BeerShop.Utils.Utils;
 import BeerShop.pages.AdministratorPage;
 import net.thucydides.core.annotations.Step;
+import org.junit.Assert;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -54,7 +55,7 @@ public class AdministratorSteps {
     }
 
     @Step
-    public String getDeletedBeerText(){
+    public String getDeletedBeerText() {
         return adminPage.getDeletedBeerMessageElement().getText();
     }
 
@@ -116,4 +117,38 @@ public class AdministratorSteps {
             e.printStackTrace();
         }
     }
+
+    //Assert Steps
+
+    @Step
+    public void assertLoggedInAsAdmin() {
+        Assert.assertEquals("admin", getLoggedUserText());
+    }
+
+    @Step
+    public void assertSuccessMsgOnDeletingBeer(String deletedMessage) {
+        Assert.assertEquals(deletedMessage, getDeletedBeerText());
+    }
+
+    @Step
+    public void assertSuccessMsg(String message) {
+        Assert.assertEquals(message, editSuccessMsgText());
+    }
+
+    @Step
+    public void assertUserIsOnPage(String pageTitle) {
+        Assert.assertEquals(pageTitle, getTitle());
+    }
+
+    @Step
+    public void asserMessageOnUpload(String message) {
+        Assert.assertEquals(message, successfulBeerMsgText());
+    }
+
+    @Step
+    public void assertUserIsOnAdminPage(String message) {
+        Assert.assertEquals(message, getTitle());
+    }
+
+
 }

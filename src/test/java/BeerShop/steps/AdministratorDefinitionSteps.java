@@ -4,7 +4,6 @@ package BeerShop.steps;
 import BeerShop.steps.serenity.AdministratorSteps;
 import BeerShop.steps.serenity.CatalogSteps;
 import BeerShop.steps.serenity.LoginSteps;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -45,22 +44,22 @@ public class AdministratorDefinitionSteps {
 
     @Then("^You are logged in as admin$")
     public void youAreLoggedInAsAdmin() {
-        Assert.assertEquals("admin", adminSteps.getLoggedUserText());
+        adminSteps.assertLoggedInAsAdmin();
     }
 
     @And("^Redirected to \"([^\"]*)\"$")
-    public void redirectedTo(String arg0) {
-        Assert.assertEquals("Admin Panel", adminSteps.getTitle());
+    public void redirectedTo(String message) {
+        adminSteps.assertUserIsOnAdminPage(message);
     }
 
     @Then("^Error message appears$")
     public void errorMessageAppears() {
-        Assert.assertEquals("Wrong username or password!", loginSteps.getErrorTextMsg());
+        loginSteps.asserOnErrorMsg();
     }
 
     @And("^The user is on the \"([^\"]*)\"$")
     public void theUserIsOnThe(String arg0) {
-        Assert.assertEquals("Login", loginSteps.getTitle());
+        loginSteps.assertUserIsOnLogin();
     }
 
     @Given("^You are logged in as administrator:$")
@@ -85,8 +84,7 @@ public class AdministratorDefinitionSteps {
 
     @Then("^Product is loaded to the catalog$")
     public void productIsLoadedToTheCatalog() {
-        catalogSteps.redirectToCatalog();
-        Assert.assertEquals("TestBeer1912", catalogSteps.getProductName(1));
+        catalogSteps.assertProductIsloaded();
     }
 
     @And("^Pressing the \"([^\"]*)\" button$")
@@ -96,18 +94,18 @@ public class AdministratorDefinitionSteps {
 
     @Then("^You are redirected to the beer catalog$")
     public void youAreRedirectedToTheBeerCatalog() {
-        Assert.assertEquals("Catalog", catalogSteps.getTitle());
+        catalogSteps.assertUserIsOnCatalogPage();
     }
 
     @Then("^You are redirected to \"([^\"]*)\" page$")
-    public void you_are_redirected_to_page(String title) throws Exception {
-        Assert.assertEquals(title, adminSteps.getTitle());
+    public void you_are_redirected_to_page(String title) {
+        adminSteps.assertUserIsOnAdminPage(title);
     }
 
 
     @Then("^Successful message pops up$")
     public void successfulMessagePopsUp() {
-        Assert.assertEquals("Uploaded successfully.", adminSteps.successfulBeerMsgText());
+        adminSteps.asserMessageOnUpload("Uploaded successfully.");
     }
 
 
@@ -120,12 +118,13 @@ public class AdministratorDefinitionSteps {
 
     @Then("^process is stopped and user remains on \"([^\"]*)\" page$")
     public void process_is_stopped_and_user_remains_on_page(String title) {
-        Assert.assertEquals(title, adminSteps.getTitle());
+        adminSteps.assertUserIsOnPage(title);
     }
 
     @Then("^Successful message \"([^\"]*)\" pops up$")
     public void successful_message_pops_up(String successfulMessage) {
-        Assert.assertEquals(successfulMessage, adminSteps.editSuccessMsgText());
+        adminSteps.assertSuccessMsg(successfulMessage);
+        adminSteps.editSuccessMsgText();
     }
 
     @When("^Filling the beer name (.*)$")
@@ -166,8 +165,8 @@ public class AdministratorDefinitionSteps {
     }
 
     @Then("^Successful message \"([^\"]*)\" on beer deletion pops$")
-    public void successfulMessageOnBeerDeletionPops(String deteledMessage) {
-        Assert.assertEquals(deteledMessage, adminSteps.getDeletedBeerText());
+    public void successfulMessageOnBeerDeletionPops(String deletedMsg) {
+        adminSteps.assertSuccessMsgOnDeletingBeer(deletedMsg);
     }
 
     @And("^Complete the beer description without picture:$")
@@ -175,12 +174,12 @@ public class AdministratorDefinitionSteps {
         adminSteps.fillingBeerDescriptionForm(data);
         adminSteps.clickSaveBeerBtn();
     }
+
     @When("^changing the beer picture$")
     public void changing_the_beer_picture() throws Exception {
         adminSteps.clickOnNthBeerEditElement(1);
         adminSteps.generateRandomImage();
         adminSteps.clickSaveBeerBtn();
     }
-
 
 }

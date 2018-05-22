@@ -1,7 +1,6 @@
 package BeerShop.Utils;
 
-import BeerShop.pages.BasketPage;
-import net.serenitybdd.core.pages.PageObject;
+
 import net.serenitybdd.core.pages.WebElementFacade;
 
 import java.io.File;
@@ -22,6 +21,8 @@ public class Utils {
         SecureRandom rand = new SecureRandom();
         sb.append(HOME_PATH)
                 .append(rand.nextInt(100000) + 100)
+                .append(System.currentTimeMillis())
+                .append(System.nanoTime())
                 .append(".png");
 
         return sb.toString();

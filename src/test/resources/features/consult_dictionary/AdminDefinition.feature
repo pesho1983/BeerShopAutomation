@@ -9,7 +9,7 @@ Feature: Admin panel
       | username | admin       |
       | password | parola123A! |
     Then You are logged in as admin
-    And Redirected to "Admin panel"
+    And Redirected to "Admin Panel"
 
   Scenario: Log in with invalid admin credentials
     Given I am on the log in page
@@ -107,7 +107,7 @@ Feature: Admin panel
     Then Successful message "Record was updated." pops up
     Examples:
       | beerName |
-      | EDIT     |
+      | EDIT1912 |
 
   Scenario Outline: Edit beer description
     Given You are logged in as administrator:

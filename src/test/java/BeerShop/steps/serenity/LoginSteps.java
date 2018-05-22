@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
 import java.util.Map;
+
 @DefaultUrl("http://192.168.10.158/BeerShop/login.php")
 public class LoginSteps {
 
@@ -63,6 +64,16 @@ public class LoginSteps {
         return loginPage.getTitle();
     }
 
+    @Step
+    public void asserOnErrorMsg() {
+        Assert.assertEquals("Wrong username or password!", getErrorTextMsg());
+    }
+
+
+    @Step
+    public void assertUserIsOnLogin() {
+        Assert.assertEquals("Login", getTitle());
+    }
 
     public void clickOnWalletLink() {
     }
