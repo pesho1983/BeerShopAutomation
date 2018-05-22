@@ -9,5 +9,5 @@ import org.junit.runner.RunWith;
 
 @CucumberOptions(features = "src/test/resources/features/consult_dictionary/",
         snippets = SnippetType.CAMELCASE)
-public class DefinitionTestSuite {
+public class RadoDefTestSuite {
 }

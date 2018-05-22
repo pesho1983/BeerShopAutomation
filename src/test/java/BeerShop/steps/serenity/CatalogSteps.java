@@ -8,9 +8,10 @@ public class CatalogSteps {
 
 
     @Step
-    public void redirectToCatalog(){
+    public void redirectToCatalog() {
         catalogPage.open();
     }
+
     @Step
     public void clickOnAddToCart(int product) {
         catalogPage.clickOnAddToCart(product);
@@ -18,11 +19,12 @@ public class CatalogSteps {
 
     @Step
     public String getProductName(int product) {
-       return catalogPage.getProductName(product);
+        return catalogPage.getProductName(product);
     }
 
     @Step
-    public String getTitle(){
+    public String getTitle() {
         return catalogPage.getTitle();
     }
+
 }

@@ -12,6 +12,7 @@ public class LoginSteps {
 
     LoginPage loginPage;
 
+
     @Step
     public void navigateToLoginPage() {
         loginPage.open();
@@ -28,8 +29,15 @@ public class LoginSteps {
         loginPage.getPassword().type(data.get("password"));
     }
 
+
+    public void enterUsernameAndPassword(String username, String password) {
+        loginPage.getUsername().type(username);
+        loginPage.getPassword().type(password);
+    }
+
     @Step
     public void pressSubmitButton() {
+
         loginPage.getSubmitButton().click();
     }
 
@@ -42,11 +50,20 @@ public class LoginSteps {
     @Step
     public void clickOnProfileNavLink() {
         loginPage.getProfileNavLink().click();
-
     }
+
+    @Step
+    public void openSite() {
+        loginPage.open();
+    }
+
 
     @Step
     public String getTitle() {
         return loginPage.getTitle();
+    }
+
+
+    public void clickOnWalletLink() {
     }
 }

@@ -24,13 +24,16 @@ public class CatalogPage extends PageObject {
         return productName;
     }
 
+
     public void clickOnAddToCart(int product) {
         String result = Utils.productIndividualXpath(this.getProductBox(), "]]");
         String targetProduct = result + "][" + product + "]" + "/a";
         this.getDriver().findElement(By.xpath(targetProduct)).click();
     }
 
+
     public String getProductName(int product) {
+
         String productName = this.getProduct().getWrappedElement().toString();
         String toRemove = productName.substring(0, 78);
         String result = productName.replace(toRemove, "").replace("]/h2[text()]", "");

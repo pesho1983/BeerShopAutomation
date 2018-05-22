@@ -28,8 +28,13 @@ public class LoginPage extends PageObject {
     @FindBy(id = "profile")
     private WebElementFacade profileNavLink;
 
+
     @FindBy(xpath = "//div[@class='alert alert-danger']")
     private WebElementFacade wrongUserOrPassBox;
+
+    @FindBy(id="wallet")
+    private WebElementFacade walletLink;
+
 
     public WebElementFacade getUsername() {
         return username;
@@ -46,7 +51,15 @@ public class LoginPage extends PageObject {
     public WebElementFacade getProfileNavLink() {
         return profileNavLink;
     }
+
     public WebElementFacade getWrongUserOrPassBox() {
         return wrongUserOrPassBox;
     }
+
+
+    public WebElementFacade getWalletLink() {
+        return walletLink;
+    }
+
+
 }
