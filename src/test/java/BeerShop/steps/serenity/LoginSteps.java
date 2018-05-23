@@ -44,4 +44,9 @@ public class LoginSteps {
     public void openSite(){
         loginPage.open();
     }
+
+    @Step
+    public void clickOnWalletLink(){
+        loginPage.getWalletLink().click();
+    }
 }

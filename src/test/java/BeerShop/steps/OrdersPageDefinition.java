@@ -1,10 +1,8 @@
 package BeerShop.steps;
 
 import BeerShop.pages.AdminProfilePage;
-import BeerShop.steps.serenity.AdminProfilePageSteps;
-import BeerShop.steps.serenity.IndexSteps;
-import BeerShop.steps.serenity.LoginSteps;
-import BeerShop.steps.serenity.OrdersPageSteps;
+import BeerShop.pages.OldOrdersPage;
+import BeerShop.steps.serenity.*;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -26,6 +24,9 @@ public class OrdersPageDefinition {
     OrdersPageSteps ordersPageSteps;
     @Steps
     AdminProfilePageSteps adminProfilePageSteps;
+    @Steps
+    OldOrdersSteps oldOrdersSteps;
+
 
 
 
@@ -56,5 +57,16 @@ public class OrdersPageDefinition {
     @Then("^the user should be redirected to completed orders page - \"([^\"]*)\"$")
     public void theUserShouldBeRedirectedToCompletedOrdersPageOldOrdersPhp(String url) throws Throwable {
         ordersPageSteps.assertCompletedOrdersPageLoaded(url);
+    }
+
+    @When("^the adminUser should navigate to completed orders page$")
+    public void theAdminUserShouldNavigateToCompletedOrdersPage() throws Throwable {
+        adminProfilePageSteps.clickOnUserOrdersLink();
+        ordersPageSteps.clickOnOrdersLink();
+    }
+
+    @Then("^the adminUser should see order number \"([^\"]*)\" in the list of completed orders$")
+    public void theAdminUserShouldSeeOrderNumberInTheListOfCopletedOrders(String orderId) throws Throwable {
+        oldOrdersSteps.assertCompletedOrdersId(orderId);
     }
 }
