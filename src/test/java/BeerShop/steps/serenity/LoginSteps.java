@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
 
 import java.util.List;
+import java.util.Map;
 
 public class LoginSteps {
     LoginPage loginPage;
@@ -16,6 +17,13 @@ public class LoginSteps {
         loginPage.getUsername().type(user.get(0).getUsername());
         loginPage.getPassword().type(user.get(0).getPassword());
     }
+
+    @Step
+    public void enterUsernameAndPassword(Map<String, String> data){
+        loginPage.getUsername().type(data.get("username"));
+        loginPage.getPassword().type(data.get("password"));
+    }
+
 
     @Step
     public void enterUsernameAndPassword(String username, String password){

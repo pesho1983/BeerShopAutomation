@@ -30,7 +30,7 @@ public class PasswordChangeDefinitionSteps {
 
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
-        //loginSteps.enterUsernameAndPassword(data);
+        loginSteps.enterUsernameAndPassword(data);
         loginSteps.pressSubmitButton();
         loginSteps.clickOnProfileNavLink();
     }
