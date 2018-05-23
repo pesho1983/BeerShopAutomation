@@ -17,5 +17,4 @@ public class IndexPage extends PageObject {
         return loginNavLink;
     }
 
-
 }

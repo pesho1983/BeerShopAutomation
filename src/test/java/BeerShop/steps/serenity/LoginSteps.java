@@ -1,5 +1,6 @@
 package BeerShop.steps.serenity;
 
+
 import BeerShop.entities.User;
 import BeerShop.pages.LoginPage;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -16,7 +17,6 @@ import static BeerShop.Utils.Utils.WEBSITE_URL;
 public class LoginSteps {
 
 
-
     LoginPage loginPage;
 
 
@@ -31,18 +31,18 @@ public class LoginSteps {
     }
 
     @Step
-<<<<<<< HEAD
     public void enterUsernameAndPassword(Map<String, String> data) {
         loginPage.getUsername().type(data.get("username"));
         loginPage.getPassword().type(data.get("password"));
-=======
-    public void enterUsernameAndPassword(List<User> user){
-        loginPage.getUsername().type(user.get(0).getUsername());
-        loginPage.getPassword().type(user.get(0).getPassword());
->>>>>>> 4a49aeaa21ad162e4e5aefcc5c37b2043b5088a9
     }
 
+    @Step
+    public void enterUsernameAndPassword(List<User> user) {
+        loginPage.getUsername().type(user.get(0).getUsername());
+        loginPage.getPassword().type(user.get(0).getPassword());
+    }
 
+    @Step
     public void enterUsernameAndPassword(String username, String password) {
         loginPage.getUsername().type(username);
         loginPage.getPassword().type(password);
@@ -55,8 +55,8 @@ public class LoginSteps {
     }
 
     @Step
-    public void assertUserIsOnCatalogPage() {
-        Assert.assertEquals("http://192.168.10.158/BeerShop/catalog.php#", loginPage.getDriver().getCurrentUrl());
+    public void assertUserIsOnCatalogPage(String defaultUrl) {
+        Assert.assertEquals(defaultUrl, loginPage.getDriver().getCurrentUrl());
     }
 
 
@@ -69,8 +69,6 @@ public class LoginSteps {
     public void openSite() {
         loginPage.open();
     }
-
-<<<<<<< HEAD
 
     @Step
     public String getTitle() {
@@ -88,11 +86,39 @@ public class LoginSteps {
         Assert.assertEquals("Login", getTitle());
     }
 
-    public void clickOnWalletLink() {
-=======
     @Step
-    public void clickOnWalletLink(){
+    public void clickOnWalletLink() {
         loginPage.getWalletLink().click();
->>>>>>> 4a49aeaa21ad162e4e5aefcc5c37b2043b5088a9
+    }
+
+    @Step
+    public void assertValidationMessage(String validation, String defaulMessage) {
+        switch (validation) {
+            case "errorLogin":
+                Assert.assertEquals(defaulMessage, loginPage.getWrongUsernameOrPasswordMessage().getText());
+                break;
+            case "usernameValidation":
+                Assert.assertEquals(defaulMessage, loginPage.getUsernameValidationMessage().getText());
+                break;
+            case "passwordValidation":
+                Assert.assertEquals(defaulMessage, loginPage.getPasswordValidationMessage().getText());
+                break;
+            case "userAndPassValidations":
+                Assert.assertEquals(defaulMessage, loginPage.getUsernameValidationMessage().getText());
+                Assert.assertEquals(defaulMessage, loginPage.getPasswordValidationMessage().getText());
+                break;
+        }
+
+    }
+
+    @Step
+    public void checkRememberMeCheckbox() {
+        loginPage.getRememberMeCheckBox().click();
+    }
+
+    @Step
+    public void assertLoggedInWithSameUser(String username) {
+        Assert.assertEquals(username, loginPage.getProfileUsermame().getText());
+
     }
 }

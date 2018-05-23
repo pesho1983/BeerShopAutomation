@@ -26,20 +26,26 @@ public class PasswordChangePage extends PageObject {
     private WebElementFacade successMessage;
 
     @FindBy(xpath = "//strong[contains(text(), \" Wrong password!\")]")
-    private WebElementFacade wrongPassword;
+    private WebElementFacade wrongPasswordMessage;
+
+    @FindBy(xpath = "//strong[contains(text(), \"Password must contains\")]")
+    private WebElementFacade requiredPasswordSymbolsMessage;
+
+    @FindBy(xpath = "//strong[contains(text(), \" Passwords do not match.\")]")
+    private WebElementFacade matchPasswordMessage;
 
     @FindBy(xpath = "//a[@class=\"btn btn-danger\"]")
     private WebElementFacade backToProfileButton;
 
-    @FindBy(id = "old_password-error")
+
+    @FindBy(id="old_password-error")
     private WebElementFacade oldPasswordValidationMessage;
 
-    @FindBy(id = "password-error")
+    @FindBy(id="password-error")
     private WebElementFacade newPasswordValidationMessage;
 
-    @FindBy(id = "confirmPass-error")
+    @FindBy(id="confirmPass-error")
     private WebElementFacade confirmPasswordValidationMessage;
-
 
     public WebElementFacade getNewPasswordValidationMessage() {
         return newPasswordValidationMessage;
@@ -52,7 +58,6 @@ public class PasswordChangePage extends PageObject {
     public WebElementFacade getOldPasswordValidationMessage() {
         return oldPasswordValidationMessage;
     }
-
 
     public WebElementFacade getOldPassword() {
         return oldPassword;
@@ -74,8 +79,16 @@ public class PasswordChangePage extends PageObject {
         return successMessage;
     }
 
-    public WebElementFacade getWrongPassword() {
-        return wrongPassword;
+    public WebElementFacade getWrongPasswordMessage() {
+        return wrongPasswordMessage;
+    }
+
+    public WebElementFacade getRequiredPasswordSymbolsMessage() {
+        return requiredPasswordSymbolsMessage;
+    }
+
+    public WebElementFacade getMatchPasswordMessage() {
+        return matchPasswordMessage;
     }
 
     public WebElementFacade getBackToProfileButton() {
