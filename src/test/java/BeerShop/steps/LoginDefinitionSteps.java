@@ -42,10 +42,4 @@ public class LoginDefinitionSteps {
         loginSteps.assertUserIsOnCatalogPage();
     }
 
-
-    @Given("^a user is logged in as (.*)$")
-    public void aUserIsLoggedInAsUsernameAndPassword(List<List<User>> tupak) {
-        //loginSteps.enterUsernameAndPassword(tupak);
-
-    }
 }
