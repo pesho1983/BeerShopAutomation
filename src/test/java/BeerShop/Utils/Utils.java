@@ -35,5 +35,10 @@ public class Utils {
 
         ((JavascriptExecutor) getDriver()).executeScript(script, "");
     }
+
+    public static String removeSuffixFromPrice(WebElementFacade target) {
+        String result = target.getText();
+        return result.substring(0, result.length() - 3);
+    }
 }
 

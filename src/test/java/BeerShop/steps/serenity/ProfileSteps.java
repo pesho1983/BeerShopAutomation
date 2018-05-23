@@ -17,9 +17,4 @@ public class ProfileSteps {
        profilePage.getChangeInfoButton().click();
     }
 
-    @Step
-    public String getUserFirstName(){
-        profilePage.open();
-        return Utils.replaceWordWithWhitespace(profilePage.getFirstName().getText(), "First name: ");
-    }
 }

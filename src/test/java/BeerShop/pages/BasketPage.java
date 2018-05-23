@@ -1,4 +1,5 @@
 package BeerShop.pages;
+import BeerShop.Utils.Utils;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -51,24 +52,29 @@ public class BasketPage extends PageObject {
     @FindBy(xpath = "//div[@class=\"shipAddr\"]")
     private WebElementFacade shippingDetails;
 
-    public WebElementFacade getPlaceOrderBtn() {
-        return placeOrderBtn;
+    public BasketPage clickPlaceOrderButton() {
+        this.placeOrderBtn.click();
+        return this;
     }
 
     public WebElementFacade getFirstProductPrice() {
         return firstProductPrice;
     }
 
-    public WebElementFacade getWalletBtn() {
-        return walletBtn;
+    public BasketPage clickWalletButton() {
+        this.walletBtn.click();
+        return this;
     }
 
-    public WebElementFacade getRemoveProduct() {
-        return removeProduct;
+    public BasketPage clickRemoveProduct() {
+        this.removeProduct.click();
+        Utils.acceptAlert();
+        return this;
     }
 
-    public WebElementFacade getCheckout() {
-        return checkout;
+    public BasketPage clickCheckoutButton() {
+        this.checkout.click();
+        return this;
     }
 
     public WebElementFacade getQuantityEmpty() {
@@ -79,20 +85,22 @@ public class BasketPage extends PageObject {
         return quantity;
     }
 
-    public WebElementFacade getPrice() {
-        return price;
+    public String getPrice() {
+        return Utils.removeSuffixFromPrice(this.price);
     }
 
     public WebElementFacade getSubtotal() {
         return subtotal;
     }
 
-    public WebElementFacade getCartTotal() {
-        return cartTotal;
+    public float getCartTotal() {
+        String wholeWord = this.cartTotal.getText();
+        return Float.parseFloat(wholeWord.substring(6, wholeWord.length() - 3));
     }
 
-    public WebElementFacade getBackToCatalogBtn() {
-        return backToCatalogBtn;
+    public BasketPage clickBackToCatalogButton() {
+        this.backToCatalogBtn.click();
+        return this;
     }
 
     public WebElementFacade getProductName() {
@@ -104,7 +112,7 @@ public class BasketPage extends PageObject {
     }
 
     public String getSuccesMsgText() {
-        return successOrderMsgBox.getText();
+        return Utils.replaceWordWithRegex(this.successOrderMsgBox.getText(), " Order ID is #(\\d+)");
     }
 
     public String getErrorOrderMsgBox() {

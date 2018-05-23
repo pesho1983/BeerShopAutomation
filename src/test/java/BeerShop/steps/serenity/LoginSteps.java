@@ -1,10 +1,12 @@
 package BeerShop.steps.serenity;
 
+import BeerShop.entities.User;
 import BeerShop.pages.LoginPage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
+import java.util.List;
 import java.util.Map;
 
 public class LoginSteps {
@@ -14,9 +16,9 @@ public class LoginSteps {
 
 
     @Step
-    public void enterUsernameAndPassword(Map<String, String> data){
-        loginPage.getUsername().type(data.get("username"));
-        loginPage.getPassword().type(data.get("password"));
+    public void enterUsernameAndPassword(List<User> user){
+        loginPage.getUsername().type(user.get(0).getUsername());
+        loginPage.getPassword().type(user.get(0).getPassword());
     }
 
     @Step
@@ -43,5 +45,10 @@ public class LoginSteps {
     @Step
     public void openSite(){
         loginPage.open();
+    }
+
+    @Step
+    public void clickOnWalletLink(){
+        loginPage.getWalletLink().click();
     }
 }
