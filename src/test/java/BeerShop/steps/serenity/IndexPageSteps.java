@@ -28,8 +28,5 @@ public class IndexPageSteps {
         loginPage.getPassword().type("parola123A!");
         loginPage.getSignIn().click();
     }
-   /* @Step
-    public void assertMessage() {
-        Assert.assertEquals(" Please sign in",loginPage.getNote().getText());
-    }*/
+
 }

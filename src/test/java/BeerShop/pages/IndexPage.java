@@ -13,11 +13,7 @@ public class IndexPage extends PageObject {
     private WebElementFacade login;
 
 
-    @FindBy(id = "login")
-    private WebElementFacade loginNavLink;
-
-
-    public WebElementFacade getLogin() {
+      public WebElementFacade getLogin() {
         return login;
     }
 

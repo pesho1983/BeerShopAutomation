@@ -21,10 +21,14 @@ public class LoginPage extends PageObject {
     @FindBy(className = "extraPlace")
     private WebElementFacade note;
 
+    @FindBy(css=".btn.btn-md.btn-success.btn-block")
     private WebElementFacade submitButton;
 
     @FindBy(id = "profile")
     private WebElementFacade profileNavLink;
+
+    @FindBy(id="wallet")
+    private WebElementFacade walletLink;
 
     public WebElementFacade getUsername() {
         return username;
@@ -48,4 +52,9 @@ public class LoginPage extends PageObject {
     public WebElementFacade getProfileNavLink() {
         return profileNavLink;
     }
+
+    public WebElementFacade getWalletLink() {
+        return walletLink;
+    }
+
 }

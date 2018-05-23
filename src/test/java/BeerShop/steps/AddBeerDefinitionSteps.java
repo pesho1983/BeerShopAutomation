@@ -4,6 +4,7 @@ import BeerShop.pages.AdminPanelPage;
 import BeerShop.pages.AddBeerPage;
 import BeerShop.steps.serenity.AddBeerSteps;
 import cucumber.api.PendingException;
+import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -40,5 +41,17 @@ public class AddBeerDefinitionSteps {
     @Then("^successful \"([^\"]*)\" message appears.$")
     public void successfullMessageAppears(String message) {
        addBeerSteps.assertSuccessfulMessage(message);
+    }
+
+    @And("^user add data:$")
+    public void userAddData(@Transpose Map<String,String> data){
+        addBeerSteps.fillCredentials(data);
+    }
+
+    @Then("(.*) appears:$")
+    public void messageAppears(String message){
+
+         addBeerSteps.appearMessage(message);
+
     }
 }

@@ -21,17 +21,22 @@ public class AddBeerPage extends PageObject {
     @FindBy(name="quantity")
     private WebElementFacade quantity;
 
-    @FindBy(xpath = "//input[@class=\"btn btn-default\"]")
+    @FindBy(css = ".btn.btn-default")
     private WebElementFacade picture;
 
-    @FindBy(xpath = "//input[@value=\"Save\"]")
+    @FindBy(css=".btn.btn-success")
     private WebElementFacade saveButton;
 
     @FindBy(className ="btn btn-danger")
     private WebElementFacade backButton;
 
-    @FindBy(xpath = "//div[@class=\"alert alert-success\"]")
+    @FindBy(css=".alert.alert-success")
     private WebElementFacade successfullMessage;
+
+
+
+    @FindBy(css=".alert.alert-danger")
+    private WebElementFacade dangerMessage;
 
     public WebElementFacade getBackButton() {
         return backButton;
@@ -64,5 +69,9 @@ public class AddBeerPage extends PageObject {
 
     public WebElementFacade getSuccessfullMessage() {
         return successfullMessage;
+    }
+
+    public WebElementFacade getDangerMessage() {
+        return dangerMessage;
     }
 }

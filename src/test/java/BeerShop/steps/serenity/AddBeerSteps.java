@@ -3,6 +3,7 @@ package BeerShop.steps.serenity;
 import BeerShop.pages.AdminPanelPage;
 import BeerShop.pages.AddBeerPage;
 import BeerShop.pages.LoginPage;
+import cucumber.api.Transpose;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
 
@@ -13,7 +14,7 @@ public class AddBeerSteps {
     AdminPanelPage adminPanelPage;
     AddBeerPage addBeerPage;
     LoginPage loginPage;
-    public String FILE = "C:\\Users\\sivanova\\Desktop\\1414.jpg";
+    public String FILE = "C:\\Users\\sivanova\\Desktop\\1717.jpg";
 
    @Step
    public void goToLoginPage(){
@@ -27,6 +28,7 @@ public class AddBeerSteps {
         loginPage.getPassword().type(data.get("password"));
         loginPage.getSignIn().click();
     }
+
 
     @Step
     public void clickButtonAddBeer(){
@@ -45,9 +47,26 @@ public class AddBeerSteps {
         addBeerPage.getSaveButton().click();
 
         }
+
+    @Step
+    public void fillCredentials(@Transpose Map<String,String> data) {
+        addBeerPage.getName().type(data.get("name"));
+        addBeerPage.getDescription().type(data.get("description"));
+        addBeerPage.getPrice().type(data.get("price"));
+        addBeerPage.getQuantity().type(data.get("quantity"));
+        addBeerPage.getPicture().click();
+        getDriver().switchTo().activeElement().sendKeys(FILE);
+        addBeerPage.getSaveButton().click();
+    }
      @Step
     public void assertSuccessfulMessage(String message){
          Assert.assertEquals(message,addBeerPage.getSuccessfullMessage().getText());
+
+     }
+
+     @Step
+    public void appearMessage(String message){
+       Assert.assertEquals(message,addBeerPage.getDangerMessage().getText());
 
      }
 }
