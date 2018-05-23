@@ -3,13 +3,17 @@ package BeerShop.steps.serenity;
 import BeerShop.pages.LoginPage;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
 import java.util.Map;
 
-@DefaultUrl("http://192.168.10.158/BeerShop/login.php")
+import static BeerShop.Utils.Utils.WEBSITE_URL;
+
+
+@DefaultUrl(WEBSITE_URL + "login.php")
 public class LoginSteps {
+
+
 
     LoginPage loginPage;
 

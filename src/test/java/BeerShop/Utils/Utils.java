@@ -8,6 +8,8 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 public class Utils {
+
+    public final static String WEBSITE_URL = "http://192.168.10.158/BeerShop/";
     private final static String HOME_PATH = "C:/Users/rkolev/Desktop/uploadTestImages/";
 
     public static String productIndividualXpath(WebElementFacade target, String replace) {
@@ -45,7 +47,7 @@ public class Utils {
         File fileDir = new File(HOME_PATH);
         File[] images = fileDir.listFiles();
         Random random = new Random();
-        return images[random.nextInt(images.length-1)+1].toString();
+        return images[random.nextInt(images.length - 1) + 1].toString();
     }
 }
 

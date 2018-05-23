@@ -5,7 +5,9 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 
-@DefaultUrl("http://192.168.10.158/BeerShop/passwordChange.php")
+import static BeerShop.Utils.Utils.WEBSITE_URL;
+
+@DefaultUrl(WEBSITE_URL + "passwordChange.php")
 public class PasswordChangePage extends PageObject {
 
     @FindBy(name = "old_password")
@@ -29,14 +31,14 @@ public class PasswordChangePage extends PageObject {
     @FindBy(xpath = "//a[@class=\"btn btn-danger\"]")
     private WebElementFacade backToProfileButton;
 
-    @FindBy(id="old_password-error")
-    private  WebElementFacade oldPasswordValidationMessage;
+    @FindBy(id = "old_password-error")
+    private WebElementFacade oldPasswordValidationMessage;
 
-    @FindBy(id="password-error")
-    private  WebElementFacade newPasswordValidationMessage;
+    @FindBy(id = "password-error")
+    private WebElementFacade newPasswordValidationMessage;
 
-    @FindBy(id="confirmPass-error")
-    private  WebElementFacade confirmPasswordValidationMessage;
+    @FindBy(id = "confirmPass-error")
+    private WebElementFacade confirmPasswordValidationMessage;
 
 
     public WebElementFacade getNewPasswordValidationMessage() {

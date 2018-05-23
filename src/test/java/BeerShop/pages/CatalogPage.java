@@ -7,7 +7,9 @@ import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.By;
 
-@DefaultUrl("http://192.168.10.158/BeerShop/catalog.php")
+import static BeerShop.Utils.Utils.WEBSITE_URL;
+
+@DefaultUrl(WEBSITE_URL + "/catalog.php")
 public class CatalogPage extends PageObject {
 
     @FindBy(xpath = "//div [@class=\"product justify-content-md-center\"]")

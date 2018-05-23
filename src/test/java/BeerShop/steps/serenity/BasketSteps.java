@@ -5,13 +5,12 @@ import BeerShop.pages.BasketPage;
 import BeerShop.pages.CatalogPage;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
-import org.jruby.RubyProcess;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 
-import java.lang.reflect.Array;
+
 
 import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 
