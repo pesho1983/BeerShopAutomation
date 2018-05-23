@@ -5,14 +5,18 @@
  
 # Intellij
 .idea/
-src/test/java/BeerShop/DefinitionTestSuite
-src/test/java/BeerShop/MishoDefinitionTestSuite
 *.iml
 *.iws
- 
+
 # Mac
 .DS_Store
- 
+
 # Maven
 log/
 target/
+.gradle
+
+# User
+src/test/java\BeerShop/MyDefinitionTestSuite.java
+src/test/java/BeerShop/DefinitionTestSuite
+src/test/java/BeerShop/MishoDefinitionTestSuite

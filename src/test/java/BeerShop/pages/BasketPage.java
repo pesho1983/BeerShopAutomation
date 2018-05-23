@@ -1,11 +1,16 @@
 package BeerShop.pages;
+
 import BeerShop.Utils.Utils;
+
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
+import static BeerShop.Utils.Utils.WEBSITE_URL;
 
-@DefaultUrl("http://192.168.10.158/BeerShop/viewCart.php")
+
+
+@DefaultUrl(WEBSITE_URL + "viewCart.php")
 public class BasketPage extends PageObject {
     @FindBy(xpath = "//tbody/tr[1]/td[2]")
     private WebElementFacade firstProductPrice;

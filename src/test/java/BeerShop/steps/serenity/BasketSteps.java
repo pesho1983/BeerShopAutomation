@@ -8,8 +8,11 @@ import BeerShop.pages.CatalogPage;
 import BeerShop.pages.ProfilePage;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
+<<<<<<< HEAD
+=======
 import org.jruby.RubyProcess;
 import org.junit.Assert;
+>>>>>>> 4a49aeaa21ad162e4e5aefcc5c37b2043b5088a9
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,7 +21,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
+<<<<<<< HEAD
+=======
 import java.util.Random;
+>>>>>>> 4a49aeaa21ad162e4e5aefcc5c37b2043b5088a9
 
 import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 

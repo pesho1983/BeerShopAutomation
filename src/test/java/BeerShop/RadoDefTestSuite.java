@@ -7,11 +7,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 
-
-@CucumberOptions(features = "src/test/resources/features/consult_dictionary/",
+@CucumberOptions(features = "src/test/resources/features/consult_dictionary/AdminDefinition.feature",
         snippets = SnippetType.CAMELCASE)
-public class DefinitionTestSuite {
+public class RadoDefTestSuite {
 }
-
-
-

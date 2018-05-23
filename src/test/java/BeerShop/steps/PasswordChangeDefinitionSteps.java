@@ -1,6 +1,7 @@
 package BeerShop.steps;
 
 import BeerShop.steps.serenity.*;
+import cucumber.api.PendingException;
 import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -25,7 +26,7 @@ public class PasswordChangeDefinitionSteps {
 
 
     @Given("^I am on Profile page logged in with:$")
-    public void iAmOnProfilePage(Map<String, String> data) {
+    public void iAmOnProfilePage(@Transpose Map<String, String> data) {
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
         loginSteps.enterUsernameAndPassword(data);
@@ -43,11 +44,6 @@ public class PasswordChangeDefinitionSteps {
         changeProfileSteps.clickOnChangePasswordButton();
     }
 
-    @When("^I enter correct oldPassword, newPassword and confirmPassword:$")
-    public void iEnterValidOldPasswordNewPasswordAndConfirmPassword(Map<String, String> data) {
-        passwordChangeSteps.enterOldPassNewPassAndConfirmPass(data);
-    }
-
     @And("^click on Save button$")
     public void clickOnSaveButton() {
         passwordChangeSteps.clickOnSaveButton();
@@ -59,19 +55,8 @@ public class PasswordChangeDefinitionSteps {
         passwordChangeSteps.assertSuccessMessageText(message);
     }
 
-
-    @When("^I enter wrong oldPassword:$")
+    @When("^I enter:$")
     public void iEnterWrongOldPassword(@Transpose Map<String, String> data) {
-        passwordChangeSteps.enterOldPassNewPassAndConfirmPass(data);
-    }
-
-    @Then("^I should see \"([^\"]*)\" message$")
-    public void iShouldSeeAnWrongPasswordMessage(String message) {
-        passwordChangeSteps.assertWrongPasswordMessage(message);
-    }
-
-    @When("^I enter wrong data:$")
-    public void iEnterWrongOldPasswordOldPasswordNewPasswordConfirmPassword(@Transpose Map<String, String> data) {
         passwordChangeSteps.enterOldPassNewPassAndConfirmPass(data);
     }
 
@@ -85,8 +70,8 @@ public class PasswordChangeDefinitionSteps {
         passwordChangeSteps.assertProfilePageURL(defaultUrl);
     }
 
-    @Then("^I should see \"([^\"]*)\" (.*) message$")
-    public void iShouldSeeValidationMessage(String defaultValidation, int fieldNum) {
-        passwordChangeSteps.assertPasswordFieldValidationMessage(defaultValidation, fieldNum);
+    @Then("^I should see (.*) (.*) on PaswordChange page$")
+    public void iShouldSeeValidationMessageOnPaswordChangePage(String validation, String defaultMessage) {
+        passwordChangeSteps.assertPasswordFieldValidationMessage(validation, defaultMessage);
     }
 }
