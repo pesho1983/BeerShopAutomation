@@ -9,11 +9,14 @@ build
 history
 *.iml
 *.iws
- 
+
 # Mac
 .DS_Store
- 
+
 # Maven
 log/
 target/
 .gradle
+
+# User
+src\test\java\BeerShop\MyDefinitionTestSuite.java
