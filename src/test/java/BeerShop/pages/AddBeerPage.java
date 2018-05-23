@@ -27,20 +27,21 @@ public class AddBeerPage extends PageObject {
     @FindBy(css=".btn.btn-success")
     private WebElementFacade saveButton;
 
-    @FindBy(className ="btn btn-danger")
-    private WebElementFacade backButton;
+    @FindBy(xpath="//div[contains (text(),'must be unique')]")
+    private WebElementFacade dangerMessageSameName;
+
+//    @FindBy(className ="btn btn-danger")
+//    private WebElementFacade backButton;
 
     @FindBy(css=".alert.alert-success")
     private WebElementFacade successfullMessage;
 
-
-
-    @FindBy(css=".alert.alert-danger")
+    @FindBy(xpath="//div[contains (text(),'Image')]")
     private WebElementFacade dangerMessage;
 
-    public WebElementFacade getBackButton() {
-        return backButton;
-    }
+//    public WebElementFacade getBackButton() {
+//        return backButton;
+//    }
 
 
     public WebElementFacade getName() {
@@ -73,5 +74,8 @@ public class AddBeerPage extends PageObject {
 
     public WebElementFacade getDangerMessage() {
         return dangerMessage;
+    }
+    public WebElementFacade getDangerMessageSameName() {
+        return dangerMessageSameName;
     }
 }

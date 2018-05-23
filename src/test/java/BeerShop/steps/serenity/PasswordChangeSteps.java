@@ -1,5 +1,6 @@
 package BeerShop.steps.serenity;
 
+import BeerShop.pages.LoginPage;
 import BeerShop.pages.PasswordChangePage;
 import BeerShop.pages.ProfilePage;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -36,38 +37,43 @@ public class PasswordChangeSteps {
     }
 
     @Step
-    public void assertWrongPasswordMessage(String wrongMessage){
-        Assert.assertEquals(wrongMessage, passwordChangePage.getWrongPassword().getText());
-    }
-
-    @Step
     public void assertProfilePageURL(String defaultUrl){
         String currentUrl = profilePage.getDriver().getCurrentUrl();
         Assert.assertEquals(defaultUrl,currentUrl);
     }
 
     @Step
-    public void assertPasswordFieldValidationMessage(String defaultValidation,  int fieldNum){
+    public void assertPasswordFieldValidationMessage(String fieldValidation,  String defaultValidation){
         WebElementFacade oldPassValidation = passwordChangePage.getOldPasswordValidationMessage();
         WebElementFacade newPassValidation = passwordChangePage.getNewPasswordValidationMessage();
         WebElementFacade confirmPassValidation = passwordChangePage.getConfirmPasswordValidationMessage();
-        if (fieldNum == 0) {
-
-            Assert.assertEquals(defaultValidation,oldPassValidation.getText());
-        }
-        else if (fieldNum == 1){
-
-            Assert.assertEquals(defaultValidation,newPassValidation.getText());
-        }
-        else if (fieldNum == 2){
-
-            Assert.assertEquals(defaultValidation,confirmPassValidation.getText());
-        }
-        else if (fieldNum == 3){
-
-            Assert.assertEquals(defaultValidation,oldPassValidation.getText());
-            Assert.assertEquals(defaultValidation,newPassValidation.getText());
-            Assert.assertEquals(defaultValidation,confirmPassValidation.getText());
+        switch (fieldValidation){
+            case "oldPasswordValidation":
+                Assert.assertEquals(defaultValidation,oldPassValidation.getText());
+                break;
+            case "newPasswordValidation":
+                Assert.assertEquals(defaultValidation,newPassValidation.getText());
+                break;
+            case "confirmPasswordValidation":
+                Assert.assertEquals(defaultValidation,confirmPassValidation.getText());
+                break;
+            case "allPasswordValidations":
+                Assert.assertEquals(defaultValidation,oldPassValidation.getText());
+                Assert.assertEquals(defaultValidation,newPassValidation.getText());
+                Assert.assertEquals(defaultValidation,confirmPassValidation.getText());
+                break;
+            case "successPasswordChange":
+                Assert.assertEquals(defaultValidation,passwordChangePage.getSuccessMessage().getText());
+                break;
+            case "errorPasswordChange":
+                Assert.assertEquals(defaultValidation,passwordChangePage.getWrongPasswordMessage().getText());
+                break;
+            case "requiredPasswordSymbols":
+                Assert.assertEquals(defaultValidation,passwordChangePage.getRequiredPasswordSymbolsMessage().getText());
+            break;
+            case "matchPasswordError":
+                Assert.assertEquals(defaultValidation,passwordChangePage.getMatchPasswordMessage().getText());
+                break;
         }
     }
 }

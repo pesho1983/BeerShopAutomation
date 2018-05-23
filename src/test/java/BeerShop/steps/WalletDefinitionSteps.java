@@ -36,18 +36,15 @@ public class WalletDefinitionSteps {
 
     @And("^the user is on wallet page with zero funds:$")
     public void theUserIsOnWalletPage(Map<String, String> data){
-
         loginSteps.clickOnWalletLink();
         walletSteps.addMoney(data);
         walletSteps.pressDepositButton();
-
     }
 
     @When("^adding additional funds to the personal account:$")
     public void addingAdditionalFundsToThePersonalAccount(Map<String, String> data) {
         walletSteps.addMoney(data);
         walletSteps.pressDepositButton();
-
     }
 
     @Then("^the funds are added to users personal account$")

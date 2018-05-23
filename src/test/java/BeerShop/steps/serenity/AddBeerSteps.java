@@ -14,7 +14,7 @@ public class AddBeerSteps {
     AdminPanelPage adminPanelPage;
     AddBeerPage addBeerPage;
     LoginPage loginPage;
-    public String FILE = "C:\\Users\\sivanova\\Desktop\\1717.jpg";
+    public String FILE = "C:\\Users\\sivanova\\Desktop\\1003.jpg";
 
    @Step
    public void goToLoginPage(){
@@ -65,8 +65,12 @@ public class AddBeerSteps {
      }
 
      @Step
-    public void appearMessage(String message){
+    public void assertDangerMessage(String message){
        Assert.assertEquals(message,addBeerPage.getDangerMessage().getText());
 
+     }
+     @Step
+    public void assertMessageSameName(String message){
+       Assert.assertEquals(message,addBeerPage.getDangerMessageSameName().getText());
      }
 }

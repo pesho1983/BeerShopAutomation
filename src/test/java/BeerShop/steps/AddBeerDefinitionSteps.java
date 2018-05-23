@@ -49,9 +49,13 @@ public class AddBeerDefinitionSteps {
     }
 
     @Then("(.*) appears:$")
-    public void messageAppears(String message){
+    public void assertMessageAppears(String message){
+         addBeerSteps.assertDangerMessage(message);
 
-         addBeerSteps.appearMessage(message);
+    }
 
+    @Then("(.*) about the same name is displayed:$")
+    public void messageAboutTheSameNameIsDisplayed(String message){
+        addBeerSteps.assertMessageSameName(message);
     }
 }
