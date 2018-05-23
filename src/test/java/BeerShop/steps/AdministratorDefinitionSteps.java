@@ -9,7 +9,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
-import org.junit.Assert;
+
 
 import java.util.Map;
 
@@ -42,9 +42,9 @@ public class AdministratorDefinitionSteps {
         adminSteps.clickSaveBeerBtn();
     }
 
-    @Then("^You are logged in as admin$")
-    public void youAreLoggedInAsAdmin() {
-        adminSteps.assertLoggedInAsAdmin();
+    @Then("^You are logged in as \"([^\"]*)\"$")
+    public void youAreLoggedInAsAdmin(String admin) {
+        adminSteps.assertLoggedInAsAdmin(admin);
     }
 
     @And("^Redirected to \"([^\"]*)\"$")
@@ -103,9 +103,13 @@ public class AdministratorDefinitionSteps {
     }
 
 
-    @Then("^Successful message pops up$")
-    public void successfulMessagePopsUp() {
-        adminSteps.asserMessageOnUpload("Uploaded successfully.");
+    @Then("^Successful message pops up:\"([^\"]*)\"$")
+    public void successfulMessagePopsUp(String message) {
+        adminSteps.asserMessageOnUpload(message);
+        adminSteps.clickOnBackToProductsBtn();
+        adminSteps.clickOnNthBeerDeleteElement(1);
+        adminSteps.pressPopUpConfirmation();
+
     }
 
 
@@ -170,7 +174,7 @@ public class AdministratorDefinitionSteps {
     }
 
     @And("^Complete the beer description without picture:$")
-    public void completeTheBeerDescriptionWithoutPicture(Map<String, String> data) throws Throwable {
+    public void completeTheBeerDescriptionWithoutPicture(Map<String, String> data)  {
         adminSteps.fillingBeerDescriptionForm(data);
         adminSteps.clickSaveBeerBtn();
     }

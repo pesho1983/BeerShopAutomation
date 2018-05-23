@@ -12,7 +12,7 @@ public class ProfileSteps {
 
     @Step
     public void clickOnChangeInfoButton() {
-       ((JavascriptExecutor) profilePage.getDriver()).executeScript("window.scrollBy(0,500)", "");
-       profilePage.getChangeInfoButton().click();
+        ((JavascriptExecutor) profilePage.getDriver()).executeScript("window.scrollBy(0,500)", "");
+        profilePage.getChangeInfoButton().click();
     }
 }

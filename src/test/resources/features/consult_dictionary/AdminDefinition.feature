@@ -8,7 +8,7 @@ Feature: Admin panel
     When Filling the form with admin access credentials:
       | username | admin       |
       | password | parola123A! |
-    Then You are logged in as admin
+    Then You are logged in as "admin"
     And Redirected to "Admin Panel"
 
   Scenario: Log in with invalid admin credentials
@@ -29,7 +29,7 @@ Feature: Admin panel
       | beerDescription | <----------BEER TEST TEXT GOES HERE----------> |
       | beerPrice       | 1.99                                           |
       | beerQuantity    | 100                                            |
-    Then Successful message pops up
+    Then Successful message pops up:"Uploaded successfully."
 
   Scenario: Creating product without name
     Given You are logged in as administrator:

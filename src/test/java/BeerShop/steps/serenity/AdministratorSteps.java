@@ -121,8 +121,8 @@ public class AdministratorSteps {
     //Assert Steps
 
     @Step
-    public void assertLoggedInAsAdmin() {
-        Assert.assertEquals("admin", getLoggedUserText());
+    public void assertLoggedInAsAdmin(String adminUsername) {
+        Assert.assertEquals(adminUsername, getLoggedUserText());
     }
 
     @Step
@@ -149,6 +149,4 @@ public class AdministratorSteps {
     public void assertUserIsOnAdminPage(String message) {
         Assert.assertEquals(message, getTitle());
     }
-
-
 }
