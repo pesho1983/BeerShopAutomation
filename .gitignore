@@ -4,9 +4,9 @@
 .settings/
  
 # Intellij
-.idea
-build
-history
+.idea/
+src/test/java/BeerShop/DefinitionTestSuite
+src/test/java/BeerShop/MishoDefinitionTestSuite
 *.iml
 *.iws
  
@@ -16,4 +16,3 @@ history
 # Maven
 log/
 target/
-.gradle
