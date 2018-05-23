@@ -30,7 +30,7 @@ public class WalletDefinitionSteps {
     public void theUserIsLoggedInWithValidCredentials(Map<String, String> data){
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
-        loginSteps.enterUsernameAndPassword(data);
+        //loginSteps.enterUsernameAndPassword(data);
         loginSteps.pressSubmitButton();
     }
 

@@ -2,12 +2,12 @@ package BeerShop.steps;
 
 import BeerShop.steps.serenity.IndexSteps;
 import BeerShop.steps.serenity.LoginSteps;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
+
 
 public class LoginDefinitionSteps {
 
@@ -39,7 +39,7 @@ public class LoginDefinitionSteps {
     }
 
     @Then("^I should see (.*) (.*) on Login page$")
-    public void iShouldSeeValidationMessageOnLoginPage(String validation, String defaultMessage)  {
+    public void iShouldSeeValidationMessageOnLoginPage(String validation, String defaultMessage) {
         loginSteps.assertValidationMessage(validation, defaultMessage);
     }
 
@@ -58,4 +58,5 @@ public class LoginDefinitionSteps {
         loginSteps.checkRememberMeCheckbox();
         loginSteps.pressSubmitButton();
     }
+
 }

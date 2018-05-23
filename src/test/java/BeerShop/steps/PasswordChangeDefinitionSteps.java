@@ -30,7 +30,7 @@ public class PasswordChangeDefinitionSteps {
 
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
-        loginSteps.enterUsernameAndPassword(data);
+        //loginSteps.enterUsernameAndPassword(data);
         loginSteps.pressSubmitButton();
         loginSteps.clickOnProfileNavLink();
     }
@@ -49,6 +49,7 @@ public class PasswordChangeDefinitionSteps {
     public void clickOnSaveButton() {
         passwordChangeSteps.clickOnSaveButton();
     }
+
 
     @Then("^I should see message \"([^\"]*)\"$")
     public void passwordIsSuccessfullyChanged(String message) {
