@@ -30,36 +30,21 @@ public class WalletDefinitionSteps {
     public void theUserIsLoggedInWithValidCredentials(Map<String, String> data){
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
-        loginSteps.enterUsernameAndPassword(data);
+        //loginSteps.enterUsernameAndPassword(data);
         loginSteps.pressSubmitButton();
     }
 
     @And("^the user is on wallet page with zero funds:$")
     public void theUserIsOnWalletPage(Map<String, String> data){
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         loginSteps.clickOnWalletLink();
         walletSteps.addMoney(data);
         walletSteps.pressDepositButton();
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     @When("^adding additional funds to the personal account:$")
     public void addingAdditionalFundsToThePersonalAccount(Map<String, String> data) {
         walletSteps.addMoney(data);
         walletSteps.pressDepositButton();
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     @Then("^the funds are added to users personal account$")
