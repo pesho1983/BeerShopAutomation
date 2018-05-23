@@ -33,9 +33,9 @@ public class LoginDefinitionSteps {
         loginSteps.pressSubmitButton();
     }
 
-    @Then("^I should be logged in and redirected to Catalog page$")
-    public void iShouldBeLoggedInAndRedirectedToCatalogPage() {
-        loginSteps.assertUserIsOnCatalogPage();
+    @Then("^I should be logged in and redirected to \"([^\"]*)\"$")
+    public void iShouldBeLoggedInAndRedirectedToCatalogPage(String defaultUrl) {
+        loginSteps.assertUserIsOnCatalogPage(defaultUrl);
     }
 
     @Then("^I should see (.*) (.*) on Login page$")

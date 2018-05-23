@@ -7,7 +7,7 @@ Feature: Login Functionality
     Given I am on Login page
     When I enter <username> and <password>
     And click on Sign In button
-    Then I should be logged in and redirected to Catalog page
+    Then I should be logged in and redirected to "http://192.168.10.158/BeerShop/catalog.php#"
     Examples:
       | username | password    |
       | login1   | parola123A! |

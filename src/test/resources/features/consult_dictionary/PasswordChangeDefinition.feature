@@ -17,11 +17,12 @@ Feature: Password Change Functionality
     Examples:
       | oldPassword | newPassword | confirmPassword | validation            | message                        |
       | parola123!A | parola123A! | parola123A!     | successPasswordChange | Your profile has been updated. |
+      | parola123A! | parola123!A | parola123!A     | successPasswordChange | Your profile has been updated. |
 
   Scenario Outline: Change password with invalid data
     Given I am on Profile page logged in with:
       | username | admin2      |
-      | password | parola123A! |
+      | password | parola123!A |
     And click on change Info button
     And click on change Password button
     When I enter:
@@ -31,16 +32,16 @@ Feature: Password Change Functionality
     Then I should see <validation> <message> on PaswordChange page
     Examples:
       | oldPassword | newPassword | confirmPassword | validation              | message                                                                                        |
-      | wrongPass   | parola123A! | parola123A!     | errorPasswordChange     | Wrong password!                                                                                |
-      | parola123A! | g43qgarg4   | parola123A!     | requiredPasswordSymbols | Password must contains at least 1 special symbol, 1 uppercase letter, 2 numbers and 3 letters. |
-      | wrongPass   | parola123A! | gew             | matchPasswordError      | Passwords do not match.                                                                        |
-      | gwe         | parola123A! | parola1w23A!    | errorPasswordChange     | Wrong password!                                                                                |
+      | wrongPass   | parola123!A | parola123!A     | errorPasswordChange     | Wrong password!                                                                                |
+      | parola123!A | g43qgarg4   | parola123!A     | requiredPasswordSymbols | Password must contains at least 1 special symbol, 1 uppercase letter, 2 numbers and 3 letters. |
+      | wrongPass   | parola123!A | gew             | matchPasswordError      | Passwords do not match.                                                                        |
+      | gwe         | parola123!A | parola1w23!A    | errorPasswordChange     | Wrong password!                                                                                |
       | gweg        | 4       5   | 44444444444     | matchPasswordError      | Passwords do not match.                                                                        |
 
   Scenario Outline: Change password with empty fields
     Given I am on Profile page logged in with:
       | username | admin2      |
-      | password | parola123A! |
+      | password | parola123!A |
     And click on change Info button
     And click on change Password button
     When I enter:
@@ -58,7 +59,7 @@ Feature: Password Change Functionality
   Scenario: Redirect to profilePage
     Given I am on Profile page logged in with:
       | username | admin2      |
-      | password | parola123A! |
+      | password | parola123!A |
     And click on change Info button
     And click on change Password button
     When I press Back to your profile button
