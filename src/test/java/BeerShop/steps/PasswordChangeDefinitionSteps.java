@@ -26,7 +26,7 @@ public class PasswordChangeDefinitionSteps {
 
 
     @Given("^I am on Profile page logged in with:$")
-    public void iAmOnProfilePage(Map<String, String> data) {
+    public void iAmOnProfilePage(@Transpose Map<String, String> data) {
 
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();

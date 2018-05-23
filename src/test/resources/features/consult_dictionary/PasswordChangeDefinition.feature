@@ -5,8 +5,8 @@ Feature: Password Change Functionality
 
   Scenario Outline: Successful change password
     Given I am on Profile page logged in with:
-      | username | admin2      |
-      | password | parola123!A |
+      | username   | password   |
+      | <username> | <password> |
     And click on change Info button
     And click on change Password button
     When I enter:
@@ -15,14 +15,14 @@ Feature: Password Change Functionality
     And click on Save button
     Then I should see <validation> <message> on PaswordChange page
     Examples:
-      | oldPassword | newPassword | confirmPassword | validation            | message                        |
-      | parola123!A | parola123A! | parola123A!     | successPasswordChange | Your profile has been updated. |
-      | parola123A! | parola123!A | parola123!A     | successPasswordChange | Your profile has been updated. |
+      | username | password    | oldPassword | newPassword | confirmPassword | validation            | message                        |
+      | admin2   | parola123!A | parola123!A | parola123A! | parola123A!     | successPasswordChange | Your profile has been updated. |
+      | admin2   | parola123A! | parola123A! | parola123!A | parola123!A     | successPasswordChange | Your profile has been updated. |
 
   Scenario Outline: Change password with invalid data
     Given I am on Profile page logged in with:
-      | username | admin2      |
-      | password | parola123!A |
+      | username | password    |
+      | admin2   | parola123!A |
     And click on change Info button
     And click on change Password button
     When I enter:
@@ -40,8 +40,8 @@ Feature: Password Change Functionality
 
   Scenario Outline: Change password with empty fields
     Given I am on Profile page logged in with:
-      | username | admin2      |
-      | password | parola123!A |
+      | username | password    |
+      | admin2   | parola123!A |
     And click on change Info button
     And click on change Password button
     When I enter:
@@ -58,8 +58,8 @@ Feature: Password Change Functionality
 
   Scenario: Redirect to profilePage
     Given I am on Profile page logged in with:
-      | username | admin2      |
-      | password | parola123!A |
+      | username | password    |
+      | admin2   | parola123!A |
     And click on change Info button
     And click on change Password button
     When I press Back to your profile button
