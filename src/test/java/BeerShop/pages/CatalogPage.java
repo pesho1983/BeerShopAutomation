@@ -7,7 +7,9 @@ import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.By;
 
-@DefaultUrl("http://192.168.10.158/BeerShop/catalog.php")
+import static BeerShop.Utils.Utils.WEBSITE_URL;
+
+@DefaultUrl(WEBSITE_URL + "/catalog.php")
 public class CatalogPage extends PageObject {
 
     @FindBy(xpath = "//div [@class=\"product justify-content-md-center\"]")
@@ -24,17 +26,20 @@ public class CatalogPage extends PageObject {
         return productName;
     }
 
-    public void clickOnAddToCart(int product){
+
+    public void clickOnAddToCart(int product) {
+
         String result = Utils.productIndividualXpath(this.getProductBox(), "]]");
         String targetProduct = result + "][" + product + "]" + "/a";
         this.getDriver().findElement(By.xpath(targetProduct)).click();
     }
 
-    public String getProductName(int product){
-        String productName = this.getProduct().getWrappedElement().toString();
-        String toRemove = productName.substring(0, 78);
-        String result = productName.replace(toRemove, "").replace("]/h2[text()]", "");
+
+    public String getProductName(int product) {
+        String result = Utils.productIndividualXpath(this.getProduct(), "]/h2[text()]");
+
         String targetProductName = result + "[" + product + "]" + "/h2";
         return this.getDriver().findElement(By.xpath(targetProductName)).getText();
     }
 }
+
