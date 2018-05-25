@@ -12,7 +12,6 @@ import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-
 import java.util.Random;
 
 import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
