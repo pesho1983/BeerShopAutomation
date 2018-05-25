@@ -19,5 +19,4 @@ public class BasketConstants {
 
     public static final String REMOVE_BUTTON = "Thrash";
 
-
 }
