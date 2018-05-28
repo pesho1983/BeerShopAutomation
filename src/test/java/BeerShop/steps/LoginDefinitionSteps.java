@@ -11,14 +11,16 @@ import net.thucydides.core.annotations.Steps;
 
 public class LoginDefinitionSteps {
 
-    @Steps
-    IndexSteps indexSteps;
+
     @Steps
     LoginSteps loginSteps;
+    @Steps
+    IndexSteps indexSteps;
 
 
     @Given("^I am on Login page$")
     public void iAmOnLoginPage() {
+
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
     }
