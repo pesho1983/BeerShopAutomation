@@ -1,6 +1,7 @@
 package BeerShop.steps.serenity;
 
 import BeerShop.pages.ChangeProfilePage;
+import BeerShop.pages.LoginPage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
@@ -11,15 +12,11 @@ public class
 ChangeProfileSteps {
 
     ChangeProfilePage changeProfilePage;
+    LoginPage loginPage;
 
     @Step
     public void clickOnChangePasswordButton() {
         changeProfilePage.getChangePasswordButton().click();
-    }
-
-    @Step
-    public void openChangeProfilePage() {
-        changeProfilePage.open();
     }
 
     @Step
@@ -58,8 +55,8 @@ ChangeProfileSteps {
     }
 
     @Step
-    public void changeInfoAboutMe(Map<String, String> data) {
-        changeProfilePage.getInfoAboutMe().type(data.get("info"));
+    public void changeInfoAboutMe(String info) {
+        changeProfilePage.getInfoAboutMe().type(info);
     }
 
     @Step
@@ -67,39 +64,35 @@ ChangeProfileSteps {
         changeProfilePage.getSubmitInfo().click();
     }
 
-    @Step
-    public void changeWithInvalidAge(String age) {
-        changeProfilePage.getAge().type(age);
-    }
 
     @Step
-    public void verifyErrorMessageIsDisplayed() {
-        Assert.assertEquals("Your age must be 18+", changeProfilePage.getAgeErrorMessage().getText());
-    }
-
-    @Step
-    public void verifySuccessMessageIsDisplayed() {
-        Assert.assertEquals("Your profile has been updated.", changeProfilePage.getSuccessMessage().getText());
+    public void verifySuccessMessageIsDisplayed(String successMessage) {
+        Assert.assertEquals(successMessage, changeProfilePage.getSuccessMessage().getText());
     }
 
 
-    public void verifyInfoAboutMeIsAdded() {
-        Assert.assertEquals("I don't like to drink beer", changeProfilePage.getDivAboutMe().getText());
+    public void verifyInfoAboutMeIsAdded(String info) {
+        Assert.assertEquals(info, changeProfilePage.getDivAboutMe().getText());
     }
 
     @Step
-    public void changeProfileWithInvalidData(String username, String email, String firstName, String lastName, String address, String phone, String age) {
-        changeProfilePage.getUsername().type(username);
-        changeProfilePage.getEmail().type(email);
-        changeProfilePage.getFirstName().type(firstName);
-        changeProfilePage.getLastName().type(lastName);
-        changeProfilePage.getAddress().type(address);
-        changeProfilePage.getPhone().type(phone);
-        changeProfilePage.getAge().type(age);
+    public void changeProfileWithInvalidData(Map<String, String> data) {
+        changeProfilePage.getUsername().type(data.get("username"));
+        changeProfilePage.getEmail().type(data.get("email"));
+        changeProfilePage.getFirstName().type(data.get("firstName"));
+        changeProfilePage.getLastName().type(data.get("lastName"));
+        changeProfilePage.getAddress().type(data.get("address"));
+        changeProfilePage.getPhone().type(data.get("phone"));
+        changeProfilePage.getAge().type(data.get("age"));
     }
     @Step
     public void  verifyCorrectErrorMessageIsDisplayed(String errorMessage){
         Assert.assertEquals(errorMessage, changeProfilePage.getErrorMessageLabel().getText());
+    }
+
+    @Step
+    public void verifyUsernameIsDisplayed(String username){
+        Assert.assertEquals(username, loginPage.getProfileNavLink().getText());
     }
 }
 

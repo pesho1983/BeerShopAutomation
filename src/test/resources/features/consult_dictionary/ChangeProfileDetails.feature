@@ -8,7 +8,6 @@ Feature: Change Profile Details
       | username | ivan05      |
       | password | parola123A! |
     And Profile page is loaded
-    And Change your details header should be displayed
     When I change my details
       | email     | pesho@abv.bg    |
       | firstName | Peshko          |
@@ -17,24 +16,29 @@ Feature: Change Profile Details
       | phone     | 0123456789      |
       | age       | 30              |
     And Click on Save button
-    Then Success message is displayed
+    Then Success message "Your profile has been updated." is displayed
 
-  Scenario: Change Info About Me
-    Given I am logged in
-      | username | ivan05      |
-      | password | parola123A! |
-    And Username is displayed
-    When I change the info about me
-      | info | I don't like to drink beer |
+
+  Scenario Outline: Change Info About Me
+    Given I am logged in with <username> and <password>
+    And My <username> is displayed
+    When I change the <info> about me
     And I click on Save info
-    Then Info about me is updated
+    Then The <info> about me is updated
+
+    Examples:
+      | username | password    | info                 |
+      | ivan05   | parola123A! | I like to drink beer |
+
 
   Scenario Outline: Change profile details with invalid data
     Given I am logged in
       | username | ivan05      |
       | password | parola123A! |
     And Profile page is loaded
-    When I change my <username>, <email>, <firstName>, <lastName>, <address>, <phone> and <age>
+    When I change my details with invalid data
+      | username   | email   | firstName   | lastName   | address   | phone   | age   | errorMessage   |
+      | <username> | <email> | <firstName> | <lastName> | <address> | <phone> | <age> | <errorMessage> |
     And Click on Save button
     Then Correct <errorMessage> is displayed
 

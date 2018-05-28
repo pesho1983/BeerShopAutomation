@@ -10,6 +10,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.Transpose;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
@@ -43,14 +44,18 @@ public class ChangeProfileDetailsDefinitionSteps {
         loginSteps.clickOnProfileNavLink();
     }
 
+    @Given("^I am logged in with (.*) and (.*)$")
+    public void iAmLoggedInWithUsernameAndPassword(String username, String password) throws Throwable {
+        indexSteps.openURL();
+        indexSteps.clickOnLoginNavLink();
+        loginSteps.enterUsernameAndPassword(username, password);
+        loginSteps.pressSubmitButton();
+        loginSteps.clickOnProfileNavLink();
+    }
+
     @And("^Profile page is loaded$")
     public void clickOnChangeInfoButton() { //changeProfileSteps.openChangeProfilePage();
         profileSteps.clickOnChangeInfoButton();
-    }
-
-    @And("^Change your details header should be displayed$")
-    public void changeYourDetailsHeaderShouldBeDisplayed() throws Throwable {
-        Assert.assertEquals("Change your details", changeProfileSteps.getHeaderText());
     }
 
     @When("^I change my details$")
@@ -69,19 +74,19 @@ public class ChangeProfileDetailsDefinitionSteps {
 
     }
 
-    @Then("^Success message is displayed$")
-    public void successMessageIsDisplayed() throws Throwable {
-        changeProfileSteps.verifySuccessMessageIsDisplayed();
+    @Then("^Success message \"([^\"]*)\" is displayed$")
+    public void successMessageIsDisplayed(String successMessage) throws Throwable {
+        changeProfileSteps.verifySuccessMessageIsDisplayed(successMessage);
     }
 
-    @And("^Username is displayed$")
-    public void usernameIsDisplayed() throws Throwable {
-      Assert.assertEquals("ivan05", loginPage.getProfileNavLink().getText());
+    @And("^My (.*) is displayed$")
+    public void usernameIsDisplayed(String username) throws Throwable {
+      changeProfileSteps.verifyUsernameIsDisplayed(username);
     }
 
-    @When("^I change the info about me$")
-    public void iChangeTheInfoAboutMe(Map<String, String> data) throws Throwable {
-       changeProfileSteps.changeInfoAboutMe(data);
+    @When("^I change the (.*) about me$")
+    public void iChangeTheInfoAboutMe(String info) throws Throwable {
+       changeProfileSteps.changeInfoAboutMe(info);
     }
 
     @And("^I click on Save info$")
@@ -89,9 +94,9 @@ public class ChangeProfileDetailsDefinitionSteps {
         changeProfileSteps.clickOnSaveButton();
     }
 
-    @When("^I change my (.*), (.*), (.*), (.*), (.*), (.*) and (.*)$")
-    public void iChangeMyEmailFirstNameLastNameAddressPhoneAndAge(String username, String email, String firstName, String lastName, String address, String phone, String age) throws Throwable {
-        changeProfileSteps.changeProfileWithInvalidData(username, email, firstName, lastName, address, phone, age);
+    @When("^I change my details with invalid data$")
+    public void iChangeMyEmailFirstNameLastNameAddressPhoneAndAge(@Transpose Map<String, String> data) throws Throwable {
+        changeProfileSteps.changeProfileWithInvalidData(data);
     }
 
     @Then("^Correct (.*) is displayed$")
@@ -99,9 +104,9 @@ public class ChangeProfileDetailsDefinitionSteps {
         changeProfileSteps.verifyCorrectErrorMessageIsDisplayed(errorMessage);
     }
 
-    @Then("^Info about me is updated$")
-    public void infoAboutMeIsUpdated() throws Throwable {
-        changeProfileSteps.verifyInfoAboutMeIsAdded();
+    @Then("^The (.*) about me is updated$")
+    public void infoAboutMeIsUpdated(String info) throws Throwable {
+        changeProfileSteps.verifyInfoAboutMeIsAdded(info);
     }
 }
 

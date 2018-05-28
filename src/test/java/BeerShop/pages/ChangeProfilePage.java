@@ -41,11 +41,8 @@ public class ChangeProfilePage extends PageObject {
     @FindBy(id = "infoAboutMe")
     private WebElementFacade infoAboutMe;
 
-    @FindBy(id = "submitInfo")
+    @FindBy(name = "submit_info")
     private WebElementFacade submitInfo;
-
-    @FindBy(id = "age-error")
-    private WebElementFacade ageErrorMessage;
 
     @FindBy(xpath = "//div[@class='alert alert-success']")
     private WebElementFacade successMessage;
@@ -107,10 +104,6 @@ public class ChangeProfilePage extends PageObject {
 
     public WebElementFacade getSubmitInfo() {
         return submitInfo;
-    }
-
-    public WebElementFacade getAgeErrorMessage() {
-        return ageErrorMessage;
     }
 
     public WebElementFacade getSuccessMessage() {
