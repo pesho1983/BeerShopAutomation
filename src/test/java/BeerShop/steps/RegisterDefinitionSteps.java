@@ -23,7 +23,7 @@ public class RegisterDefinitionSteps {
     }
 
     @When("^user enters valid data$")
-    public void userEntersValidData(Map<String, String> data) {
+    public void userEntersValidData(@Transpose Map<String, String> data) {
         registerSteps.fillValidData(data);
     }
 

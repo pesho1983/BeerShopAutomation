@@ -4,20 +4,22 @@ Feature: Register Functionality
   I would like to be able to register
 
   #Positive path
-  Scenario: Register with valid data
+  Scenario Outline: Register with valid data
     Given user is on the register page
     When user enters valid data
-      | username  | [8a]                                |
-      | password  | parola123A!                         |
-      | firstname | Ivan                                |
-      | lastname  | Stoev                               |
-      | email     | [9a]                                |
-      | phone     | [10]                                |
-      | address   | Sofia, j.k.Ivan Vazov, ul.Balsha N1 |
-      | age       | [3]                                 |
+      | username   | password   | firstname   | lastname   | email   | phone   | address   | age   |
+      | <username> | <password> | <firstname> | <lastname> | <email> | <phone> | <address> | <age> |
+
 
     And click on register button
     Then user is redirected to login "http://192.168.10.158/BeerShop/login.php#" url
+
+    Examples:
+      | username | password        | firstname | lastname | email | phone | address                             | age |
+      | [8a]     | ola123A!        | Ivan      | Stoev    | [9a]  | [10]  | Sofia, j.k.Ivan Vazov, ul.Balsha N6 | 18  |
+      | [8a]     | parola123A!     | Ivan      | Stoev    | [9a]  | [10]  | Sofia, j.k.Ivan Vazov, ul.Balsha N1 | 18  |
+      | [4a]     | parola123A!     | Ivan      | Stoev    | [9a]  | [10]  | Sofia, j.k.Ivan Vazov, ul.Balsha N3 | 99  |
+      | [8a]     | parola123A!paro | Ivan      | Stoev    | [9a]  | [10]  | Sofia, j.k.Ivan Vazov, ul.Balsha N6 | 18  |
 
   #Negative path frontend validation
   Scenario Outline: Register with invalid data with checked checkboxes
