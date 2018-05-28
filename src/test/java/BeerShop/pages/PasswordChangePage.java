@@ -27,6 +27,8 @@ public class PasswordChangePage extends PageObject {
     @FindBy(xpath = "//a[@class=\"btn btn-danger\"]")
     private WebElementFacade backToProfileButton;
 
+
+
     public WebElementFacade getOldPassword() {
         return oldPassword;
     }
@@ -54,4 +56,5 @@ public class PasswordChangePage extends PageObject {
     public WebElementFacade getBackToProfileButton() {
         return backToProfileButton;
     }
+
 }

@@ -10,7 +10,7 @@ public class PasswordChangeSteps {
     PasswordChangePage passwordChangePage;
 
     @Step
-    public void enterOldPassNewPassAndConfirmPass(Map<String, String> data){
+    public void enterOldPassNewPassAndConfirmPass(Map<String, String> data) {
         passwordChangePage.getOldPassword().type(data.get("oldPassword"));
         passwordChangePage.getNewPassword().type(data.get("newPassword"));
         passwordChangePage.getConfirmPassword().type(data.get("confirmPassword"));
@@ -19,6 +19,7 @@ public class PasswordChangeSteps {
     @Step
     public void clickOnSaveButton() {
         passwordChangePage.getSaveButton().click();
+
     }
 
 
