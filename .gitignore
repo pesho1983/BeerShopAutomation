@@ -5,6 +5,8 @@
  
 # Intellij
 .idea/
+build/
+history/
 *.iml
 *.iws
 
@@ -17,6 +19,5 @@ target/
 .gradle
 
 # User
-src/test/java\BeerShop/MyDefinitionTestSuite.java
-src/test/java/BeerShop/DefinitionTestSuite
-src/test/java/BeerShop/MishoDefinitionTestSuite
+**/MyDefinitionTestSuite.java
+**/MishoDefinitionTestSuite.java

@@ -19,18 +19,16 @@ public class ProfileDefinitionSteps {
     @Steps
     ProfileSteps profileSteps;
 
-    @When("^a picture is chosen and uploaded$")
-    public void aPictureIsChosenAndUploaded()  {
-        profileSteps.chooseImage();
+    @When("^a (.*) is chosen and uploaded$")
+    public void aPictureIsChosenAndUploaded(String file)  {
+        profileSteps.chooseFile(file);
         profileSteps.uploadImage();
-
     }
 
     @Then("^user profile should be updated$")
     public void userProfileShouldBeUpdated()  {
         profileSteps.redirect_to_profile();
         profileSteps.assertImage();
-        //Assert.assertEquals("C:\\Users\\mashdzhiyan\\Desktop\\pictures\\25.jpg", profileSteps.PICTURE);
     }
 
     @When("^no picture is chosen and upload button is clicked$")
@@ -45,7 +43,7 @@ public class ProfileDefinitionSteps {
 
     @When("^a non-picture file is chosen and upload button is clicked$")
     public void aNonPictureFileIsChosenAndUploadButtonIsClicked()  {
-        profileSteps.chooseFile();
+        profileSteps.chooseFile("File");
         profileSteps.uploadImage();
     }
 

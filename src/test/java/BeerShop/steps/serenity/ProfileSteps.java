@@ -14,7 +14,7 @@ public class ProfileSteps {
 
     ProfilePage profilePage;
 
-    public String PICTURE = "C:\\Users\\mashdzhiyan\\Desktop\\pictures\\25.jpg";
+    public String PICTURE = "C:\\Users\\mashdzhiyan\\Desktop\\pictures\\Surikat_3";
     public String FILE = "C:\\Users\\mashdzhiyan\\Desktop\\pictures\\Q.pdf";
 
 
@@ -44,7 +44,12 @@ public class ProfileSteps {
     }
 
     @Step
-    public void chooseFile(){
+    public void chooseFile(String file){
+        profilePage.getChooseFile();
+        switch (file) {
+            case "file": getDriver().switchTo().activeElement().sendKeys(FILE); break;
+            case "image": getDriver().switchTo().activeElement().sendKeys(PICTURE); break;
+        }
         profilePage.getChooseFile();
         getDriver().switchTo().activeElement().sendKeys(FILE);
 
@@ -87,6 +92,7 @@ public class ProfileSteps {
     }
 
     public void assertImage() {
+        Assert.assertEquals("//img/@src[contains(., 'Surikat')]",PICTURE);
     }
 
     public void assertErrorMessage(String message) {

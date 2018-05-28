@@ -9,7 +9,7 @@ Feature: User profile functionality
       | pesho    | parola123A! |
 
   Scenario: Upload a new profile picture
-    When a picture is chosen and uploaded
+    When a "picture" is chosen and uploaded
     Then user profile should be updated
 
 
@@ -19,7 +19,7 @@ Feature: User profile functionality
 
 
   Scenario: Try to upload picture that is not an image
-    When a non-picture file is chosen and upload button is clicked
+    When a "file" is chosen and uploaded
     Then user should see message "Submitted file is not an image."
 
 
