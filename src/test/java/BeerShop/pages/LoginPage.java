@@ -5,19 +5,20 @@ import net.thucydides.core.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.WebElementFacade;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
-
 import net.thucydides.core.pages.PageObject;
 
 
 
+import static BeerShop.Utils.Utils.WEBSITE_URL;
 
-@DefaultUrl("http://192.168.10.158/BeerShop/login.php")
+@DefaultUrl(WEBSITE_URL+"login.php")
+
 public class LoginPage extends PageObject {
 
-    @FindBy(id="inputEmail")
+    @FindBy(id = "inputEmail")
     private WebElementFacade username;
 
-    @FindBy(id="password")
+    @FindBy(id = "password")
     private WebElementFacade password;
 
     @FindBy(name="login")
@@ -32,6 +33,9 @@ public class LoginPage extends PageObject {
     @FindBy(id = "profile")
     private WebElementFacade profileNavLink;
 
+    @FindBy(xpath = "//div[@class='alert alert-danger']")
+    private WebElementFacade wrongUserOrPassBox;
+
     @FindBy(xpath = "//strong")
     private WebElementFacade wrongUsernameOrPasswordMessage;
 
@@ -44,13 +48,12 @@ public class LoginPage extends PageObject {
     @FindBy(name="remember")
     private WebElementFacade rememberMeCheckbox;
 
-
-
     @FindBy(id="wallet")
     private WebElementFacade walletLink;
 
     @FindBy(css = "a#profile")
     private WebElementFacade profileUsermame;
+
 
     public WebElementFacade getUsername() {
         return username;
@@ -73,6 +76,10 @@ public class LoginPage extends PageObject {
 
     public WebElementFacade getProfileNavLink() {
         return profileNavLink;
+    }
+
+    public WebElementFacade getWrongUserOrPassBox() {
+        return wrongUserOrPassBox;
     }
 
     public WebElementFacade getWrongUsernameOrPasswordMessage() {

@@ -32,10 +32,9 @@ public class AddBeerDefinitionSteps {
     }
 
     
-    @And("^beer all beer credentials are filled:$")
+    @When("^beer all beer credentials are filled:$")
     public void beerAllBeerCredientialsNameDescriptionPriceAndQuantityAreFilled(Map<String,String> data){
         addBeerSteps.addNewBeer(data);
-
     }
 
     @Then("^successful \"([^\"]*)\" message appears.$")
@@ -43,7 +42,7 @@ public class AddBeerDefinitionSteps {
        addBeerSteps.assertSuccessfulMessage(message);
     }
 
-    @And("^user add data:$")
+    @When("^user add data:$")
     public void userAddData(@Transpose Map<String,String> data){
         addBeerSteps.fillCredentials(data);
     }

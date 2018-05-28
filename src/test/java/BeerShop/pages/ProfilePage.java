@@ -6,7 +6,9 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 
-@DefaultUrl("http://192.168.10.158/BeerShop/profile.php")
+import static BeerShop.Utils.Utils.WEBSITE_URL;
+
+@DefaultUrl(WEBSITE_URL + "profile.php")
 public class ProfilePage extends PageObject {
 
     @FindBy(xpath = "//a[@href='changeProfile.php']")
