@@ -2,6 +2,7 @@ package BeerShop.steps;
 
 import BeerShop.steps.serenity.IndexSteps;
 import BeerShop.steps.serenity.LoginSteps;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
