@@ -10,11 +10,14 @@ import static BeerShop.Utils.Utils.WEBSITE_URL;
 @DefaultUrl(WEBSITE_URL + "index.php")
 public class IndexPage extends PageObject {
 
-    @FindBy(id = "login")
-    private WebElementFacade loginNavLink;
 
-    public WebElementFacade getLoginNavLink() {
-        return loginNavLink;
+    @FindBy(id = "login")
+    private WebElementFacade login;
+
+
+
+      public WebElementFacade getLogin() {
+        return login;
     }
 
 }
