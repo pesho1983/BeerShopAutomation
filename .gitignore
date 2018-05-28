@@ -17,6 +17,6 @@ target/
 .gradle
 
 # User
-src/test/java\BeerShop/MyDefinitionTestSuite.java
-src/test/java/BeerShop/DefinitionTestSuite
-src/test/java/BeerShop/MishoDefinitionTestSuite
+src/test/ava/BeerShop/MyDefinitionTestSuite.java
+
+
