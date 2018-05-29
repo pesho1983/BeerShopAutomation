@@ -13,7 +13,7 @@ public class IndexSteps {
 
     @Step
     public void clickOnLoginNavLink() {
-        indexPage.getLoginNavLink().click();
+        indexPage.getLogin().click();
     }
 
 
