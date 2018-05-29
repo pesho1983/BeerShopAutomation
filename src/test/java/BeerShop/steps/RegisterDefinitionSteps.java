@@ -31,6 +31,7 @@ public class RegisterDefinitionSteps {
     public void clickOnRegister() {
         registerSteps.register();
     }
+
     @Then("^user is redirected to login \"([^\"]*)\" url$")
     public void userIsRedirectedToUrl(String url) {
         registerSteps.successRegister(url);
@@ -43,7 +44,7 @@ public class RegisterDefinitionSteps {
     }
 
     @Then("^user is redirected to register \"([^\"]*)\" url$")
-    public void userIsRedirectedToRegisterUrl(String url)  {
+    public void userIsRedirectedToRegisterUrl(String url) {
         registerSteps.deniedRegisterWithCheckbox(url);
     }
 
@@ -56,6 +57,17 @@ public class RegisterDefinitionSteps {
 
     @Then("^user is redirected to register # \"([^\"]*)\" url$")
     public void userIsRedirectedToRegister1Url(String url) {
-       registerSteps.deniedRegisterWithoutCheckbox(url);
+        registerSteps.deniedRegisterWithoutCheckbox(url);
+    }
+
+
+    @Then("^an frontend error message  \"([^\"]*)\" appears$")
+    public void anErrorMessageAppears(String error) {
+        registerSteps.verifyCorrectErrorMessageIsDisplayed(error);
+    }
+
+    @Then("^an backend error message  \"([^\"]*)\" appears$")
+    public void anBackendErrorMessageAppears(String error) {
+        registerSteps.verifyCorrectBackendErrorMessageIsDisplayed(error);
     }
 }

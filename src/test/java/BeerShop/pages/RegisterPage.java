@@ -48,6 +48,20 @@ public class RegisterPage extends PageObject {
     @FindBy(id = "age")
     private WebElementFacade age;
 
+    @FindBy(xpath = "//label[not(contains(@style, 'display: none'))]")
+    private WebElementFacade errorMessageLabel;
+
+    @FindBy(xpath = "//strong[not(contains(@style, 'display: none'))]")
+    private WebElementFacade errorMessageLabelStrong;
+
+    public WebElementFacade getErrorMessageLabelStrong() {
+        return errorMessageLabelStrong;
+    }
+
+    public WebElementFacade getErrorMessageLabel() {
+        return errorMessageLabel;
+    }
+
     public WebElementFacade getUsername() {
         return username;
     }
