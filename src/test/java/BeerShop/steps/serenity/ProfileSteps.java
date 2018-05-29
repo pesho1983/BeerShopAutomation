@@ -1,6 +1,8 @@
 package BeerShop.steps.serenity;
 
+import BeerShop.Utils.Utils;
 import BeerShop.pages.ProfilePage;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.*;
 
@@ -11,7 +13,8 @@ public class ProfileSteps {
 
     @Step
     public void clickOnChangeInfoButton() {
-       profilePage.withAction().sendKeys(Keys.END).perform();
-       profilePage.getChangeInfoButton().click();
+        ((JavascriptExecutor) profilePage.getDriver()).executeScript("window.scrollBy(0,500)", "");
+        profilePage.getChangeInfoButton().click();
     }
+
 }
