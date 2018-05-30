@@ -19,7 +19,6 @@ target/
 .gradle
 
 # User
-src/test/ava/BeerShop/MyDefinitionTestSuite.java
-
+**/MyDefinitionTestSuite.java
 
 
