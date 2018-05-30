@@ -6,21 +6,14 @@ import BeerShop.entities.User;
 import BeerShop.steps.serenity.BasketSteps;
 import BeerShop.steps.serenity.LoginSteps;
 import BeerShop.steps.serenity.ProfileSteps;
-import cucumber.api.PendingException;
-import cucumber.api.Transform;
-import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
-import org.junit.Assert;
-import sun.java2d.cmm.Profile;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 
 
 public class BasketDefinitionSteps {
