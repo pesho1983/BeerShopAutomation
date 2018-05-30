@@ -9,9 +9,6 @@ import net.thucydides.core.pages.PageObject;
 @DefaultUrl("http://192.168.10.158/BeerShop/register.php")
 
 public class RegisterPage extends PageObject {
-    @FindBy(id = "agreement-error")
-    private WebElementFacade errorMessage;
-
     @FindBy(id = "register_submit")
     private WebElementFacade registerSubmit;
 
@@ -110,7 +107,4 @@ public class RegisterPage extends PageObject {
         return registerSubmit;
     }
 
-    public WebElementFacade getErrorMessage() {
-        return errorMessage;
-    }
 }
