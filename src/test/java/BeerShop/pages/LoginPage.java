@@ -1,14 +1,18 @@
 package BeerShop.pages;
 
+
 import net.thucydides.core.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.WebElementFacade;
+
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.thucydides.core.pages.PageObject;
+
 
 
 import static BeerShop.Utils.Utils.WEBSITE_URL;
 
 @DefaultUrl(WEBSITE_URL+"login.php")
+
 public class LoginPage extends PageObject {
 
     @FindBy(id = "inputEmail")
@@ -17,7 +21,13 @@ public class LoginPage extends PageObject {
     @FindBy(id = "password")
     private WebElementFacade password;
 
-    @FindBy(name = "login")
+    @FindBy(name="login")
+    private WebElementFacade signIn;
+
+    @FindBy(className = "extraPlace")
+    private WebElementFacade note;
+
+    @FindBy(css=".btn.btn-md.btn-success.btn-block")
     private WebElementFacade submitButton;
 
     @FindBy(id = "profile")
@@ -53,9 +63,16 @@ public class LoginPage extends PageObject {
         return password;
     }
 
-    public WebElementFacade getSubmitButton() {
-        return submitButton;
+    public WebElementFacade getNote() {
+        return note;
     }
+
+
+    public WebElementFacade getSubmitButton() {
+        return submitButton;}
+
+    public WebElementFacade getSignIn() {
+        return signIn;}
 
     public WebElementFacade getProfileNavLink() {
         return profileNavLink;
