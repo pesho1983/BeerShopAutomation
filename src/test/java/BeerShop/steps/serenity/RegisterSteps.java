@@ -83,10 +83,10 @@ public class RegisterSteps {
 
     @Step
     public void  verifyCorrectErrorMessageIsDisplayed(String errorMessage){
-        Assert.assertEquals(errorMessage, registerPage.getErrorMessageLabel().getText());
+        Assert.assertEquals(errorMessage, registerPage.getErrorMessageLabel());
     }
     @Step
     public void  verifyCorrectBackendErrorMessageIsDisplayed(String errorMessage){
-        Assert.assertEquals(errorMessage, registerPage.getErrorMessageLabelStrong().getText());
+        Assert.assertEquals(errorMessage, registerPage.getErrorMessageLabelStrong());
     }
 }

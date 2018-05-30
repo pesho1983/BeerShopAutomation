@@ -51,12 +51,12 @@ public class RegisterPage extends PageObject {
     @FindBy(xpath = "//strong[not(contains(@style, 'display: none'))]")
     private WebElementFacade errorMessageLabelStrong;
 
-    public WebElementFacade getErrorMessageLabelStrong() {
-        return errorMessageLabelStrong;
+    public String getErrorMessageLabelStrong() {
+        return errorMessageLabelStrong.getText();
     }
 
-    public WebElementFacade getErrorMessageLabel() {
-        return errorMessageLabel;
+    public String getErrorMessageLabel() {
+        return errorMessageLabel.getText();
     }
 
     public WebElementFacade getUsername() {
