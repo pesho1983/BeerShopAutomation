@@ -4,12 +4,13 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
+
 import static BeerShop.Utils.Utils.WEBSITE_URL;
+
 
 @DefaultUrl(WEBSITE_URL + "changeProfile.php")
 
 public class ChangeProfilePage extends PageObject {
-
 
     @FindBy(xpath = "//a[@href=\"passwordChange.php\"]")
     private WebElementFacade changePasswordButton;
@@ -52,6 +53,15 @@ public class ChangeProfilePage extends PageObject {
 
     @FindBy(xpath = "//div[(contains (@style, 'overflow: auto'))]")
     private WebElementFacade divAboutMe;
+
+    @FindBy(xpath = "//span[text()='Choose a file…'] ")
+    private WebElementFacade chooseFile;
+
+    @FindBy(name = "submit")
+    private WebElementFacade submitButton;
+
+    @FindBy(xpath="//img[(contains (@style, 'overflow: auto'))]['src']")
+    private WebElementFacade pictureName;
 
     public WebElementFacade getErrorMessageLabel() {
         return errorMessageLabel;
@@ -114,4 +124,17 @@ public class ChangeProfilePage extends PageObject {
     public WebElementFacade getDivAboutMe() {
         return divAboutMe;
     }
+
+    public WebElementFacade getChooseFile() {
+        return chooseFile;
+    }
+
+    public WebElementFacade getSubmitButton() {
+        return submitButton;
+    }
+
+    public WebElementFacade getPictureName() {
+        return pictureName;
+    }
+
 }

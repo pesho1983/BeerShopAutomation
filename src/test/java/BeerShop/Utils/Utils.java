@@ -16,7 +16,10 @@ import java.util.Random;
 public class Utils {
 
     public final static String WEBSITE_URL = "http://192.168.10.158/BeerShop/";
-    private final static String HOME_PATH = "C:/Users/rkolev/Desktop/uploadTestImages/";
+
+    private static String localUsername = System.getProperty("user.name");
+    private static String homePath = "C:/Users/" + localUsername + "/Desktop/uploadTestImages/";
+
 
     public static String productIndividualXpath(WebElementFacade target, String replace) {
         String targetProduct = target.getWrappedElement().toString();
@@ -28,7 +31,7 @@ public class Utils {
     public static String generateRandomImagePath() {
         StringBuilder sb = new StringBuilder();
         SecureRandom rand = new SecureRandom();
-        sb.append(HOME_PATH)
+        sb.append(homePath)
                 .append(rand.nextInt(100000) + 100)
                 .append(System.currentTimeMillis())
                 .append(System.nanoTime())
@@ -37,9 +40,8 @@ public class Utils {
         return sb.toString();
     }
 
-
     public static void renameAllFiles() {
-        File fileDirs = new File(HOME_PATH);
+        File fileDirs = new File(homePath);
         for (File image : fileDirs.listFiles()) {
             if (image.isFile()) {
                 String newName = generateRandomImagePath();
@@ -51,10 +53,11 @@ public class Utils {
 
     public static String getRandomImageFromFolder() {
         renameAllFiles();
-        File fileDir = new File(HOME_PATH);
+        File fileDir = new File(homePath);
         File[] images = fileDir.listFiles();
         Random random = new Random();
-        return images[random.nextInt(images.length - 1) + 1].toString();
+        String selectedImage = images[random.nextInt(images.length - 1) + 1].toString();
+        return selectedImage;
     }
 
     public static String replaceWordWithWhitespace(String text, String toReplace) {
@@ -82,7 +85,6 @@ public class Utils {
     public static String removeSuffixFromPrice(WebElementFacade target) {
         String result = target.getText();
         return result.substring(0, result.length() - 3);
-
     }
 }
 

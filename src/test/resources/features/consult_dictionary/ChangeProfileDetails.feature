@@ -52,7 +52,15 @@ Feature: Change Profile Details
       | ivan05   | ivan@abv.bg        | Ivan      | Ivanov   | Sofia   | 08         | 36  | Your phone number must be 10 digits |
       | ivan05   | ivan@abv.bg        | Ivan      | Ivanov   | Sofia   | 0896512364 | -2  | Your age must be 18+                |
 
+    Scenario Outline: Change my profile picture
+      Given I am logged in with <username> and <password>
+      And My <username> is displayed
+      When I select a new picture
+      Then My profile picture is changed
 
+      Examples:
+        | username | password    |
+        | ivan05   | parola123A! |
 
 
 

@@ -5,15 +5,13 @@ import BeerShop.pages.ChangeProfilePage;
 import BeerShop.pages.LoginPage;
 import BeerShop.pages.ProfilePage;
 import BeerShop.steps.serenity.*;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.api.Transpose;
-import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
-import org.junit.Assert;
+
 
 import java.util.Map;
 
@@ -81,12 +79,12 @@ public class ChangeProfileDetailsDefinitionSteps {
 
     @And("^My (.*) is displayed$")
     public void usernameIsDisplayed(String username) throws Throwable {
-      changeProfileSteps.verifyUsernameIsDisplayed(username);
+        changeProfileSteps.verifyUsernameIsDisplayed(username);
     }
 
     @When("^I change the (.*) about me$")
     public void iChangeTheInfoAboutMe(String info) throws Throwable {
-       changeProfileSteps.changeInfoAboutMe(info);
+        changeProfileSteps.changeInfoAboutMe(info);
     }
 
     @And("^I click on Save info$")
@@ -107,6 +105,18 @@ public class ChangeProfileDetailsDefinitionSteps {
     @Then("^The (.*) about me is updated$")
     public void infoAboutMeIsUpdated(String info) throws Throwable {
         changeProfileSteps.verifyInfoAboutMeIsAdded(info);
+    }
+
+    @When("^I select a new picture$")
+    public void iSelectANewPicture() throws Throwable {
+        changeProfileSteps.clickOnChooseAFileButton();
+        changeProfileSteps.generateRandomImage();
+        changeProfileSteps.clickOnUploadImage();
+    }
+
+    @Then("^My profile picture is changed$")
+    public void myProfilePictureIsChanged() throws Throwable {
+        changeProfileSteps.verifyIfPictureIsChanged();
     }
 }
 
