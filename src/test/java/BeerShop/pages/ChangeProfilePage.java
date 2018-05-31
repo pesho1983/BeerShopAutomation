@@ -63,6 +63,9 @@ public class ChangeProfilePage extends PageObject {
     @FindBy(xpath="//img[(contains (@style, 'overflow: auto'))]['src']")
     private WebElementFacade pictureName;
 
+    @FindBy(xpath = "//div[@class='alert alert-danger']")
+    private WebElementFacade errorMessageImage;
+
     public WebElementFacade getErrorMessageLabel() {
         return errorMessageLabel;
     }
@@ -137,4 +140,7 @@ public class ChangeProfilePage extends PageObject {
         return pictureName;
     }
 
+    public String getErrorMessageImage() {
+        return errorMessageImage.getText();
+    }
 }

@@ -4,12 +4,7 @@ import BeerShop.Utils.Utils;
 import BeerShop.pages.ChangeProfilePage;
 import BeerShop.pages.LoginPage;
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import javax.servlet.ServletContext;
 import java.util.Map;
 
 
@@ -122,7 +117,12 @@ ChangeProfileSteps {
     @Step
     public void verifyIfPictureIsChanged() {
         String uploadedImage = changeProfilePage.getPictureName().getAttribute("src");
-        Assert.assertEquals(selectedImage.substring(selectedImage.length() - 38), uploadedImage.substring(uploadedImage.length() - 38));
+        Assert.assertEquals(selectedImage.substring(selectedImage.length() - 37), uploadedImage.substring(uploadedImage.length() - 37));
+    }
+
+    @Step
+    public void verifyErrorMessageForUploadImageIsDisplayed(String errorMessage){
+        Assert.assertEquals(errorMessage, changeProfilePage.getErrorMessageImage());
     }
 }
 

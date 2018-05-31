@@ -1,6 +1,7 @@
 package BeerShop.steps;
 
 
+import BeerShop.Utils.Utils;
 import BeerShop.pages.ChangeProfilePage;
 import BeerShop.pages.LoginPage;
 import BeerShop.pages.ProfilePage;
@@ -89,6 +90,7 @@ public class ChangeProfileDetailsDefinitionSteps {
 
     @And("^I click on Save info$")
     public void theInfoIsSaved() throws Throwable {
+        Utils.javascriptWindowScroll(500);
         changeProfileSteps.clickOnSaveButton();
     }
 
@@ -117,6 +119,17 @@ public class ChangeProfileDetailsDefinitionSteps {
     @Then("^My profile picture is changed$")
     public void myProfilePictureIsChanged() throws Throwable {
         changeProfileSteps.verifyIfPictureIsChanged();
+    }
+
+    @When("^I click on upload file, without choosing a file$")
+    public void iClickOnUploadFileWithoutChoosingAFile() throws Throwable {
+      changeProfileSteps.clickOnUploadImage();
+
+    }
+
+    @Then("^(.*) for missing picture is displayed$")
+    public void errormessageForMissingPictureIsDisplayed(String errorMessage) throws Throwable {
+        changeProfileSteps.verifyErrorMessageForUploadImageIsDisplayed(errorMessage);
     }
 }
 

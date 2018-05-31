@@ -18,7 +18,6 @@ Feature: Change Profile Details
     And Click on Save button
     Then Success message "Your profile has been updated." is displayed
 
-
   Scenario Outline: Change Info About Me
     Given I am logged in with <username> and <password>
     And My <username> is displayed
@@ -52,18 +51,26 @@ Feature: Change Profile Details
       | ivan05   | ivan@abv.bg        | Ivan      | Ivanov   | Sofia   | 08         | 36  | Your phone number must be 10 digits |
       | ivan05   | ivan@abv.bg        | Ivan      | Ivanov   | Sofia   | 0896512364 | -2  | Your age must be 18+                |
 
-    @ay
-    Scenario Outline: Change my profile picture
-      Given I am logged in with <username> and <password>
-      And My <username> is displayed
-      When I select a new picture
-      Then My profile picture is changed
 
-      Examples:
-        | username | password    |
-        | ivan05   | parola123A! |
+  Scenario Outline: Change my profile picture
+    Given I am logged in with <username> and <password>
+    And My <username> is displayed
+    When I select a new picture
+    Then My profile picture is changed
 
+    Examples:
+      | username | password    |
+      | ivan05   | parola123A! |
 
+  Scenario Outline: Try to upload image before selecting it
+    Given I am logged in with <username> and <password>
+    And My <username> is displayed
+    When I click on upload file, without choosing a file
+    Then <errorMessage> for missing picture is displayed
+
+    Examples:
+      | username | password    | errorMessage             |
+      | ivan05   | parola123A! | Please select a picture. |
 
 
 
