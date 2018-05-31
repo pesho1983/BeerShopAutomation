@@ -80,4 +80,13 @@ public class RegisterSteps {
     public void deniedRegisterWithoutCheckbox(String url) {
         Assert.assertEquals(url, registerPage.getDriver().getCurrentUrl());
     }
+
+    @Step
+    public void  verifyCorrectErrorMessageIsDisplayed(String errorMessage){
+        Assert.assertEquals(errorMessage, registerPage.getErrorMessageLabel());
+    }
+    @Step
+    public void  verifyCorrectBackendErrorMessageIsDisplayed(String errorMessage){
+        Assert.assertEquals(errorMessage, registerPage.getErrorMessageLabelStrong());
+    }
 }

@@ -71,6 +71,7 @@ public class LoginSteps {
     }
 
     @Step
+
     public String getTitle() {
         return loginPage.getTitle();
     }
@@ -92,6 +93,7 @@ public class LoginSteps {
     }
 
     @Step
+
     public void assertValidationMessage(String validation, String defaulMessage) {
         switch (validation) {
             case "errorLogin":

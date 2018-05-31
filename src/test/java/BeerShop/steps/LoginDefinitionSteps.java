@@ -2,6 +2,7 @@ package BeerShop.steps;
 
 import BeerShop.steps.serenity.IndexSteps;
 import BeerShop.steps.serenity.LoginSteps;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -11,14 +12,16 @@ import net.thucydides.core.annotations.Steps;
 
 public class LoginDefinitionSteps {
 
-    @Steps
-    IndexSteps indexSteps;
+
     @Steps
     LoginSteps loginSteps;
+    @Steps
+    IndexSteps indexSteps;
 
 
     @Given("^I am on Login page$")
     public void iAmOnLoginPage() {
+
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
     }

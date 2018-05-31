@@ -10,8 +10,9 @@ import static BeerShop.Utils.Utils.WEBSITE_URL;
 @DefaultUrl(WEBSITE_URL + "index.php")
 public class IndexPage extends PageObject {
 
+
     @FindBy(id = "login")
-    private WebElementFacade loginNavLink;
+    private WebElementFacade login;
 
     @FindBy(css = ".last_sold>div>p:nth-child(2)")
     private WebElementFacade lastSoldBeer;
@@ -20,8 +21,8 @@ public class IndexPage extends PageObject {
         return lastSoldBeer;
     }
 
-    public WebElementFacade getLoginNavLink() {
-        return loginNavLink;
+      public WebElementFacade getLogin() {
+        return login;
     }
 
 
