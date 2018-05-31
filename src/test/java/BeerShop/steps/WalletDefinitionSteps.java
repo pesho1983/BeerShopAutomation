@@ -30,11 +30,11 @@ public class WalletDefinitionSteps {
     public void theUserIsLoggedInWithValidCredentials(Map<String, String> data){
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
-        //loginSteps.enterUsernameAndPassword(data);
+        loginSteps.enterUsernameAndPassword(data);
         loginSteps.pressSubmitButton();
     }
 
-    @And("^the user is on wallet page with zero funds:$")
+    @And("^(?:user|the user) is on wallet page with zero funds:$")
     public void theUserIsOnWalletPage(Map<String, String> data){
         loginSteps.clickOnWalletLink();
         walletSteps.addMoney(data);

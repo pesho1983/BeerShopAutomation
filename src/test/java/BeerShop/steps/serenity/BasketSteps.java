@@ -8,19 +8,13 @@ import BeerShop.pages.CatalogPage;
 import BeerShop.pages.ProfilePage;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
-import org.jruby.RubyProcess;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 import java.util.Random;
 
-import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 
 public class BasketSteps {
 
@@ -199,5 +193,10 @@ public class BasketSteps {
             clickButton(BasketConstants.CONTINUE_SHOPPING_BUTTON);
         }
         basketPage.open();
+    }
+
+    @Step
+    public String getProductName(){
+        return basketPage.getProductName().getText();
     }
 }
