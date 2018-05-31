@@ -17,9 +17,17 @@ public class Utils {
 
     public final static String WEBSITE_URL = "http://192.168.10.158/BeerShop/";
 
-    private static String localUsername = System.getProperty("user.name");
-    private static String homePath = "C:/Users/" + localUsername + "/Desktop/uploadTestImages/";
+    private static String homePath = imagesRelativePath();
 
+    public static String imagesRelativePath() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(System.getProperty("user.dir"))
+                .append("/src/test/java/BeerShop/Utils/images/");
+        String homePath = sb.toString();
+        homePath = homePath.replace('\\', '/');
+
+        return homePath;
+    }
 
     public static String productIndividualXpath(WebElementFacade target, String replace) {
         String targetProduct = target.getWrappedElement().toString();
@@ -27,11 +35,10 @@ public class Utils {
         return targetProduct.replace(toRemove, "").replace(replace, "");
     }
 
-
     public static String generateRandomImagePath() {
         StringBuilder sb = new StringBuilder();
         SecureRandom rand = new SecureRandom();
-        sb.append(homePath)
+        sb.append(imagesRelativePath())
                 .append(rand.nextInt(100000) + 100)
                 .append(System.currentTimeMillis())
                 .append(System.nanoTime())
