@@ -77,14 +77,14 @@ public class LoginSteps {
     }
 
     @Step
-    public void asserOnErrorMsg() {
-        Assert.assertEquals("Wrong username or password!", getErrorTextMsg());
+    public void asserOnErrorMsg(String message) {
+        Assert.assertEquals(message, getErrorTextMsg());
     }
 
 
     @Step
-    public void assertUserIsOnLogin() {
-        Assert.assertEquals("Login", getTitle());
+    public void assertUserIsOnLogin(String message) {
+        Assert.assertEquals(message, getTitle());
     }
 
     @Step

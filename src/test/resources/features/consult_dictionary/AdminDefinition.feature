@@ -16,7 +16,7 @@ Feature: Admin panel
     When Filling the form with admin access credentials:
       | username | admin1      |
       | password | parola123a! |
-    Then Error message appears
+    Then Error message "Wrong username or password!" appears
     And The user is on the "Login page"
 
   Scenario: Creating product with all valid fields

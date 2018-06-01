@@ -34,7 +34,7 @@ public class WalletDefinitionSteps {
         loginSteps.pressSubmitButton();
     }
 
-    @And("^the user is on wallet page with zero funds:$")
+    @And("^(?:user|the user) is on wallet page with zero funds:$")
     public void theUserIsOnWalletPage(Map<String, String> data){
         loginSteps.clickOnWalletLink();
         walletSteps.addMoney(data);

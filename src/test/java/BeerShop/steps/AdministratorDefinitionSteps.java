@@ -52,14 +52,14 @@ public class AdministratorDefinitionSteps {
         adminSteps.assertUserIsOnAdminPage(message);
     }
 
-    @Then("^Error message appears$")
-    public void errorMessageAppears() {
-        loginSteps.asserOnErrorMsg();
+    @Then("^Error message \"([^\"]*)\" appears$")
+    public void errorMessageAppears(String message) {
+        loginSteps.asserOnErrorMsg(message);
     }
 
     @And("^The user is on the \"([^\"]*)\"$")
-    public void theUserIsOnThe(String arg0) {
-        loginSteps.assertUserIsOnLogin();
+    public void theUserIsOnThe(String message) {
+        loginSteps.assertUserIsOnLogin(message);
     }
 
     @Given("^You are logged in as administrator:$")

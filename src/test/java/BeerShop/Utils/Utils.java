@@ -11,6 +11,7 @@ import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver
 
 import java.io.File;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Utils {
@@ -92,6 +93,27 @@ public class Utils {
     public static String removeSuffixFromPrice(WebElementFacade target) {
         String result = target.getText();
         return result.substring(0, result.length() - 3);
+    }
+
+    public static ArrayList fileRemaner() {
+        // change file names in 'Directory':
+        String absolutePath = "C:\\Pictures";
+        File dir = new File(absolutePath);
+        File[] filesInDir = dir.listFiles();
+        ArrayList listOfPicturesNames = new ArrayList();
+        int i = 0;
+        for(File file:filesInDir) {
+            i++;
+            String name = file.getName();
+            double random = Math.random() * 4.9 + 1;
+            String newName = random + i + ".jpg";
+            listOfPicturesNames.add(newName);
+            String newPath = absolutePath + "\\" + newName;
+            file.renameTo(new File(newPath));
+            System.out.println(name + " changed to " + newName);
+        }
+
+        return listOfPicturesNames;
     }
 }
 

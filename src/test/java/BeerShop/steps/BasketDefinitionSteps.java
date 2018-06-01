@@ -17,7 +17,7 @@ import java.util.Random;
 
 
 public class BasketDefinitionSteps {
-    private static String name;
+    public static String name;
     private static String userFirstName;
     private static String result;
     private int productCount;
@@ -151,4 +151,5 @@ public class BasketDefinitionSteps {
     public void anErrorMessageAboutInsufficientFundsAppears(String message) {
         basketSteps.assertMessageEquals(message);
     }
+
 }

@@ -14,10 +14,16 @@ public class IndexPage extends PageObject {
     @FindBy(id = "login")
     private WebElementFacade login;
 
+    @FindBy(css = ".last_sold>div>p:nth-child(2)")
+    private WebElementFacade lastSoldBeer;
 
+    public WebElementFacade getLastSoldBeer() {
+        return lastSoldBeer;
+    }
 
       public WebElementFacade getLogin() {
         return login;
     }
+
 
 }
