@@ -5,6 +5,7 @@ import BeerShop.Utils.Utils;
 import BeerShop.Utils.constants.BasketConstants;
 import BeerShop.pages.BasketPage;
 import BeerShop.pages.CatalogPage;
+import BeerShop.pages.IndexPage;
 import BeerShop.pages.ProfilePage;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
@@ -13,14 +14,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 
-import java.util.Random;
+import java.util.*;
 
 
 public class BasketSteps {
-
+    private String productName;
+    private List<String> listOfSoldBeers = new ArrayList<>();
     BasketPage basketPage;
     CatalogPage catalogPage;
     ProfilePage profilePage;
+    IndexPage indexPage;
 
     @Step
     public void openBasketPage() {
@@ -197,6 +200,18 @@ public class BasketSteps {
 
     @Step
     public String getProductName(){
-        return basketPage.getProductName().getText();
+        productName = basketPage.getProductName().getText();
+        listOfSoldBeers.add(productName);
+        return productName;
+    }
+
+    @Step
+    public void assertNameOfLastSoldBeer() {
+        Assert.assertEquals(productName, indexPage.getLastSoldBeer().getText());
+    }
+
+    @Step
+    public void assertIfLastThreeSoldBeersAreOnIndexPage(){
+        Assert.assertTrue("not true", indexPage.getLastThreeSoldBeers(listOfSoldBeers));
     }
 }

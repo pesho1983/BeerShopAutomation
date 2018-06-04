@@ -1,21 +1,24 @@
 package BeerShop.steps;
 
+import BeerShop.pages.BasketPage;
 import BeerShop.steps.serenity.BasketSteps;
 import BeerShop.steps.serenity.IndexSteps;
 import BeerShop.steps.serenity.LoginSteps;
 import BeerShop.steps.serenity.WalletSteps;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import net.thucydides.core.annotations.Steps;
+import org.junit.Test;
 
 import java.util.Map;
 import java.util.Random;
 
 public class IndexDefinitionSteps {
-    public static String name;
     private Random random = new Random();
 
+    BasketPage basketPage;
     @Steps
     LoginSteps loginSteps;
     @Steps
@@ -36,8 +39,19 @@ public class IndexDefinitionSteps {
     @And("^(?:user|the user) had added random product in his basket")
     public void productIsAddedToTheBasket() {
         basketSteps.clickOnAddToCart(random.nextInt(12) + 1);
-        name = basketSteps.getProductName();
+        basketSteps.getProductName();
+    }
 
+    @And("^(?:user|the user) had added three random products in his basket")
+    public void productsAreAddedToTheBasket() {
+        basketSteps.clickOnAddToCart(random.nextInt(12) + 1);
+        basketSteps.getProductName();
+        basketPage.clickBackToCatalogButton();
+        basketSteps.clickOnAddToCart(random.nextInt(12) + 1);
+        basketSteps.getProductName();
+        basketPage.clickBackToCatalogButton();
+        basketSteps.clickOnAddToCart(random.nextInt(12) + 1);
+        basketSteps.getProductName();
     }
 
     @And("^user is on wallet page and add funds:$")
@@ -51,6 +65,12 @@ public class IndexDefinitionSteps {
     @Then("^go back to Index page current bought beer have to be shown$")
     public void currentBoughtBeerHaveToBeShown() {
         indexSteps.openURL();
-        indexSteps.assertLastSoldBeer(name);
+        basketSteps.assertNameOfLastSoldBeer();
+    }
+
+    @Then("^go back to Index page current bought beers have to be shown$")
+    public void goBackToIndexPageCurrentBoughtBeersHaveToBeShown() {
+        indexSteps.openURL();
+        basketSteps.assertIfLastThreeSoldBeersAreOnIndexPage();
     }
 }

@@ -17,7 +17,7 @@ import java.util.Random;
 
 
 public class BasketDefinitionSteps {
-    public static String name;
+    private static String name;
     private static String userFirstName;
     private static String result;
     private int productCount;
