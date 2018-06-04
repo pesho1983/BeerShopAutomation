@@ -57,4 +57,9 @@ public class AddBeerDefinitionSteps {
     public void messageAboutTheSameNameIsDisplayed(String message){
         addBeerSteps.assertMessageSameName(message);
     }
+
+    @When("^user add credentials but existing name:$")
+    public void userAddCredentialsButExistingName(@Transpose Map<String,String> data)  {
+       addBeerSteps.fillCredentialsExistingName(data);
+    }
 }

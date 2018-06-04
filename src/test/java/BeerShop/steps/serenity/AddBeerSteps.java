@@ -1,5 +1,7 @@
 package BeerShop.steps.serenity;
 
+import BeerShop.Utils.Randomizer;
+import BeerShop.Utils.Utils;
 import BeerShop.pages.AdminPanelPage;
 import BeerShop.pages.AddBeerPage;
 import BeerShop.pages.LoginPage;
@@ -38,26 +40,38 @@ public class AddBeerSteps {
 
     @Step
     public void addNewBeer(Map<String,String> data) {
-        addBeerPage.getName().type(data.get("name"));
+        addBeerPage.getName().type(Randomizer.randomizeValue(data.get("name")));
         addBeerPage.getDescription().type(data.get("description"));
         addBeerPage.getPrice().type(data.get("price"));
         addBeerPage.getQuantity().type(data.get("quantity"));
         addBeerPage.getPicture().click();
-        getDriver().switchTo().activeElement().sendKeys(FILE);
+        getDriver().switchTo().activeElement().sendKeys(Utils.getRandomImageFromFolderBeer());
         addBeerPage.getSaveButton().click();
 
         }
 
     @Step
     public void fillCredentials(@Transpose Map<String,String> data) {
+        addBeerPage.getName().type(Randomizer.randomizeValue(data.get("name")));
+        addBeerPage.getDescription().type(data.get("description"));
+        addBeerPage.getPrice().type(data.get("price"));
+        addBeerPage.getQuantity().type(data.get("quantity"));
+        addBeerPage.getPicture().click();
+        getDriver().switchTo().activeElement().sendKeys(Utils.getRandomImageFromFolderSameBeer());
+        addBeerPage.getSaveButton().click();
+    }
+
+    @Step
+    public void fillCredentialsExistingName(@Transpose Map<String,String> data) {
         addBeerPage.getName().type(data.get("name"));
         addBeerPage.getDescription().type(data.get("description"));
         addBeerPage.getPrice().type(data.get("price"));
         addBeerPage.getQuantity().type(data.get("quantity"));
         addBeerPage.getPicture().click();
-        getDriver().switchTo().activeElement().sendKeys(FILE);
+        getDriver().switchTo().activeElement().sendKeys(Utils.getRandomImageFromFolderBeer());
         addBeerPage.getSaveButton().click();
     }
+
      @Step
     public void assertSuccessfulMessage(String message){
          Assert.assertEquals(message,addBeerPage.getSuccessfullMessage().getText());
