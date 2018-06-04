@@ -139,6 +139,7 @@ Feature: Admin panel
       | beerQuantity |
       | 55           |
 
+
   Scenario: Edit beer picture
     Given You are logged in as administrator:
       | username | admin       |
