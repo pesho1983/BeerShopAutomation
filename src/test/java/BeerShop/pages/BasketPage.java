@@ -121,5 +121,5 @@ public class BasketPage extends PageObject {
     public String getErrorOrderMsgBox() {
         return errorMessageBox.getText();
     }
-    
+
 }

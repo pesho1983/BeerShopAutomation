@@ -212,6 +212,6 @@ public class BasketSteps {
 
     @Step
     public void assertIfLastThreeSoldBeersAreOnIndexPage(){
-        Assert.assertTrue("not true", indexPage.getLastThreeSoldBeers(listOfSoldBeers));
+        Assert.assertTrue(indexPage.getLastThreeSoldBeers(listOfSoldBeers));
     }
 }
