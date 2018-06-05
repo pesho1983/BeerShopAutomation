@@ -70,8 +70,9 @@ public class ChangeProfilePage extends PageObject {
         return errorMessageLabel;
     }
 
-    public WebElementFacade getChangePasswordButton() {
-        return changePasswordButton;
+    public ChangeProfilePage clickOnChangePasswordButton() {
+        this.changePasswordButton.click();
+        return this;
     }
 
     public WebElementFacade getHeader() {

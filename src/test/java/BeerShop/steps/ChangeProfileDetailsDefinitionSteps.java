@@ -2,6 +2,7 @@ package BeerShop.steps;
 
 
 import BeerShop.Utils.Utils;
+import BeerShop.entities.User;
 import BeerShop.pages.ChangeProfilePage;
 import BeerShop.pages.LoginPage;
 import BeerShop.pages.ProfilePage;
@@ -14,6 +15,7 @@ import cucumber.api.Transpose;
 import net.thucydides.core.annotations.Steps;
 
 
+import java.util.List;
 import java.util.Map;
 
 public class ChangeProfileDetailsDefinitionSteps {
@@ -35,19 +37,19 @@ public class ChangeProfileDetailsDefinitionSteps {
     LoginPage loginPage;
 
     @Given("^I am logged in$")
-    public void iAmOnProfilePage(Map<String, String> data) {
+    public void iAmOnProfilePage(@Transpose List<User> user) {
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
-        loginSteps.enterUsernameAndPassword(data);
+        loginSteps.enterUsernameAndPassword(user);
         loginSteps.pressSubmitButton();
         loginSteps.clickOnProfileNavLink();
     }
 
     @Given("^I am logged in with (.*) and (.*)$")
-    public void iAmLoggedInWithUsernameAndPassword(String username, String password) throws Throwable {
+    public void iAmLoggedInWithUsernameAndPassword(List<User> user) {
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
-        loginSteps.enterUsernameAndPassword(username, password);
+        loginSteps.enterUsernameAndPassword(user);
         loginSteps.pressSubmitButton();
         loginSteps.clickOnProfileNavLink();
     }

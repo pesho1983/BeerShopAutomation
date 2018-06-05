@@ -1,9 +1,11 @@
 package BeerShop.steps;
 
 
+import BeerShop.entities.User;
 import BeerShop.steps.serenity.AdministratorSteps;
 import BeerShop.steps.serenity.CatalogSteps;
 import BeerShop.steps.serenity.LoginSteps;
+import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -11,6 +13,8 @@ import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
 
+import javax.jws.soap.SOAPBinding;
+import java.util.List;
 import java.util.Map;
 
 public class AdministratorDefinitionSteps {
@@ -30,8 +34,8 @@ public class AdministratorDefinitionSteps {
     }
 
     @When("^Filling the form with admin access credentials:$")
-    public void fillingTheFormWithAdminAccessCredentials(Map<String, String> data) {
-        loginSteps.enterUsernameAndPassword(data);
+    public void fillingTheFormWithAdminAccessCredentials(@Transpose List<User> user) {
+        loginSteps.enterUsernameAndPassword(user);
         loginSteps.pressSubmitButton();
 
     }
@@ -63,9 +67,9 @@ public class AdministratorDefinitionSteps {
     }
 
     @Given("^You are logged in as administrator:$")
-    public void youAreLoggedInAsAdministrator(Map<String, String> data) {
+    public void youAreLoggedInAsAdministrator(@Transpose List<User> user) {
         loginSteps.navigateToLoginPage();
-        loginSteps.enterUsernameAndPassword(data);
+        loginSteps.enterUsernameAndPassword(user);
         loginSteps.pressSubmitButton();
     }
 

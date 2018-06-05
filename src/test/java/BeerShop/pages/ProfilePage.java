@@ -5,6 +5,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
+import org.openqa.selenium.JavascriptExecutor;
 
 import static BeerShop.Utils.Utils.WEBSITE_URL;
 
@@ -21,8 +22,9 @@ public class ProfilePage extends PageObject {
         return Utils.replaceWordWithWhitespace(this.firstName.getText(), "First name: ");
     }
 
-    public WebElementFacade getChangeInfoButton() {
-        return changeInfoButton;
+    public ProfilePage clickOnChangeInfoButton() {
+        ((JavascriptExecutor) this.getDriver()).executeScript("window.scrollBy(0,500)", "");
+        this.changeInfoButton.click();
+        return this;
     }
-
 }

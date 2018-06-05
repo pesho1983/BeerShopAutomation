@@ -16,15 +16,12 @@ public class IndexPage extends PageObject {
     @FindBy(id = "login")
     private WebElementFacade login;
 
-    @FindBy(css = ".last_sold>div:nth-last-child(3)>p:nth-child(2)")
-    private WebElementFacade lastSoldBeer;
-
-    @FindBy (css = ".last_sold div p:nth-child(2)")
+    @FindBy(css = ".last_sold div p:nth-child(2)")
     private List<WebElementFacade> listOfLastSoldBeers;
 
-    public boolean getLastThreeSoldBeers(List<String> listOfSoldBeers) {
-        for (int i = 0; i < 3; i++){
-            if (!listOfLastSoldBeers.get(i).getText().equals(listOfSoldBeers.get(i))){
+    public boolean getLastThreeSoldBeers(List<String> listOfSoldBeers, int numberOfPurchasedBeers) {
+        for (int i = 0; i < numberOfPurchasedBeers; i++) {
+            if (!listOfLastSoldBeers.get(i).getText().equals(listOfSoldBeers.get(i))) {
                 return false;
             }
         }
@@ -32,14 +29,8 @@ public class IndexPage extends PageObject {
         return true;
     }
 
-
-    public WebElementFacade getLastSoldBeer() {
-        return lastSoldBeer;
+    public IndexPage clickOnLoginNavLink(){
+        this.login.click();
+        return this;
     }
-
-      public WebElementFacade getLogin() {
-        return login;
-    }
-
-
 }

@@ -1,24 +1,16 @@
 package BeerShop.steps.serenity;
 
-
 import BeerShop.entities.User;
 import BeerShop.pages.LoginPage;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
-
 import java.util.List;
-import java.util.Map;
-
 import static BeerShop.Utils.Utils.WEBSITE_URL;
-
 
 @DefaultUrl(WEBSITE_URL + "login.php")
 public class LoginSteps {
-
-
     LoginPage loginPage;
-
 
     @Step
     public void navigateToLoginPage() {
@@ -31,26 +23,13 @@ public class LoginSteps {
     }
 
     @Step
-    public void enterUsernameAndPassword(Map<String, String> data) {
-        loginPage.getUsername().type(data.get("username"));
-        loginPage.getPassword().type(data.get("password"));
-    }
-
-    @Step
     public void enterUsernameAndPassword(List<User> user) {
         loginPage.getUsername().type(user.get(0).getUsername());
         loginPage.getPassword().type(user.get(0).getPassword());
     }
 
     @Step
-    public void enterUsernameAndPassword(String username, String password) {
-        loginPage.getUsername().type(username);
-        loginPage.getPassword().type(password);
-    }
-
-    @Step
     public void pressSubmitButton() {
-
         loginPage.getSubmitButton().click();
     }
 
@@ -58,7 +37,6 @@ public class LoginSteps {
     public void assertUserIsOnCatalogPage(String defaultUrl) {
         Assert.assertEquals(defaultUrl, loginPage.getDriver().getCurrentUrl());
     }
-
 
     @Step
     public void clickOnProfileNavLink() {
@@ -71,7 +49,6 @@ public class LoginSteps {
     }
 
     @Step
-
     public String getTitle() {
         return loginPage.getTitle();
     }
@@ -80,7 +57,6 @@ public class LoginSteps {
     public void asserOnErrorMsg(String message) {
         Assert.assertEquals(message, getErrorTextMsg());
     }
-
 
     @Step
     public void assertUserIsOnLogin(String message) {
@@ -93,7 +69,6 @@ public class LoginSteps {
     }
 
     @Step
-
     public void assertValidationMessage(String validation, String defaulMessage) {
         switch (validation) {
             case "errorLogin":
