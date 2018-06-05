@@ -16,10 +16,6 @@ public class PasswordChangeDefinitionSteps {
     @Steps
     LoginSteps loginSteps;
     @Steps
-    ProfileSteps profileSteps;
-    @Steps
-    ChangeProfileSteps changeProfileSteps;
-    @Steps
     PasswordChangeSteps passwordChangeSteps;
     @Steps
     BasketSteps basketSteps;

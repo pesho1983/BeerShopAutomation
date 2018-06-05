@@ -5,7 +5,6 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
-import org.openqa.selenium.JavascriptExecutor;
 
 import static BeerShop.Utils.Utils.WEBSITE_URL;
 
@@ -23,7 +22,7 @@ public class ProfilePage extends PageObject {
     }
 
     public ProfilePage clickOnChangeInfoButton() {
-        ((JavascriptExecutor) this.getDriver()).executeScript("window.scrollBy(0,500)", "");
+        Utils.javascriptWindowScroll(500);
         this.changeInfoButton.click();
         return this;
     }
