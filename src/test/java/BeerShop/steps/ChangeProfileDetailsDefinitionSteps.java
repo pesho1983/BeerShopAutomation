@@ -45,7 +45,7 @@ public class ChangeProfileDetailsDefinitionSteps {
         loginSteps.clickOnProfileNavLink();
     }
 
-    @Given("^I am logged in with (.*) and (.*)$")
+    @Given("^I am logged in with$")
     public void iAmLoggedInWithUsernameAndPassword(List<User> user) {
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
