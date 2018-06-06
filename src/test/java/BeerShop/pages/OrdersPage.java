@@ -11,8 +11,20 @@ public class OrdersPage extends PageObject {
     @FindBy(xpath = "//a[@href='oldOrders.php']")
     private WebElementFacade completedOrdersBtn;
 
+    @FindBy(css = "table tr strong")
+    private WebElementFacade getCartTotalPriceElement;
+
     public WebElementFacade getOrdersLink() {
 
         return completedOrdersBtn.waitUntilClickable();
+    }
+
+    public float getCartTotalPrice() {
+        float cartTotalPrice = Float.parseFloat(getCartTotalPriceElement
+                .getText()
+                .trim()
+                .replaceAll("[^\\d+.]", ""));
+
+        return cartTotalPrice;
     }
 }

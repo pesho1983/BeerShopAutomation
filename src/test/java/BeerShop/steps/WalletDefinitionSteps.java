@@ -1,20 +1,21 @@
 package BeerShop.steps;
 
-import BeerShop.steps.serenity.IndexSteps;
-import BeerShop.steps.serenity.LoginSteps;
-import BeerShop.steps.serenity.WalletSteps;
+import BeerShop.pages.BasketPage;
+import BeerShop.steps.serenity.*;
 import cucumber.api.PendingException;
 import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
+
 import java.util.Map;
 
 
-
 public class WalletDefinitionSteps {
+    public float totalPriceFromBasket;
     private String currentMoney;
     private float depositMoney;
 
@@ -24,130 +25,103 @@ public class WalletDefinitionSteps {
     LoginSteps loginSteps;
     @Steps
     WalletSteps walletSteps;
+    @Steps
+    CatalogSteps catalogSteps;
+    @Steps
+    BasketSteps basketSteps;
+    @Steps
+    BasketDefinitionSteps basketDefinitionSteps;
+
+    BasketPage basketPage;
 
 
     @Given("^a user is logged in with valid credentials:$")
-    public void aUserIsLoggedInWithValidCredentials(Map<String,String> data){
+    public void aUserIsLoggedInWithValidCredentials(Map<String, String> data) {
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
         loginSteps.enterUsernameAndPassword(data);
         loginSteps.pressSubmitButton();
     }
 
-    @And("^the user is on wallet page with zero funds:$")
-    public void theUserIsOnWalletPageWithZeroFunds( Map<String,Float> data) {
-        loginSteps.clickOnWalletLink();
-        walletSteps.addMoney(data);
-        walletSteps.pressDepositButton();
-    }
+//    @And("^the user is on wallet page with zero funds:$")
+//    public void theUserIsOnWalletPageWithZeroFunds(Float data) {
+//        loginSteps.clickOnWalletLink();
+//        walletSteps.addMoney(data);
+//        walletSteps.pressDepositButton();
+//    }
 
-    @When("^add additional funds to the personal account:$")
-    public void addAdditionalFundsToThePersonalAccount( Map<String,Float> data) {
-        walletSteps.addMoney(data);
-        walletSteps.pressDepositButton();
-    }
-
-    @Then("^the funds are added to users personal account:$")
-    public void theFundsAreAddedToUsersPersonalAccount( Map<String,String> data)  {
+    @Then("^the funds are added to user's personal account:$")
+    public void theFundsAreAddedToUsersPersonalAccount(String data) {
         walletSteps.assertCurrentBalance(data);
     }
 
-
     @Given("^the user is on wallet page$")
-    public void theUserIsOnWalletPage()  {
+    public void theUserIsOnWalletPage() {
         loginSteps.clickOnWalletLink();
         walletSteps.pressDepositButton();
-
     }
 
     @Then("^current balance increase or decrease with the additional funds:$")
-    public void currentBalanceIncreaseOrDecreaseWithTheAdditionalFunds()  {
+    public void currentBalanceIncreaseOrDecreaseWithTheAdditionalFunds() {
         walletSteps.assertBalanceChange(currentMoney, depositMoney);
     }
 
-    @When("^add additional funds to the personal account and calculate:$")
-    public void addAdditionalFundsToThePersonalAccountAndCalculate(@Transpose Map<String,Float> data) {
-        currentMoney = walletSteps.getCurrentBalance();
-        depositMoney = data.get("deposit");
-        walletSteps.addMoney(data);
+    @Then("^current balance should be \"([^\"]*)\":$")
+    public void currentBalanceShouldBe(String data) {
+        walletSteps.assertCurrentBalance(data);
+    }
+
+    @When("^the user adds special characters in deposit field:$")
+    public void theUserAddsSpecialCharactersInDepositField(@Transpose Map<String, String> data) {
+        walletSteps.addSymbols(data);
         walletSteps.pressDepositButton();
     }
 
-    @Then("^current balance is:$")
-    public void currentBalanceIs( Map<String, String> data)  {
-        walletSteps.assertCurrentBalance(data);
+    @When("the user is on the wallet page and check his current balance$")
+    public String theUserIsOnTheWalletPageAndCheckHisCurrentBalance() {
+        loginSteps.clickOnWalletLink();
+        return currentMoney = walletSteps.getCurrentBalance();
     }
 
-    @When("^add special characters in deposit field:$")
-    public void addSpecialCharactersInDepositField(@Transpose Map<String,String> data) {
-       walletSteps.addSymbols(data);
-       walletSteps.pressDepositButton();
+    @When("^the user adds \"([^\"]*)\" funds to the personal account$")
+    public void theUserAddsFundsToThePersonalAccount(Float data) {
+        walletSteps.addMoney(data);
+        walletSteps.getCurrentBalance();
+        walletSteps.pressDepositButton();
     }
 
-    @Then("^current balance is the same as before:$")
-    public void currentBalanceIsTheSameAsBefore(Map<String, String> data) {
-        walletSteps.assertCurrentBalance(data);
+    @When("^the user is on order preview page:$")
+    public void theUserIsOnOrderPrevewPage(Map<String, Integer> product) {
+        catalogSteps.redirectToCatalog();
+        basketSteps.clickOnAddToCart(product.get("product"));
+        totalPriceFromBasket = basketPage.getCartTotal();
     }
 
+    @Then("^current amount in wallet is less with total order price$")
+    public void currentAmountInWalletIsLessWithTotalOrderPrice() {
+        catalogSteps.redirectToCatalog();
+        loginSteps.clickOnWalletLink();
+        float cartPrice = basketDefinitionSteps.cartTotalPrice;
+        float moneyBeforeBuy = Float.parseFloat(currentMoney);
+        float moneyInWallet = Float.valueOf(walletSteps.getCurrentBalance());
+        walletSteps.assertPurchaseBalanceChange(moneyInWallet, moneyBeforeBuy, totalPriceFromBasket);
+    }
 
-//    @Then("^current balance will increased with additional funds$")
-//    public void currentBalanceWillIncreasedWithAdditionalFunds() throws Throwable {
-//
-//    }
+    @Then("^\"([^\"]*)\" funds are added to the account$")
+    public void fundsAreAddedToTheAccount(float value) {
+        walletSteps.assertBalanceIsChanged(value, currentMoney);
+    }
 
-//    @Then("^current balance will be (\\d+)\.(\\d+)$")
-//    public void currentBalanceWillBe(int arg0, int arg1) throws Throwable {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new PendingException();
-//    }
+    @When("^the user has enough money to buy beer$")
+    public void theUserHasEnoughMoneyToBuyBeer() {
+        loginSteps.clickOnWalletLink();
+        walletSteps.checkIfTheBalanceIsEnough();
+        currentMoney = walletSteps.getCurrentBalance();
+    }
 
-//    @When("^adding special characters in Deposit field:$")
-//    public void addingSpecialCharactersInDepositField() throws Throwable {
-//
-//    }
-//
-//    @Then("^current balance will be the same as before$")
-//    public void currentBalanceWillBeTheSameAsBefore() throws Throwable {
-//
-//    }
-//
-//    @And("^the user has enough money in wallet$")
-//    public void theUserHasEnoughMoneyInWallet() throws Throwable {
-//
-//    }
-//
-//    @And("^the user is on order prevew page$")
-//    public void theUserIsOnOrderPrevewPage() throws Throwable {
-//
-//    }
-//
-//    @When("^click on button place order:$")
-//    public void clickOnButtonPlaceOrder() throws Throwable {
-//
-//    }
-//
-//    @Then("^order has been placed$")
-//    public void orderHasBeenPlaced() throws Throwable {
-//
-//    }
-//
-//    @And("^current amount in wallet is less with total order price$")
-//    public void currentAmountInWalletIsLessWithTotalOrderPrice() throws Throwable {
-//
-//    }
-//
-//    @And("^there is not enough money in wallet$")
-//    public void thereIsNotEnoughMoneyInWallet() throws Throwable {
-//
-//    }
-//
-//    @Then("^order hasn't been placed$")
-//    public void orderHasnTBeenPlaced() throws Throwable {
-//
-//    }
-//
-//    @And("^there is warning message$")
-//    public void thereIsWarningMessage() throws Throwable {
-//
-//    }
+    @When("^user press \"([^\"]*)\" and \"([^\"]*)\" buttons to confirm order$")
+    public void userPressAndButtonsToConfirmOrder(String checkout, String placeOrder)  {
+        basketSteps.clickButton(checkout);
+        basketSteps.clickButton(placeOrder);
+    }
 }

@@ -1,97 +1,63 @@
 Feature: Wallet functionality
+
   User could add money in the wallet
   in order to buy beers when substract money from wallet amount
 
-
-  Scenario: Add funds to wallet
+  Background:
     Given a user is logged in with valid credentials:
       | username | BatAndro |
       | password | Asdf123! |
-    And the user is on wallet page with zero funds:
-      | deposit | -100000000 |
-    When add additional funds to the personal account:
-      | deposit | 100 |
-    Then the funds are added to users personal account:
-      | funds | Current balance: BGN 100.00 |
 
-
-  Scenario Outline: Check current balance changes
-    Given a user is logged in with valid credentials:
-      | username | BatAndro |
-      | password | Asdf123! |
-    And the user is on wallet page with zero funds:
-      | deposit  | -100000000 |
-      | deposit  | 100        |
-    When add additional funds to the personal account and calculate:
-      | deposit   |
-      | <deposit> |
-    Then current balance increase or decrease with the additional funds:
+  Scenario Outline: Add funds to wallet
+    When the user is on the wallet page and check his current balance
+    And the user adds "<value>" funds to the personal account
+    Then "<value>" funds are added to the account
     Examples:
-      | deposit |
-      | 20      |
-      | -5      |
+      | value |
+      | 2     |
 
-
-  Scenario: Check maximal possible current balance
-    Given a user is logged in with valid credentials:
-      | username | BatAndro |
-      | password | Asdf123! |
+  Scenario Outline: Check maximal possible current balance
     And the user is on wallet page
-    When add additional funds to the personal account:
-      | deposit | 100000000.00 |
-    Then current balance is:
-      | funds   | Current balance: BGN 99999999.99 |
-
+    When the user adds "<value>" funds to the personal account
+    Then current balance should be "<funds>":
+    Examples:
+      | value        | funds                            |
+      | 100000000.00 | Current balance: BGN 99999999.99 |
 
   Scenario Outline: Check minimal possible current balance
-    Given a user is logged in with valid credentials:
-      | username | BatAndro |
-      | password | Asdf123! |
-    And the user is on wallet page with zero funds:
-      | deposit  | -100000000 |
-    When add additional funds to the personal account and calculate:
-      | deposit   |
-      | <deposit> |
-    Then current balance is:
-      | funds     |  Current balance: BGN 0.01  |
+    When the user is on the wallet page and check his current balance
+    And the user adds "<addCash>" funds to the personal account
+    And the user adds "<deposit>" funds to the personal account
+    Then current balance should be "<funds>":
     Examples:
-      | deposit |
-      | 0.01    |
-      | 0.011   |
-      | 0.0111  |
+      | deposit | addCash    | funds                     |
+      | 0.01    | -100000000 | Current balance: BGN 0.01 |
+      | 0.011   | -100000000 | Current balance: BGN 0.01 |
+      | 0.0111  | -100000000 | Current balance: BGN 0.01 |
 
 
   Scenario Outline: Check adding special characters
-    Given a user is logged in with valid credentials:
-      | username | BatAndro |
-      | password | Asdf123! |
-    And the user is on wallet page with zero funds:
-      | deposit | -100000000 |
-    When add special characters in deposit field:
+    When the user is on the wallet page and check his current balance
+    When the user adds special characters in deposit field:
       | deposit   |
       | <deposit> |
-    Then current balance is the same as before:
-      | funds | Current balance: BGN 0.00 |
+    Then "<value>" funds are added to the account
     Examples:
-      | deposit     |
-      | aBchktq     |
-      | @#^&*(_?    |
-      | !~%:;"'-+   |
-      | <>/.,\{}[]= |
+      | deposit     | value |
+      | aBchktq     | 0     |
+      | @#^&*(_?    | 0     |
+      | !~%:;"'-+   | 0     |
+      | <>/.,\{}[]= | 0     |
 
 
+  Scenario: Checking to withdraw money from the wallet when buying beer
+    When the user has enough money to buy beer
+    And the user is on order preview page:
+      | product | 5 |
+    And user press "Checkout" and "Place order" buttons to confirm order
+    Then current amount in wallet is less with total order price
 
-#  Scenario: Checking to withdraw money from the wallet when buying beer
-#    Given the user is logged in with valid credentials:
-#      | username | BatAndro |
-#      | password | Asdf123! |
-#    And the user has enough money in wallet
-#    And the user is on order prevew page
-#    When click on button place order:
-#    Then order has been placed
-#    And current amount in wallet is less with total order price
-#
-#
+
 #  Scenario: Buying beer whith not enough funds in wallet
 #    Given the user is logged in with valid credentials:
 #      | username | BatAndro |

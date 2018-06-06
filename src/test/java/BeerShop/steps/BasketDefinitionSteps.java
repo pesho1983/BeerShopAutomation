@@ -3,32 +3,31 @@ package BeerShop.steps;
 import BeerShop.Utils.ShippingDetails;
 import BeerShop.Utils.constants.BasketConstants;
 import BeerShop.entities.User;
+import BeerShop.pages.BasketPage;
+import BeerShop.pages.OrdersPage;
 import BeerShop.steps.serenity.BasketSteps;
 import BeerShop.steps.serenity.LoginSteps;
 import BeerShop.steps.serenity.ProfileSteps;
-import cucumber.api.PendingException;
-import cucumber.api.Transform;
-import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
-import org.junit.Assert;
-import sun.java2d.cmm.Profile;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
-
 
 public class BasketDefinitionSteps {
+
     private static String name;
     private static String userFirstName;
     private static String result;
     private int productCount;
     private Random random = new Random();
+    public float cartTotal;
+    public float cartTotalPrice;
+    public OrdersPage ordersPage;
 
     @Steps
     BasketSteps basketSteps;
@@ -38,6 +37,8 @@ public class BasketDefinitionSteps {
 
     @Steps
     ProfileSteps profileSteps;
+
+    BasketPage basketPage;
 
     @Given("^a user is logged in:$")
     public void aUserIsLoggedIn(List<User> user) {
@@ -84,15 +85,18 @@ public class BasketDefinitionSteps {
         basketSteps.assertBeerQuantity(String.valueOf(this.productCount));
     }
 
-   @When("^user is on the \"([^\"]*)\" page$")
-   public void userIsOnTheBasketPage(String targetPage) {
-       switch(targetPage){
-           case "Basket": basketSteps.openBasketPage();
-       }
-   }
+    @When("^user is on the \"([^\"]*)\" page$")
+    public void userIsOnTheBasketPage(String targetPage) {
+        switch (targetPage) {
+            case "Basket":
+                basketSteps.openBasketPage();
+        }
+    }
 
     @And("^user clicks the \"([^\"]*)\" (?:button|icon)")
     public void userClicksTheButton(String buttonName) {
+        cartTotal = basketSteps.calculateCartTotal();
+        cartTotalPrice = ordersPage.getCartTotalPrice();
         basketSteps.clickButton(buttonName);
     }
 

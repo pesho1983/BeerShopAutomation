@@ -19,12 +19,12 @@ public class WalletPage extends PageObject {
         return moneyField;
     }
 
-    public WebElementFacade getDepositButton() {
-        return depositButton;
-    }
-
-    public WebElementFacade getCurrentBalance() {
+    public WebElementFacade getCurrentBalanceElement() {
         return currentBalance;
+    }
+    public WalletPage pressDepositButton() {
+        this.depositButton.click();
+        return this;
     }
 
 }

@@ -1,6 +1,7 @@
 package BeerShop.Utils;
 
 
+import BeerShop.pages.WalletPage;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
@@ -84,6 +85,8 @@ public class Utils {
         return result.substring(0, result.length() - 3);
 
     }
+
+
 }
 
 
