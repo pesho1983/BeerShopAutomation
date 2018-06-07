@@ -3,6 +3,7 @@ package BeerShop.entities;
 public class User {
     private String username;
     private String password;
+    private String newPassword;
     private String confirmPassword;
     private String firstName;
     private String lastName;
@@ -26,6 +27,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 
     public String getConfirmPassword() {

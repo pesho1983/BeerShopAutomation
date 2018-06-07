@@ -1,5 +1,6 @@
 package BeerShop.steps;
 
+import BeerShop.entities.User;
 import BeerShop.pages.AdminPanelPage;
 import BeerShop.pages.AddBeerPage;
 import BeerShop.steps.serenity.AddBeerSteps;
@@ -12,6 +13,7 @@ import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
+import java.util.List;
 import java.util.Map;
 
 public class AddBeerDefinitionSteps {
@@ -20,10 +22,9 @@ public class AddBeerDefinitionSteps {
 
 
     @Given("^you are logged in as administrator with valid data:$")
-    public void youAreLoggedInAsAdministratorWithUsernameAndPassword(Map<String,String> data)  {
+    public void youAreLoggedInAsAdministratorWithUsernameAndPassword(@Transpose List<User> user)  {
        addBeerSteps.goToLoginPage();
-       addBeerSteps.loginAsAdmin(data);
-
+       addBeerSteps.loginAsAdmin(user);
     }
 
     @When("^admin clicks on add beers$")

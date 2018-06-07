@@ -18,7 +18,7 @@ ChangeProfileSteps {
 
     @Step
     public void clickOnChangePasswordButton() {
-        changeProfilePage.getChangePasswordButton().click();
+        changeProfilePage.clickOnChangePasswordButton();
     }
 
     @Step

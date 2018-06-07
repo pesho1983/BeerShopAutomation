@@ -1,15 +1,13 @@
 package BeerShop.steps;
 
+import BeerShop.entities.User;
 import BeerShop.steps.serenity.*;
-import cucumber.api.PendingException;
-import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
-
-import java.util.Map;
+import java.util.List;
 
 public class PasswordChangeDefinitionSteps {
 
@@ -18,31 +16,25 @@ public class PasswordChangeDefinitionSteps {
     @Steps
     LoginSteps loginSteps;
     @Steps
-    ProfileSteps profileSteps;
-    @Steps
-    ChangeProfileSteps changeProfileSteps;
-    @Steps
     PasswordChangeSteps passwordChangeSteps;
+    @Steps
+    BasketSteps basketSteps;
 
 
-    @Given("^I am on Profile page logged in with:$")
-    public void iAmOnProfilePage(@Transpose Map<String, String> data) {
+    @Given("^a user is on Profile page logged in with:$")
+    public void userIsOnProfilePage(List<User> user) {
 
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
-        loginSteps.enterUsernameAndPassword(data);
+        loginSteps.enterUsernameAndPassword(user);
         loginSteps.pressSubmitButton();
         loginSteps.clickOnProfileNavLink();
     }
 
-    @And("^click on change Info button$")
-    public void clickOnChangeInfoButton() {
-        profileSteps.clickOnChangeInfoButton();
-    }
-
-    @And("^click on change Password button$")
-    public void clickOnChangePasswordButton() {
-        changeProfileSteps.clickOnChangePasswordButton();
+    @And("^click on \"([^\"]*)\" and \"([^\"]*)\" buttons$")
+    public void clickOnChangeInfoButton(String changeInfoButton, String changePasswordButton) {
+        basketSteps.clickButton(changeInfoButton);
+        basketSteps.clickButton(changePasswordButton);
     }
 
     @And("^click on Save button$")
@@ -56,23 +48,23 @@ public class PasswordChangeDefinitionSteps {
         passwordChangeSteps.assertSuccessMessageText(message);
     }
 
-    @When("^I enter:$")
-    public void iEnterWrongOldPassword(@Transpose Map<String, String> data) {
-        passwordChangeSteps.enterOldPassNewPassAndConfirmPass(data);
+    @When("^user enter:$")
+    public void userEnterWrongOldPassword(List<User> user) {
+        passwordChangeSteps.enterOldPassNewPassAndConfirmPass(user);
     }
 
-    @When("^I press Back to your profile button$")
-    public void iPressBackToYourProfileButton() {
+    @When("^a user press Back to your profile button$")
+    public void userPressBackToYourProfileButton() {
         passwordChangeSteps.clickOnBackToProfileButton();
     }
 
-    @Then("^I should be redirected to \"([^\"]*)\"$")
-    public void iShouldBeRedirectedToProfilePage(String defaultUrl) {
+    @Then("^a user should be redirected to \"([^\"]*)\"$")
+    public void userShouldBeRedirectedToProfilePage(String defaultUrl) {
         passwordChangeSteps.assertProfilePageURL(defaultUrl);
     }
 
-    @Then("^I should see (.*) (.*) on PaswordChange page$")
-    public void iShouldSeeValidationMessageOnPaswordChangePage(String validation, String defaultMessage) {
-        passwordChangeSteps.assertPasswordFieldValidationMessage(validation, defaultMessage);
+    @Then("^(.*) message should be displayed for (.*) field$")
+    public void validationMessageShoudBeDisplayedForDefinedField(String defaultMessage, String validation) {
+        passwordChangeSteps.assertPasswordFieldValidationMessage(defaultMessage, validation);
     }
 }
