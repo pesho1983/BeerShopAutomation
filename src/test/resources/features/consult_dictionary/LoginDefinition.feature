@@ -21,11 +21,11 @@ Feature: Login Functionality
       | username   | password   |
       | <username> | <password> |
     And click on Sign In button
-    Then I should see <validation> <message> on Login page
+    Then message <message> should be displayed for <fieldName> field
     Examples:
-      | username | password    | validation | message                     |
-      | admi     | parola123A! | errorLogin | Wrong username or password! |
-      | admin2   | ola123!A    | errorLogin | Wrong username or password! |
+      | fieldName     | username | password    | message                     |
+      | wrong data in | admi     | parola123A! | Wrong username or password! |
+      | wrong data in | admin2   | ola123!A    | Wrong username or password! |
 
   Scenario Outline: Check fields validations with empty data
     Given I am on Login page
@@ -33,12 +33,12 @@ Feature: Login Functionality
       | username   | password   |
       | <username> | <password> |
     And click on Sign In button
-    Then I should see <validation> <message> on Login page
+    Then message <message> should be displayed for <fieldName> field
     Examples:
-      | username | password    | validation             | message                 |
-      |          | parola123A! | usernameValidation     | This field is required. |
-      | admin2   |             | passwordValidation     | This field is required. |
-      |          |             | userAndPassValidations | This field is required. |
+      | fieldName      | username | password    | message                 |
+      | empty username |          | parola123A! | This field is required. |
+      | empty password | admin2   |             | This field is required. |
+      | all empty      |          |             | This field is required. |
 
   Scenario Outline: Check remember me functionality
     Given I am on Login page

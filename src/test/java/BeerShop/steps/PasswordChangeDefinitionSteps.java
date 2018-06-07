@@ -23,7 +23,6 @@ public class PasswordChangeDefinitionSteps {
 
     @Given("^a user is on Profile page logged in with:$")
     public void userIsOnProfilePage(List<User> user) {
-
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
         loginSteps.enterUsernameAndPassword(user);

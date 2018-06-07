@@ -5,7 +5,9 @@ import BeerShop.pages.LoginPage;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
+
 import java.util.List;
+
 import static BeerShop.Utils.Utils.WEBSITE_URL;
 
 @DefaultUrl(WEBSITE_URL + "login.php")
@@ -19,7 +21,7 @@ public class LoginSteps {
 
     @Step
     public String getErrorTextMsg() {
-        return loginPage.getWrongUserOrPassBox().getText();
+        return loginPage.errorMsgForWrongUserOrPass();
     }
 
     @Step
@@ -29,7 +31,7 @@ public class LoginSteps {
 
     @Step
     public void pressSubmitButton() {
-        loginPage.getSubmitButton().click();
+        loginPage.pressSubmitButton();
     }
 
     @Step
@@ -39,7 +41,7 @@ public class LoginSteps {
 
     @Step
     public void clickOnProfileNavLink() {
-        loginPage.getProfileNavLink().click();
+        loginPage.clickOnProfileNavLink();
     }
 
     @Step
@@ -64,37 +66,22 @@ public class LoginSteps {
 
     @Step
     public void clickOnWalletLink() {
-        loginPage.getWalletLink().click();
+        loginPage.clickOnWalletLink();
     }
 
     @Step
     public void assertValidationMessage(String validation, String defaulMessage) {
-        switch (validation) {
-            case "errorLogin":
-                Assert.assertEquals(defaulMessage, loginPage.getWrongUsernameOrPasswordMessage().getText());
-                break;
-            case "usernameValidation":
-                Assert.assertEquals(defaulMessage, loginPage.getUsernameValidationMessage().getText());
-                break;
-            case "passwordValidation":
-                Assert.assertEquals(defaulMessage, loginPage.getPasswordValidationMessage().getText());
-                break;
-            case "userAndPassValidations":
-                Assert.assertEquals(defaulMessage, loginPage.getUsernameValidationMessage().getText());
-                Assert.assertEquals(defaulMessage, loginPage.getPasswordValidationMessage().getText());
-                break;
-        }
-
+        loginPage.assertValidationMessage(validation, defaulMessage);
     }
 
     @Step
     public void checkRememberMeCheckbox() {
-        loginPage.getRememberMeCheckBox().click();
+        loginPage.checkRememberMeCheckbox();
     }
 
     @Step
     public void assertLoggedInWithSameUser(String username) {
-        Assert.assertEquals(username, loginPage.getProfileUsermame().getText());
+        Assert.assertEquals(username, loginPage.getProfileUsermame());
 
     }
 }
