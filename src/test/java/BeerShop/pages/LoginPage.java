@@ -134,29 +134,4 @@ public class LoginPage extends PageObject {
                 throw new PendingException("The method for " + validation + " is not implemented yet.");
         }
     }
-
-
-    //label[for=''].help-block
-
-
-//    public void assertValidationMessageForField(String validation, String defaulMessage) {
-//        String validationCss = "label[for='" + validation + "']";
-//
-//        switch (validationCss) {
-//            case "empty username":
-//                Assert.assertEquals(defaulMessage, getUsernameValidationMessage());
-//                break;
-//            case "empty password":
-//                Assert.assertEquals(defaulMessage, getPasswordValidationMessage());
-//                break;
-//            case "all empty":
-//                Assert.assertEquals(defaulMessage, getUsernameValidationMessage());
-//                Assert.assertEquals(defaulMessage, getPasswordValidationMessage());
-//                break;
-//            default:
-//                throw new PendingException("The method for " + validation + " is not implemented yet.");
-//        }
-//        find......(By.cssSelector(validationCss));
-//        Assert.assertEquals();
-//    }
 }
