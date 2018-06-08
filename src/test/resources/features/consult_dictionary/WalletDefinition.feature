@@ -1,7 +1,7 @@
 Feature: Wallet functionality
 
   User could add money in the wallet
-  in order to buy beers when substract money from wallet amount
+  in order to buy beers when subtract money from wallet amount
 
   Background:
     Given a user is logged in with valid credentials:
@@ -23,6 +23,7 @@ Feature: Wallet functionality
     Examples:
       | value        | funds                            |
       | 100000000.00 | Current balance: BGN 99999999.99 |
+
 
   Scenario Outline: Check minimal possible current balance
     When the user is on the wallet page and check his current balance
@@ -58,16 +59,17 @@ Feature: Wallet functionality
     Then current amount in wallet is less with total order price
 
 
-#  Scenario: Buying beer whith not enough funds in wallet
-#    Given the user is logged in with valid credentials:
-#      | username | BatAndro |
-#      | password | Asdf123! |
-#    And there is not enough money in wallet
-#    And the user is on order prevew page
-#    When click on button place order:
-#    Then order hasn't been placed
-#    And there is warning message
-#
+  Scenario Outline: Buying beer with not enough funds in wallet
+    When user is on wallet page with zero "<addCash>" funds:
+    And the user is on order preview page:
+      | product | 5 |
+    And user press "Checkout" and "Place order" buttons to confirm order
+    Then order has not been placed and error message "<message>" should appears
+    Examples:
+      | addCash    | message                                                         |
+      | -100000000 | You don't have enough funds in your account to make this order! |
+
+
 
 
 

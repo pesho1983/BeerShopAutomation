@@ -19,17 +19,9 @@ Feature: Completed orders Feature
     Then the user should be redirected to completed orders page - "http://192.168.10.158/BeerShop/oldOrders.php"
 
 
-#  Scenario: The admin user can see completed order of beer
-#    Given the user should be logged as admin:
-#      |username| admin|
-#      |password| parola123A!|
-#    And add one beer
-#      |name| testbeer2358|
-#      |description| Special beer with sweet and hard taste|
-#      |price| 2.50|
-#      |quantity| 20|
-#      |picture| C:\Users\stzvetkachki\Desktop\testBeerPics\mithos_beer_test.jpg|
-#    And logged out
-#
-#    When click on completed orders button
-#    And
+  Scenario: The admin user should see completed order of beer
+    Given the user should be logged as admin:
+      |username| admin|
+      |password| parola123A!|
+    When the adminUser should navigate to completed orders page
+    Then the adminUser should see order number "175" in the list of completed orders

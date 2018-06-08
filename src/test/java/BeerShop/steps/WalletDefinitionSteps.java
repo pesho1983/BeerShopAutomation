@@ -1,5 +1,6 @@
 package BeerShop.steps;
 
+import BeerShop.Utils.constants.BasketConstants;
 import BeerShop.pages.BasketPage;
 import BeerShop.steps.serenity.*;
 import cucumber.api.PendingException;
@@ -18,6 +19,7 @@ public class WalletDefinitionSteps {
     public float totalPriceFromBasket;
     private String currentMoney;
     private float depositMoney;
+    public String message;
 
     @Steps
     IndexSteps indexSteps;
@@ -43,16 +45,17 @@ public class WalletDefinitionSteps {
         loginSteps.pressSubmitButton();
     }
 
-//    @And("^the user is on wallet page with zero funds:$")
-//    public void theUserIsOnWalletPageWithZeroFunds(Float data) {
-//        loginSteps.clickOnWalletLink();
-//        walletSteps.addMoney(data);
-//        walletSteps.pressDepositButton();
-//    }
+    @When("^(?:user|the user) is on wallet page with zero \"([^\"]*)\" funds:$")
+    public void theUserIsOnWalletPage(Float data){
+        loginSteps.clickOnWalletLink();
+        walletSteps.addMoney(data);
+        walletSteps.pressDepositButton();
+    }
 
-    @Then("^the funds are added to user's personal account:$")
-    public void theFundsAreAddedToUsersPersonalAccount(String data) {
-        walletSteps.assertCurrentBalance(data);
+    @When("^adding additional funds to the personal account:$")
+    public void addingAdditionalFundsToThePersonalAccount(Float data) {
+        walletSteps.addMoney(data);
+        walletSteps.pressDepositButton();
     }
 
     @Given("^the user is on wallet page$")
@@ -108,7 +111,7 @@ public class WalletDefinitionSteps {
     }
 
     @Then("^\"([^\"]*)\" funds are added to the account$")
-    public void fundsAreAddedToTheAccount(float value) {
+    public void fundsAreAddedToTheAccount(Float value) {
         walletSteps.assertBalanceIsChanged(value, currentMoney);
     }
 
@@ -123,5 +126,15 @@ public class WalletDefinitionSteps {
     public void userPressAndButtonsToConfirmOrder(String checkout, String placeOrder)  {
         basketSteps.clickButton(checkout);
         basketSteps.clickButton(placeOrder);
+    }
+
+    @Then("^order has not been placed$")
+    public void orderHasNotBeenPlaced(String message)  {
+        basketSteps.assertMessageEquals(message);
+    }
+
+    @Then("^order has not been placed and error message \"([^\"]*)\" should appears$")
+    public void orderHasNotBeenPlacedAndErrorMessageShouldAppears(String message) {
+        basketSteps.assertMessageEquals(message);
     }
 }
