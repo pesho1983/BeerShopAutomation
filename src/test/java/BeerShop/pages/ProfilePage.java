@@ -21,8 +21,9 @@ public class ProfilePage extends PageObject {
         return Utils.replaceWordWithWhitespace(this.firstName.getText(), "First name: ");
     }
 
-    public WebElementFacade getChangeInfoButton() {
-        return changeInfoButton;
+    public ProfilePage clickOnChangeInfoButton() {
+        Utils.javascriptWindowScroll(500);
+        this.changeInfoButton.click();
+        return this;
     }
-
 }

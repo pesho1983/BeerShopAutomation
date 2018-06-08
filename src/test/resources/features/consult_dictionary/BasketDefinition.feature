@@ -39,10 +39,10 @@ Feature: basket functionality
     Examples:
     |multiple|
     |2       |
-    |3       |
+    |4       |
     |6       |
     |8       |
-    |12      |
+    |11      |
 
   Scenario: Back to catalog from basket
     Given user had added product in his basket

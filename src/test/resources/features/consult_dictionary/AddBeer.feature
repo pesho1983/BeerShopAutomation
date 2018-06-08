@@ -36,3 +36,9 @@ Feature: Add new beer
     Examples:
       | name | description                                      | price | quantity | message                                                              |
       | ACDC | Тъмно-рубинена на цвят бира, съдържаща 2,5% мед. | 2.5     | 600      | There is a beer with that name in the database. Name must be unique. |
+
+
+    Scenario: If button "Back to read products" works
+      When admin clicks on add beers
+      When user click button Back to read products
+      Then page with title "All Beers" is loaded

@@ -1,5 +1,6 @@
 package BeerShop.steps;
 
+import BeerShop.entities.User;
 import BeerShop.pages.AdminPanelPage;
 import BeerShop.pages.AddBeerPage;
 import BeerShop.steps.serenity.AddBeerSteps;
@@ -12,6 +13,7 @@ import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
+import java.util.List;
 import java.util.Map;
 
 public class AddBeerDefinitionSteps {
@@ -20,10 +22,9 @@ public class AddBeerDefinitionSteps {
 
 
     @Given("^you are logged in as administrator with valid data:$")
-    public void youAreLoggedInAsAdministratorWithUsernameAndPassword(Map<String,String> data)  {
+    public void youAreLoggedInAsAdministratorWithUsernameAndPassword(@Transpose List<User> user)  {
        addBeerSteps.goToLoginPage();
-       addBeerSteps.loginAsAdmin(data);
-
+       addBeerSteps.loginAsAdmin(user);
     }
 
     @When("^admin clicks on add beers$")
@@ -61,5 +62,16 @@ public class AddBeerDefinitionSteps {
     @When("^user add credentials but existing name:$")
     public void userAddCredentialsButExistingName(@Transpose Map<String,String> data)  {
        addBeerSteps.fillCredentialsExistingName(data);
+    }
+
+    @When("^user click button Back to read products$")
+    public void userClickButtonBackToReadProducts() {
+        addBeerSteps.clickOnBackToRead();
+    }
+
+    @Then("^page with title \"([^\"]*)\" is loaded$")
+    public void pageWithTitleIsLoaded(String title)  {
+        addBeerSteps.assertTitleAllBeer(title);
+
     }
 }

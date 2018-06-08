@@ -5,7 +5,9 @@ Feature: Login Functionality
 
   Scenario Outline: Login with valid data
     Given I am on Login page
-    When I enter <username> and <password>
+    When I enter username and password
+      | username   | password   |
+      | <username> | <password> |
     And click on Sign In button
     Then I should be logged in and redirected to "http://192.168.10.158/BeerShop/catalog.php#"
     Examples:
@@ -15,7 +17,9 @@ Feature: Login Functionality
 
   Scenario Outline: Login with invalid data
     Given I am on Login page
-    When I enter <username> and <password>
+    When I enter username and password
+      | username   | password   |
+      | <username> | <password> |
     And click on Sign In button
     Then I should see <validation> <message> on Login page
     Examples:
@@ -25,7 +29,9 @@ Feature: Login Functionality
 
   Scenario Outline: Check fields validations with empty data
     Given I am on Login page
-    When I enter <username> and <password>
+    When I enter username and password
+      | username   | password   |
+      | <username> | <password> |
     And click on Sign In button
     Then I should see <validation> <message> on Login page
     Examples:
@@ -36,7 +42,9 @@ Feature: Login Functionality
 
   Scenario Outline: Check remember me functionality
     Given I am on Login page
-    When I enter <username> and <password>
+    When I enter username and password
+      | username   | password   |
+      | <username> | <password> |
     And click on Remember me checkbox an press Sign In button
     And I open new browser session
     Then I should be logged in site with same <username>

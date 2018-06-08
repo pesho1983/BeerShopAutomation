@@ -1,10 +1,12 @@
 package BeerShop.steps;
 
+import BeerShop.entities.User;
 import BeerShop.pages.WalletPage;
 import BeerShop.steps.serenity.IndexSteps;
 import BeerShop.steps.serenity.LoginSteps;
 import BeerShop.steps.serenity.WalletSteps;
 import cucumber.api.PendingException;
+import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,6 +14,7 @@ import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
+import java.util.List;
 import java.util.Map;
 
 public class WalletDefinitionSteps {
@@ -27,10 +30,10 @@ public class WalletDefinitionSteps {
 
 
     @Given("^the user is logged in with valid credentials:$")
-    public void theUserIsLoggedInWithValidCredentials(Map<String, String> data){
+    public void theUserIsLoggedInWithValidCredentials(@Transpose List<User> user){
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
-        loginSteps.enterUsernameAndPassword(data);
+        loginSteps.enterUsernameAndPassword(user);
         loginSteps.pressSubmitButton();
     }
 
