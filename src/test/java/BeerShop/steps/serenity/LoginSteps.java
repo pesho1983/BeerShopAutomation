@@ -27,6 +27,8 @@ public class LoginSteps {
     @Step
     public void enterUsernameAndPassword(List<User> user) {
         loginPage.enterUsernameAndPassword(user);
+//        loginPage.enterUsername(user);
+//        loginPage.enterPassword(user);
     }
 
     @Step
@@ -36,7 +38,7 @@ public class LoginSteps {
 
     @Step
     public void assertUserIsOnCatalogPage(String defaultUrl) {
-        Assert.assertEquals(defaultUrl, loginPage.getDriver().getCurrentUrl());
+        Assert.assertEquals(defaultUrl, loginPage.getCurrentURL());
     }
 
     @Step

@@ -1,6 +1,5 @@
 package BeerShop.pages;
 
-
 import BeerShop.Utils.Randomizer;
 import BeerShop.entities.User;
 import net.serenitybdd.core.annotations.findby.FindBy;

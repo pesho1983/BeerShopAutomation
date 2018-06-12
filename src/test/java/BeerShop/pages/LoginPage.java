@@ -1,6 +1,5 @@
 package BeerShop.pages;
 
-
 import BeerShop.entities.User;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -61,6 +60,16 @@ public class LoginPage extends PageObject {
         this.password.type(user.get(0).getPassword());
     }
 
+//    public LoginPage enterUsername(List<User> user) {
+//        this.username.type(user.get(0).getUsername());
+//        return this;
+//    }
+//
+//    public LoginPage enterPassword(List<User> user) {
+//        this.username.type(user.get(0).getPassword());
+//        return this;
+//    }
+
     public WebElementFacade getNote() {
         return note;
     }
@@ -98,7 +107,6 @@ public class LoginPage extends PageObject {
 
     public String getPasswordValidationMessage() {
         return this.passwordValidationMessage.getText();
-
     }
 
     public LoginPage checkRememberMeCheckbox() {
@@ -109,6 +117,10 @@ public class LoginPage extends PageObject {
     public LoginPage clickOnWalletLink() {
         this.walletLink.click();
         return this;
+    }
+
+    public String getCurrentURL(){
+        return this.getDriver().getCurrentUrl();
     }
 
     public String getProfileUsermame() {
@@ -134,4 +146,5 @@ public class LoginPage extends PageObject {
                 throw new PendingException("The method for " + validation + " is not implemented yet.");
         }
     }
+
 }

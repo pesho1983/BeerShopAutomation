@@ -8,7 +8,8 @@ import org.junit.runner.RunWith;
 @RunWith(CucumberWithSerenity.class)
 
 
-@CucumberOptions(features = "src/test/resources/features/consult_dictionary/RegisterDefinition.feature",
+@CucumberOptions(features = "src/test/resources/features/consult_dictionary/CatalogDefinition.feature",
+  //      tags = "@tt",
         snippets = SnippetType.CAMELCASE)
 public class MyDefinitionTestSuite {
 }
