@@ -1,20 +1,21 @@
 package BeerShop.steps;
 
 
+import BeerShop.Utils.Utils;
+import BeerShop.entities.User;
 import BeerShop.pages.ChangeProfilePage;
 import BeerShop.pages.LoginPage;
 import BeerShop.pages.ProfilePage;
 import BeerShop.steps.serenity.*;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.api.Transpose;
-import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
-import org.junit.Assert;
 
+
+import java.util.List;
 import java.util.Map;
 
 public class ChangeProfileDetailsDefinitionSteps {
@@ -36,19 +37,19 @@ public class ChangeProfileDetailsDefinitionSteps {
     LoginPage loginPage;
 
     @Given("^I am logged in$")
-    public void iAmOnProfilePage(Map<String, String> data) {
+    public void iAmOnProfilePage(@Transpose List<User> user) {
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
-        loginSteps.enterUsernameAndPassword(data);
+        loginSteps.enterUsernameAndPassword(user);
         loginSteps.pressSubmitButton();
         loginSteps.clickOnProfileNavLink();
     }
 
-    @Given("^I am logged in with (.*) and (.*)$")
-    public void iAmLoggedInWithUsernameAndPassword(String username, String password) throws Throwable {
+    @Given("^I am logged in with$")
+    public void iAmLoggedInWithUsernameAndPassword(List<User> user) {
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
-        loginSteps.enterUsernameAndPassword(username, password);
+        loginSteps.enterUsernameAndPassword(user);
         loginSteps.pressSubmitButton();
         loginSteps.clickOnProfileNavLink();
     }
@@ -81,16 +82,17 @@ public class ChangeProfileDetailsDefinitionSteps {
 
     @And("^My (.*) is displayed$")
     public void usernameIsDisplayed(String username) throws Throwable {
-      changeProfileSteps.verifyUsernameIsDisplayed(username);
+        changeProfileSteps.verifyUsernameIsDisplayed(username);
     }
 
     @When("^I change the (.*) about me$")
     public void iChangeTheInfoAboutMe(String info) throws Throwable {
-       changeProfileSteps.changeInfoAboutMe(info);
+        changeProfileSteps.changeInfoAboutMe(info);
     }
 
     @And("^I click on Save info$")
     public void theInfoIsSaved() throws Throwable {
+        Utils.javascriptWindowScroll(500);
         changeProfileSteps.clickOnSaveButton();
     }
 
@@ -107,6 +109,29 @@ public class ChangeProfileDetailsDefinitionSteps {
     @Then("^The (.*) about me is updated$")
     public void infoAboutMeIsUpdated(String info) throws Throwable {
         changeProfileSteps.verifyInfoAboutMeIsAdded(info);
+    }
+
+    @When("^I select a new picture$")
+    public void iSelectANewPicture() throws Throwable {
+        changeProfileSteps.clickOnChooseAFileButton();
+        changeProfileSteps.generateRandomImage();
+        changeProfileSteps.clickOnUploadImage();
+    }
+
+    @Then("^My profile picture is changed$")
+    public void myProfilePictureIsChanged() throws Throwable {
+        changeProfileSteps.verifyIfPictureIsChanged();
+    }
+
+    @When("^I click on upload file, without choosing a file$")
+    public void iClickOnUploadFileWithoutChoosingAFile() throws Throwable {
+      changeProfileSteps.clickOnUploadImage();
+
+    }
+
+    @Then("^(.*) for missing picture is displayed$")
+    public void errormessageForMissingPictureIsDisplayed(String errorMessage) throws Throwable {
+        changeProfileSteps.verifyErrorMessageForUploadImageIsDisplayed(errorMessage);
     }
 }
 

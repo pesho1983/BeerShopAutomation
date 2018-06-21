@@ -14,15 +14,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import java.util.Random;
+import java.util.*;
 
-import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 
 public class BasketSteps {
-
+    private String productName;
+    private List<String> listOfSoldBeers = new ArrayList<>();
     BasketPage basketPage;
     CatalogPage catalogPage;
     ProfilePage profilePage;
+    IndexPage indexPage;
+    PasswordChangePage passwordChangePage;
+    ChangeProfilePage changeProfilePage;
 
     @Step
     public void openBasketPage() {
@@ -69,6 +72,18 @@ public class BasketSteps {
             case BasketConstants.REMOVE_BUTTON:
                 basketPage.clickRemoveProduct();
                 break;
+            case PasswordChangeConstants.BACK_TO_YOUR_PROFILE_BUTTON:
+                passwordChangePage.clickOnBackToProfileButton();
+                break;
+            case PasswordChangeConstants.PASSWORD_CHANGE_SAVE_BUTTON:
+                passwordChangePage.clickOnSaveButton();
+                break;
+            case ProfileConstants.CHANGE_INFO_BUTTON:
+                profilePage.clickOnChangeInfoButton();
+                break;
+            case PasswordChangeConstants.CHANGE_PASSWORD_BUTTON:
+                changeProfilePage.clickOnChangePasswordButton();
+                break;
             default:
                 break;
         }
@@ -87,9 +102,9 @@ public class BasketSteps {
     }
 
     @Step
-    public int getAllProductsQuantity(){
+    public int getAllProductsQuantity() {
         int totalQuantity = 0;
-        for (WebElementFacade element: basketPage.findAll(By.xpath("//input[@class='form-control text-center']"))) {
+        for (WebElementFacade element : basketPage.findAll(By.xpath("//input[@class='form-control text-center']"))) {
             totalQuantity += Integer.parseInt(element.getValue());
         }
         return totalQuantity;
@@ -158,12 +173,12 @@ public class BasketSteps {
     }
 
     @Step
-    public void assertBeerQuantity(String quantity){
+    public void assertBeerQuantity(String quantity) {
         Assert.assertEquals(Integer.parseInt(quantity), getAllProductsQuantity());
     }
 
     @Step
-    public void assertBeerPrice(String result){
+    public void assertBeerPrice(String result) {
         float subtotal = Float.parseFloat(result) * Float.parseFloat(basketPage.getPrice());
         float actualSubtotal = Float.parseFloat(Utils.removeSuffixFromPrice(basketPage.getSubtotal()));
         Assert.assertEquals(subtotal, actualSubtotal, 0.01);
@@ -178,6 +193,7 @@ public class BasketSteps {
     public void assertTitle(String title) {
         Assert.assertEquals(title, getTitle());
     }
+
     @Step
     public void assertShippingDetails(String shippingDetails) {
         Assert.assertEquals(shippingDetails, getShippingDetails(ShippingDetails.TITLE));
@@ -188,6 +204,7 @@ public class BasketSteps {
         profilePage.open();
         Assert.assertEquals(profilePage.getFirstName(), userFirstName);
     }
+
     @Step
     public void addMultipleProducts(int productCount, Random random) {
         for (int i = 0; i < productCount; i++) {
@@ -195,5 +212,22 @@ public class BasketSteps {
             clickButton(BasketConstants.CONTINUE_SHOPPING_BUTTON);
         }
         basketPage.open();
+    }
+
+    @Step
+    public String getProductName() {
+        productName = basketPage.getProductName().getText();
+        listOfSoldBeers.add(productName);
+        return productName;
+    }
+
+//    @Step
+//    public void assertNameOfLastSoldBeer() {
+//        Assert.assertEquals(productName, indexPage.getLastSoldBeer().getText());
+//    }
+
+    @Step
+    public void assertIfLastSoldBeerIsOnIndexPage(int numberOfPurchasedBeers) {
+        Assert.assertTrue(indexPage.getLastThreeSoldBeers(listOfSoldBeers, numberOfPurchasedBeers));
     }
 }

@@ -1,5 +1,6 @@
 package BeerShop.steps.serenity;
 
+import BeerShop.entities.User;
 import BeerShop.pages.AdminPanelPage;
 import BeerShop.pages.AddBeerPage;
 import BeerShop.pages.LoginPage;
@@ -7,6 +8,7 @@ import cucumber.api.Transpose;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
 
+import java.util.List;
 import java.util.Map;
 import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 
@@ -23,9 +25,9 @@ public class AddBeerSteps {
     }
 
     @Step
-    public void loginAsAdmin(Map<String,String> data){
-        loginPage.getUsername().type(data.get("username"));
-        loginPage.getPassword().type(data.get("password"));
+    public void loginAsAdmin(List<User> user){
+        loginPage.getUsername().type(user.get(0).getUsername());
+        loginPage.getPassword().type(user.get(0).getPassword());
         loginPage.getSignIn().click();
     }
 

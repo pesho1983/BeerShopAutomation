@@ -1,27 +1,24 @@
 package BeerShop.steps.serenity;
 
+import BeerShop.Utils.Utils;
 import BeerShop.pages.ChangeProfilePage;
 import BeerShop.pages.LoginPage;
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
-
 import java.util.Map;
+
 
 public class
 ChangeProfileSteps {
 
     ChangeProfilePage changeProfilePage;
     LoginPage loginPage;
+    String selectedImage;
+
 
     @Step
     public void clickOnChangePasswordButton() {
-        changeProfilePage.getChangePasswordButton().click();
-    }
-
-    @Step
-    public String getHeaderText() {
-        return changeProfilePage.getHeader().getText();
+        changeProfilePage.clickOnChangePasswordButton();
     }
 
     @Step
@@ -85,14 +82,47 @@ ChangeProfileSteps {
         changeProfilePage.getPhone().type(data.get("phone"));
         changeProfilePage.getAge().type(data.get("age"));
     }
+
     @Step
-    public void  verifyCorrectErrorMessageIsDisplayed(String errorMessage){
+    public void verifyCorrectErrorMessageIsDisplayed(String errorMessage) {
         Assert.assertEquals(errorMessage, changeProfilePage.getErrorMessageLabel().getText());
     }
 
     @Step
-    public void verifyUsernameIsDisplayed(String username){
+    public void verifyUsernameIsDisplayed(String username) {
         Assert.assertEquals(username, loginPage.getProfileNavLink().getText());
+    }
+
+    @Step
+    public void clickOnChooseAFileButton() {
+        changeProfilePage.getChooseFile().click();
+    }
+
+    @Step
+    public void uploadImg(String imgLocation) {
+        changeProfilePage.getDriver().switchTo().activeElement().sendKeys(imgLocation);
+    }
+
+    @Step
+    public void generateRandomImage() {
+        selectedImage = Utils.getRandomImageFromFolder();
+        uploadImg(selectedImage);
+    }
+
+    @Step
+    public void clickOnUploadImage() {
+        changeProfilePage.getSubmitButton().click();
+    }
+
+    @Step
+    public void verifyIfPictureIsChanged() {
+        String uploadedImage = changeProfilePage.getPictureName().getAttribute("src");
+        Assert.assertEquals(selectedImage.substring(selectedImage.length() - 37), uploadedImage.substring(uploadedImage.length() - 37));
+    }
+
+    @Step
+    public void verifyErrorMessageForUploadImageIsDisplayed(String errorMessage){
+        Assert.assertEquals(errorMessage, changeProfilePage.getErrorMessageImage());
     }
 }
 

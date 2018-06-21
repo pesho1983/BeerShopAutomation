@@ -1,13 +1,12 @@
 package BeerShop.pages;
 
 
+import BeerShop.entities.User;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.WebElementFacade;
-
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.thucydides.core.pages.PageObject;
-
-
+import java.util.List;
 
 import static BeerShop.Utils.Utils.WEBSITE_URL;
 
@@ -61,6 +60,11 @@ public class LoginPage extends PageObject {
 
     public WebElementFacade getPassword() {
         return password;
+    }
+
+    public void enterUsernameAndPassword(List<User> user) {
+        this.getUsername().type(user.get(0).getUsername());
+        this.getPassword().type(user.get(0).getPassword());
     }
 
     public WebElementFacade getNote() {
