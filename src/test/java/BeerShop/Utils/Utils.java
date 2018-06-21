@@ -19,17 +19,31 @@ public class Utils {
 
     public final static String WEBSITE_URL = "http://192.168.10.158/BeerShop/";
 
-    private static String homePath = imagesRelativePath();
 
-    public static String imagesRelativePath() {
+    private static String homePathBeer = imagesRelativePathBeer();
+    private static String homePathSameBeer = imagesRelativePathSameBeer();
+
+
+    public static String imagesRelativePathBeer() {
         StringBuilder sb = new StringBuilder();
         sb.append(System.getProperty("user.dir"))
-                .append("/src/test/java/BeerShop/Utils/images/");
-        String homePath = sb.toString();
-        homePath = homePath.replace('\\', '/');
+                .append("/src/test/java/BeerShop/Utils/imagesBeer/");
+        String homePathBeer = sb.toString();
+        homePathBeer = homePathBeer.replace('\\', '/');
 
-        return homePath;
+        return homePathBeer;
     }
+
+    public static String imagesRelativePathSameBeer() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(System.getProperty("user.dir"))
+                .append("/src/test/java/BeerShop/Utils/imageSameBeer/");
+        String homePathSameBeer = sb.toString();
+        homePathSameBeer = homePathSameBeer.replace('\\', '/');
+
+        return homePathSameBeer;
+    }
+
 
     public static String productIndividualXpath(WebElementFacade target, String replace) {
         String targetProduct = target.getWrappedElement().toString();
@@ -37,23 +51,24 @@ public class Utils {
         return targetProduct.replace(toRemove, "").replace(replace, "");
     }
 
-    public static String generateRandomImagePath() {
+    public static String generateRandomImagePathBeer() {
         StringBuilder sb = new StringBuilder();
         SecureRandom rand = new SecureRandom();
-        sb.append(imagesRelativePath())
+        sb.append(imagesRelativePathBeer())
                 .append(rand.nextInt(100000) + 100)
                 .append(System.currentTimeMillis())
                 .append(System.nanoTime())
-                .append(".png");
+                .append(".png")
+                .append(".jpg");
 
         return sb.toString();
     }
 
     public static void renameAllFiles() {
-        File fileDirs = new File(homePath);
+        File fileDirs = new File(homePathBeer);
         for (File image : fileDirs.listFiles()) {
             if (image.isFile()) {
-                String newName = generateRandomImagePath();
+                String newName = generateRandomImagePathBeer();
                 if (image.renameTo(new File(newName))) {
                 }
             }
@@ -62,12 +77,34 @@ public class Utils {
 
     public static String getRandomImageFromFolder() {
         renameAllFiles();
-        File fileDir = new File(homePath);
+        File fileDir = new File(homePathBeer);
+        File[] images = fileDir.listFiles();
+        Random random = new Random();
+        String selectedImage = images[random.nextInt(images.length
+
+
+                - 1) + 1].toString();
+        return selectedImage;
+    }
+
+    public static String getRandomImageFromFolderBeer() {
+        renameAllFiles();
+        File fileDir = new File(homePathBeer);
         File[] images = fileDir.listFiles();
         Random random = new Random();
         String selectedImage = images[random.nextInt(images.length - 1) + 1].toString();
         return selectedImage;
     }
+
+    public static String getRandomImageFromFolderSameBeer() {
+        renameAllFiles();
+        File fileDir = new File(homePathSameBeer);
+        File[] images = fileDir.listFiles();
+        Random random = new Random();
+        String selectedImage = images[random.nextInt(images.length - 1) + 1].toString();
+        return selectedImage;
+    }
+
 
     public static String replaceWordWithWhitespace(String text, String toReplace) {
         return text.replace(toReplace, "");
@@ -103,7 +140,7 @@ public class Utils {
         File[] filesInDir = dir.listFiles();
         ArrayList listOfPicturesNames = new ArrayList();
         int i = 0;
-        for(File file:filesInDir) {
+        for (File file : filesInDir) {
             i++;
             String name = file.getName();
             double random = Math.random() * 4.9 + 1;

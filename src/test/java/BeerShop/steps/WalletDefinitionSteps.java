@@ -12,6 +12,7 @@ import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -41,7 +42,7 @@ public class WalletDefinitionSteps {
     public void aUserIsLoggedInWithValidCredentials(Map<String, String> data) {
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
-        loginSteps.enterUsernameAndPassword(data);
+        loginSteps.enterUsernameAndPassword(user);
         loginSteps.pressSubmitButton();
     }
 

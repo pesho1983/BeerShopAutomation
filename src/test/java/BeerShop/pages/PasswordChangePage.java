@@ -70,8 +70,9 @@ public class PasswordChangePage extends PageObject {
         return confirmPassword;
     }
 
-    public WebElementFacade getSaveButton() {
-        return saveButton;
+    public PasswordChangePage clickOnSaveButton() {
+        this.saveButton.click();
+        return this;
     }
 
     public WebElementFacade getSuccessMessage() {
@@ -90,8 +91,9 @@ public class PasswordChangePage extends PageObject {
         return matchPasswordMessage;
     }
 
-    public WebElementFacade getBackToProfileButton() {
-        return backToProfileButton;
+    public PasswordChangePage clickOnBackToProfileButton() {
+        this.backToProfileButton.click();
+        return this;
     }
 
 }

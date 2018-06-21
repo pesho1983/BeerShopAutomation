@@ -8,8 +8,6 @@ import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 import static BeerShop.Utils.Utils.WEBSITE_URL;
 
-
-
 @DefaultUrl(WEBSITE_URL + "viewCart.php")
 public class BasketPage extends PageObject {
     @FindBy(xpath = "//tbody/tr[1]/td[2]")
@@ -123,4 +121,5 @@ public class BasketPage extends PageObject {
     public String getErrorOrderMsgBox() {
         return errorMessageBox.getText();
     }
+
 }
