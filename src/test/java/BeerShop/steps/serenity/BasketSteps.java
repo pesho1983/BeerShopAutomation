@@ -3,15 +3,16 @@ package BeerShop.steps.serenity;
 import BeerShop.Utils.ShippingDetails;
 import BeerShop.Utils.Utils;
 import BeerShop.Utils.constants.BasketConstants;
-import BeerShop.Utils.constants.PasswordChangeConstants;
-import BeerShop.Utils.constants.ProfileConstants;
-import BeerShop.pages.*;
+import BeerShop.Utils.constants.UserProfileConstants;
+import BeerShop.pages.BasketPage;
+import BeerShop.pages.CatalogPage;
+import BeerShop.pages.ProfilePage;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-
+import org.openqa.selenium.WebElement;
 
 import java.util.*;
 

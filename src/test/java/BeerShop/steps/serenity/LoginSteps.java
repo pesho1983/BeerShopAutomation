@@ -24,7 +24,14 @@ public class LoginSteps {
 
     @Step
     public void enterUsernameAndPassword(List<User> user) {
-        loginPage.enterUsernameAndPassword(user);
+        loginPage.getUsername().type(user.get(0).getUsername());
+        loginPage.getPassword().type(user.get(0).getPassword());
+    }
+
+    @Step
+    public void enterUsernameAndPassword(String username, String password){
+        loginPage.getUsername().type(username);
+        loginPage.getPassword().type(password);
     }
 
     @Step

@@ -21,9 +21,8 @@ public class PasswordChangeDefinitionSteps {
     BasketSteps basketSteps;
 
 
-    @Given("^a user is on Profile page logged in with:$")
-    public void userIsOnProfilePage(List<User> user) {
-
+    @Given("^I am on Profile page logged in with:$")
+    public void iAmOnProfilePage(@Transpose Map<String, String> data) {
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
         loginSteps.enterUsernameAndPassword(user);

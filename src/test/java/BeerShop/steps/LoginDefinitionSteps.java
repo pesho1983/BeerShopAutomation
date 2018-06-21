@@ -63,5 +63,4 @@ public class LoginDefinitionSteps {
         loginSteps.checkRememberMeCheckbox();
         loginSteps.pressSubmitButton();
     }
-
 }
