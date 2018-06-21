@@ -1,6 +1,7 @@
 package BeerShop.steps;
 
 import BeerShop.Utils.constants.BasketConstants;
+import BeerShop.entities.User;
 import BeerShop.pages.BasketPage;
 import BeerShop.steps.serenity.*;
 import cucumber.api.PendingException;
@@ -39,7 +40,7 @@ public class WalletDefinitionSteps {
 
 
     @Given("^a user is logged in with valid credentials:$")
-    public void aUserIsLoggedInWithValidCredentials(Map<String, String> data) {
+    public void aUserIsLoggedInWithValidCredentials(@Transpose List<User> user) {
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
         loginSteps.enterUsernameAndPassword(user);

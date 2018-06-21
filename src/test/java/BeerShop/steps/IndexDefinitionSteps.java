@@ -2,6 +2,8 @@ package BeerShop.steps;
 
 import BeerShop.entities.User;
 import BeerShop.steps.serenity.IndexSteps;
+import BeerShop.steps.serenity.LoginSteps;
+import BeerShop.steps.serenity.WalletSteps;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -13,6 +15,10 @@ import java.util.Map;
 public class IndexDefinitionSteps {
     @Steps
     IndexSteps indexSteps;
+    @Steps
+    LoginSteps loginSteps;
+    @Steps
+    WalletSteps walletSteps;
 
 
     @Given("^user is on Catalog page logged in with$")

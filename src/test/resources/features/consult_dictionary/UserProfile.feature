@@ -4,7 +4,7 @@ Feature: User profile functionality
   I want to have an individual profile with information about me and my favourite beers
 
   Background:
-    Given I am on Profile page logged in with:
+    Given a user is on Profile page logged in with:
       | username | password    |
       | pesho    | parola123A! |
 
@@ -29,15 +29,14 @@ Feature: User profile functionality
       | <info> |
     Then user info about me should be updated
     Examples:
-      | info |
-    |  adsasdfa    |
-    | 21414        |
-    | Аз съм Пешо  |
-
+      | info        |
+      | adsasdfa    |
+      | 21414       |
+      | Аз съм Пешо |
 
 
   Scenario: Navigate to change info page
-    When click on change Info button
+    When user clicks the "Change info" button
     Then user should be redirected to "Edit Profile"
 
 

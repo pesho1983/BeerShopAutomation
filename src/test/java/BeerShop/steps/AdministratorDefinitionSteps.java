@@ -136,7 +136,7 @@ public class AdministratorDefinitionSteps {
     }
 
     @When("^Filling the beer name (.*)$")
-    public void filling_the_beer_name_EDIT(String data) throws Exception {
+    public void filling_the_beer_name_EDIT(String data) {
         adminSteps.navigateToEditBeerPage();
         adminSteps.clickOnNthBeerEditElement(1);
         adminSteps.fillBeerEditName(data);
@@ -184,7 +184,7 @@ public class AdministratorDefinitionSteps {
     }
 
     @When("^changing the beer picture$")
-    public void changing_the_beer_picture() throws Exception {
+    public void changing_the_beer_picture() {
         adminSteps.clickOnNthBeerEditElement(1);
         adminSteps.generateRandomImage();
         adminSteps.clickSaveBeerBtn();

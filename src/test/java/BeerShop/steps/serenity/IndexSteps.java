@@ -51,12 +51,12 @@ public class IndexSteps {
         loginSteps.pressSubmitButton();
     }
 
-    @Step
-    public void theUserAddMoney(Map<String, String> data){
-        loginSteps.clickOnWalletLink();
-        walletSteps.addMoney(data);
-        walletSteps.pressDepositButton();
-    }
+//    @Step
+//    public void theUserAddMoney(Map<String, String> data){
+//        loginSteps.clickOnWalletLink();
+//        walletSteps.addMoney(data);
+//        walletSteps.pressDepositButton();
+//    }
 
     @Step
     public void assertLastThreeSoldBeersAreOnIndexPage() {

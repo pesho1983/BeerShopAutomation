@@ -1,9 +1,12 @@
 package BeerShop.pages;
 
+import BeerShop.entities.User;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
+
+import java.util.List;
 
 import static BeerShop.Utils.Utils.WEBSITE_URL;
 
@@ -46,28 +49,28 @@ public class PasswordChangePage extends PageObject {
     @FindBy(id="confirmPass-error")
     private WebElementFacade confirmPasswordValidationMessage;
 
-    public WebElementFacade getNewPasswordValidationMessage() {
-        return newPasswordValidationMessage;
+    public String getNewPasswordValidationMessage() {
+        return this.newPasswordValidationMessage.getText();
     }
 
-    public WebElementFacade getConfirmPasswordValidationMessage() {
-        return confirmPasswordValidationMessage;
+    public String getConfirmPasswordValidationMessage() {
+        return this.confirmPasswordValidationMessage.getText();
     }
 
-    public WebElementFacade getOldPasswordValidationMessage() {
-        return oldPasswordValidationMessage;
+    public String getOldPasswordValidationMessage() {
+        return this.oldPasswordValidationMessage.getText();
     }
 
-    public WebElementFacade getOldPassword() {
-        return oldPassword;
+    public void enterPassword(List<User> user) {
+        this.oldPassword.type(user.get(0).getPassword());
     }
 
-    public WebElementFacade getNewPassword() {
-        return newPassword;
+    public void enterNewPassword(List<User> user){
+        this.newPassword.type(user.get(0).getNewPassword());
     }
 
-    public WebElementFacade getConfirmPassword() {
-        return confirmPassword;
+    public void enterConfirmPassword(List<User> user){
+        this.confirmPassword.type(user.get(0).getConfirmPassword());
     }
 
     public PasswordChangePage clickOnSaveButton() {
@@ -75,20 +78,20 @@ public class PasswordChangePage extends PageObject {
         return this;
     }
 
-    public WebElementFacade getSuccessMessage() {
-        return successMessage;
+    public String getSuccessMessage() {
+        return this.successMessage.getText();
     }
 
-    public WebElementFacade getWrongPasswordMessage() {
-        return wrongPasswordMessage;
+    public String getWrongPasswordMessage() {
+        return this.wrongPasswordMessage.getText();
     }
 
-    public WebElementFacade getRequiredPasswordSymbolsMessage() {
-        return requiredPasswordSymbolsMessage;
+    public String getRequiredPasswordSymbolsMessage() {
+        return this.requiredPasswordSymbolsMessage.getText();
     }
 
-    public WebElementFacade getMatchPasswordMessage() {
-        return matchPasswordMessage;
+    public String getMatchPasswordMessage() {
+        return this.matchPasswordMessage.getText();
     }
 
     public PasswordChangePage clickOnBackToProfileButton() {

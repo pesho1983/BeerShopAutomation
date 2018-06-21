@@ -31,9 +31,8 @@ public class AddBeerSteps {
 
     @Step
     public void loginAsAdmin(List<User> user){
-        loginPage.getUsername().type(user.get(0).getUsername());
-        loginPage.getPassword().type(user.get(0).getPassword());
-        loginPage.getSignIn().click();
+        loginPage.enterUsernameAndPassword(user);
+        loginPage.clickSignInButton();
     }
 
 

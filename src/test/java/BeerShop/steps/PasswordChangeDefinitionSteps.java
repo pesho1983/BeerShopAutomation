@@ -2,6 +2,7 @@ package BeerShop.steps;
 
 import BeerShop.entities.User;
 import BeerShop.steps.serenity.*;
+import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -20,9 +21,8 @@ public class PasswordChangeDefinitionSteps {
     @Steps
     BasketSteps basketSteps;
 
-
-    @Given("^I am on Profile page logged in with:$")
-    public void iAmOnProfilePage(@Transpose Map<String, String> data) {
+    @Given("^a user is on Profile page logged in with:$")
+    public void userIsOnProfilePage(List<User> user) {
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
         loginSteps.enterUsernameAndPassword(user);

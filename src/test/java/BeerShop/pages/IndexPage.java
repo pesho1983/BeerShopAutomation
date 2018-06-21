@@ -12,12 +12,17 @@ import static BeerShop.Utils.Utils.WEBSITE_URL;
 @DefaultUrl(WEBSITE_URL + "index.php")
 public class IndexPage extends PageObject {
 
-
     @FindBy(id = "login")
     private WebElementFacade login;
 
+    @FindBy(id = "catalog")
+    private WebElementFacade catalog;
+
     @FindBy(css = ".last_sold div p:nth-child(2)")
     private List<WebElementFacade> listOfLastSoldBeers;
+
+    @FindBy(id = "myHeader")
+    private HeaderMenu headerMenu;
 
     public boolean getLastThreeSoldBeers(List<String> listOfSoldBeers, int numberOfPurchasedBeers) {
         for (int i = 0; i < numberOfPurchasedBeers; i++) {
@@ -29,8 +34,13 @@ public class IndexPage extends PageObject {
         return true;
     }
 
-    public IndexPage clickOnLoginNavLink(){
+    public void clickOnLoginNavLink() {
+
+        //this.headerMenu.clickLoginButton();
         this.login.click();
-        return this;
+    }
+
+    public void clickOnCatalogNavLink(){
+        this.catalog.click();
     }
 }

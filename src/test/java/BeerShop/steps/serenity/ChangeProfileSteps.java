@@ -90,7 +90,7 @@ ChangeProfileSteps {
 
     @Step
     public void verifyUsernameIsDisplayed(String username) {
-        Assert.assertEquals(username, loginPage.getProfileNavLink().getText());
+        Assert.assertEquals(username, loginPage.profileNavUsername());
     }
 
     @Step

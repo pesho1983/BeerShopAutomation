@@ -1,16 +1,13 @@
 package BeerShop.steps;
 
+import BeerShop.entities.User;
 import BeerShop.steps.serenity.RegisterSteps;
-
-import cucumber.api.PendingException;
-import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
-
-import java.util.Map;
+import java.util.List;
 
 public class RegisterDefinitionSteps {
     @Steps
@@ -22,44 +19,25 @@ public class RegisterDefinitionSteps {
         registerSteps.openRegisterPage();
     }
 
-    @When("^user enters valid data$")
-    public void userEntersValidData(@Transpose Map<String, String> data) {
-        registerSteps.fillValidData(data);
+    @When("^user fill registration form with$")
+    public void fillRegistrationForm(List<User> user) {
+        registerSteps.fillRegistrationForm(user);
     }
 
     @And("^click on register button$")
-    public void clickOnRegister() {
-        registerSteps.register();
+    public void clickOnRegisterButton() {
+        registerSteps.clickOnRegisterButton();
     }
 
-    @Then("^user is redirected to login \"([^\"]*)\" url$")
+    @Then("^user is redirected to \"([^\"]*)\" url$")
     public void userIsRedirectedToUrl(String url) {
-        registerSteps.successRegister(url);
+        registerSteps.assertExactURL(url);
     }
 
-
-    @When("^user enters invalid data for$")
-    public void userEntersInvalidData(@Transpose Map<String, String> data) {
-        registerSteps.fillInvalidData(data);
+    @When("^user fill registration form with with unchecked checkboxes for$")
+    public void userfillRegistrationFormWithUncheckedCheckboxesFor(List<User> user) {
+        registerSteps.fillRegistrationFormWithoutCheckbox(user);
     }
-
-    @Then("^user is redirected to register \"([^\"]*)\" url$")
-    public void userIsRedirectedToRegisterUrl(String url) {
-        registerSteps.deniedRegisterWithCheckbox(url);
-    }
-
-
-    @When("^user enters invalid data with unchecked checkboxes for$")
-    public void userEntersInvalidDataWithUncheckedCheckboxesFor(@Transpose Map<String, String> data) {
-        registerSteps.fillInvalidDataWithoutCheckbox(data);
-    }
-
-
-    @Then("^user is redirected to register # \"([^\"]*)\" url$")
-    public void userIsRedirectedToRegister1Url(String url) {
-        registerSteps.deniedRegisterWithoutCheckbox(url);
-    }
-
 
     @Then("^an frontend error message  \"([^\"]*)\" appears$")
     public void anErrorMessageAppears(String error) {

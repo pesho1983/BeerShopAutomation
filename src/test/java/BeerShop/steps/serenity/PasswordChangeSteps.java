@@ -1,11 +1,12 @@
 package BeerShop.steps.serenity;
 
+import BeerShop.Utils.constants.PasswordChangeConstants;
 import BeerShop.entities.User;
 import BeerShop.pages.PasswordChangePage;
 import BeerShop.pages.ProfilePage;
-import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
+
 import java.util.List;
 
 public class PasswordChangeSteps {
@@ -14,9 +15,9 @@ public class PasswordChangeSteps {
 
     @Step
     public void enterOldPassNewPassAndConfirmPass(List<User> user) {
-        passwordChangePage.getOldPassword().type(user.get(0).getPassword());
-        passwordChangePage.getNewPassword().type(user.get(0).getNewPassword());
-        passwordChangePage.getConfirmPassword().type(user.get(0).getConfirmPassword());
+        passwordChangePage.enterPassword(user);
+        passwordChangePage.enterNewPassword(user);
+        passwordChangePage.enterConfirmPassword(user);
     }
 
     @Step
@@ -32,47 +33,45 @@ public class PasswordChangeSteps {
 
     @Step
     public void assertSuccessMessageText(String succsessMessage) {
-        Assert.assertEquals(succsessMessage,passwordChangePage.getSuccessMessage().getText());
+        Assert.assertEquals(succsessMessage, passwordChangePage.getSuccessMessage());
     }
 
     @Step
-    public void assertProfilePageURL(String defaultUrl){
+    public void assertProfilePageURL(String defaultUrl) {
         String currentUrl = profilePage.getDriver().getCurrentUrl();
-        Assert.assertEquals(defaultUrl,currentUrl);
+        Assert.assertEquals(defaultUrl, currentUrl);
     }
 
     @Step
-    public void assertPasswordFieldValidationMessage(String defaultValidation, String fieldValidation){
-        WebElementFacade oldPassValidation = passwordChangePage.getOldPasswordValidationMessage();
-        WebElementFacade newPassValidation = passwordChangePage.getNewPasswordValidationMessage();
-        WebElementFacade confirmPassValidation = passwordChangePage.getConfirmPasswordValidationMessage();
-        switch (fieldValidation){
-            case "Empty Current Password":
-                Assert.assertEquals(defaultValidation,oldPassValidation.getText());
+    public void assertPasswordFieldValidationMessage(String defaultValidation, String fieldValidation) {
+        switch (fieldValidation) {
+            case PasswordChangeConstants.EMPTY_CURRENT_PASSWORD_FIELD:
+                Assert.assertEquals(defaultValidation, passwordChangePage.getOldPasswordValidationMessage());
                 break;
-            case "Empty New Password":
-                Assert.assertEquals(defaultValidation,newPassValidation.getText());
+            case PasswordChangeConstants.EMPTY_NEW_PASSWORD_FIELD:
+                Assert.assertEquals(defaultValidation, passwordChangePage.getNewPasswordValidationMessage());
                 break;
-            case "Empty Confirm Password":
-                Assert.assertEquals(defaultValidation,confirmPassValidation.getText());
+            case PasswordChangeConstants.EMPTY_CONFIRM_PASSWORD_FIELD:
+                Assert.assertEquals(defaultValidation, passwordChangePage.getConfirmPasswordValidationMessage());
                 break;
-            case "All Empty":
-                Assert.assertEquals(defaultValidation,oldPassValidation.getText());
-                Assert.assertEquals(defaultValidation,newPassValidation.getText());
-                Assert.assertEquals(defaultValidation,confirmPassValidation.getText());
+            case PasswordChangeConstants.ALL_EMPTY_FIELD:
+                Assert.assertEquals(defaultValidation, passwordChangePage.getOldPasswordValidationMessage());
+                Assert.assertEquals(defaultValidation, passwordChangePage.getNewPasswordValidationMessage());
+                Assert.assertEquals(defaultValidation, passwordChangePage.getConfirmPasswordValidationMessage());
                 break;
-            case "Change Password":
-                Assert.assertEquals(defaultValidation,passwordChangePage.getSuccessMessage().getText());
+            case PasswordChangeConstants.CHANGE_PASSWORD_FIELD:
+                Assert.assertEquals(defaultValidation, passwordChangePage.getSuccessMessage());
                 break;
-            case "Current Password":
-                Assert.assertEquals(defaultValidation,passwordChangePage.getWrongPasswordMessage().getText());
+            case PasswordChangeConstants.CURRENT_PASSWORD_FIELD:
+                Assert.assertEquals(defaultValidation, passwordChangePage.getWrongPasswordMessage());
                 break;
-            case "New Password":
-                Assert.assertEquals(defaultValidation,passwordChangePage.getRequiredPasswordSymbolsMessage().getText());
-            break;
-            case "Confirm New Password":
-                Assert.assertEquals(defaultValidation,passwordChangePage.getMatchPasswordMessage().getText());
+            case PasswordChangeConstants.NEW_PASSWORD_FIELD:
+                Assert.assertEquals(defaultValidation, passwordChangePage.getRequiredPasswordSymbolsMessage());
+                break;
+            case PasswordChangeConstants.CONFIRM_NEW_PASSWORD_FIELD:
+                Assert.assertEquals(defaultValidation, passwordChangePage.getMatchPasswordMessage());
                 break;
         }
     }
 }
+

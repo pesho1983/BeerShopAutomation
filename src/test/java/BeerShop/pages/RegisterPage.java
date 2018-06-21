@@ -1,10 +1,13 @@
 package BeerShop.pages;
 
-
+import BeerShop.Utils.Randomizer;
+import BeerShop.entities.User;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
+
+import java.util.List;
 
 @DefaultUrl("http://192.168.10.158/BeerShop/register.php")
 
@@ -51,6 +54,28 @@ public class RegisterPage extends PageObject {
     @FindBy(xpath = "//strong[not(contains(@style, 'display: none'))]")
     private WebElementFacade errorMessageLabelStrong;
 
+    public void fillRegistrationForm(List<User> user) {
+        this.username.type(Randomizer.randomizeValue(user.get(0).getUsername()));
+        this.password.type(user.get(0).getPassword());
+        this.confirmpass.type(user.get(0).getConfirmPassword());
+        this.firstname.type(user.get(0).getFirstName());
+        this.lastname.type(user.get(0).getLastName());
+        this.email.type(Randomizer.randomizeValue(user.get(0).getEmail()));
+        this.phone.type(Randomizer.randomizeValue(user.get(0).getPhone()));
+        this.address.type(user.get(0).getAddress());
+        this.age.type(Randomizer.randomizeValue(user.get(0).getAge()));
+    }
+
+    public RegisterPage clickOnAgreement(){
+        this.agreement.click();
+        return this;
+    }
+
+    public RegisterPage clickOnGDPR(){
+        this.gdpr.click();
+        return this;
+    }
+
     public String getErrorMessageLabelStrong() {
         return errorMessageLabelStrong.getText();
     }
@@ -59,52 +84,13 @@ public class RegisterPage extends PageObject {
         return errorMessageLabel.getText();
     }
 
-    public WebElementFacade getUsername() {
-        return username;
+    public RegisterPage clickOnRegisterButton() {
+        this.registerSubmit.click();
+        return this;
     }
 
-    public WebElementFacade getPassword() {
-        return password;
-    }
-
-    public WebElementFacade getConfirmPass() {
-        return confirmpass;
-    }
-
-    public WebElementFacade getFirstname() {
-        return firstname;
-    }
-
-    public WebElementFacade getLastname() {
-        return lastname;
-    }
-
-    public WebElementFacade getEmail() {
-        return email;
-    }
-
-    public WebElementFacade getPhone() {
-        return phone;
-    }
-
-    public WebElementFacade getAddress() {
-        return address;
-    }
-
-    public WebElementFacade getAge() {
-        return age;
-    }
-
-    public WebElementFacade getAgreement() {
-        return agreement;
-    }
-
-    public WebElementFacade getGdpr() {
-        return gdpr;
-    }
-
-    public WebElementFacade getRegisterSubmit() {
-        return registerSubmit;
+    public String getCurrentURL(){
+        return this.getDriver().getCurrentUrl();
     }
 
 }

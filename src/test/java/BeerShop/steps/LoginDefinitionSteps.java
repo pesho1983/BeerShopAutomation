@@ -43,8 +43,8 @@ public class LoginDefinitionSteps {
         loginSteps.assertUserIsOnCatalogPage(defaultUrl);
     }
 
-    @Then("^I should see (.*) (.*) on Login page$")
-    public void iShouldSeeValidationMessageOnLoginPage(String validation, String defaultMessage) {
+    @Then("^message (.*) should be displayed for (.*) field$")
+    public void messageShouldBeDisplayedOnLoginPage(String defaultMessage, String validation) {
         loginSteps.assertValidationMessage(validation, defaultMessage);
     }
 

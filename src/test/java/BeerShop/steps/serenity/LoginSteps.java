@@ -5,7 +5,10 @@ import BeerShop.pages.LoginPage;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
+import sun.security.util.PendingException;
+
 import java.util.List;
+
 import static BeerShop.Utils.Utils.WEBSITE_URL;
 
 @DefaultUrl(WEBSITE_URL + "login.php")
@@ -19,34 +22,27 @@ public class LoginSteps {
 
     @Step
     public String getErrorTextMsg() {
-        return loginPage.getWrongUserOrPassBox().getText();
+        return loginPage.errorMsgForWrongUserOrPass();
     }
 
     @Step
     public void enterUsernameAndPassword(List<User> user) {
-        loginPage.getUsername().type(user.get(0).getUsername());
-        loginPage.getPassword().type(user.get(0).getPassword());
-    }
-
-    @Step
-    public void enterUsernameAndPassword(String username, String password){
-        loginPage.getUsername().type(username);
-        loginPage.getPassword().type(password);
+        loginPage.enterUsernameAndPassword(user);
     }
 
     @Step
     public void pressSubmitButton() {
-        loginPage.getSubmitButton().click();
+        loginPage.pressSubmitButton();
     }
 
     @Step
     public void assertUserIsOnCatalogPage(String defaultUrl) {
-        Assert.assertEquals(defaultUrl, loginPage.getDriver().getCurrentUrl());
+        Assert.assertEquals(defaultUrl, loginPage.getCurrentURL());
     }
 
     @Step
     public void clickOnProfileNavLink() {
-        loginPage.getProfileNavLink().click();
+        loginPage.clickOnProfileNavLink();
     }
 
     @Step
@@ -77,31 +73,33 @@ public class LoginSteps {
     @Step
     public void assertValidationMessage(String validation, String defaulMessage) {
         switch (validation) {
-            case "errorLogin":
-                Assert.assertEquals(defaulMessage, loginPage.getWrongUsernameOrPasswordMessage().getText());
+            case "wrong data in":
+                Assert.assertEquals(defaulMessage, loginPage.getWrongUsernameOrPasswordMessage());
                 break;
-            case "usernameValidation":
-                Assert.assertEquals(defaulMessage, loginPage.getUsernameValidationMessage().getText());
+            case "empty username":
+                Assert.assertEquals(defaulMessage, loginPage.getUsernameValidationMessage());
                 break;
-            case "passwordValidation":
-                Assert.assertEquals(defaulMessage, loginPage.getPasswordValidationMessage().getText());
+            case "empty password":
+                Assert.assertEquals(defaulMessage, loginPage.getPasswordValidationMessage());
                 break;
-            case "userAndPassValidations":
-                Assert.assertEquals(defaulMessage, loginPage.getUsernameValidationMessage().getText());
-                Assert.assertEquals(defaulMessage, loginPage.getPasswordValidationMessage().getText());
+            case "all empty":
+                Assert.assertEquals(defaulMessage, loginPage.getUsernameValidationMessage());
+                Assert.assertEquals(defaulMessage, loginPage.getPasswordValidationMessage());
                 break;
+            default:
+                throw new PendingException("The method for " + validation + " is not implemented yet.");
         }
 
     }
 
     @Step
     public void checkRememberMeCheckbox() {
-        loginPage.getRememberMeCheckBox().click();
+        loginPage.checkRememberMeCheckbox();
     }
 
     @Step
     public void assertLoggedInWithSameUser(String username) {
-        Assert.assertEquals(username, loginPage.getProfileUsermame().getText());
+        Assert.assertEquals(username, loginPage.getProfileUsermame());
 
     }
 }
