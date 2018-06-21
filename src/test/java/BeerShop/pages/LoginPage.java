@@ -58,16 +58,6 @@ public class LoginPage extends PageObject {
         this.password.type(user.get(0).getPassword());
     }
 
-//    public LoginPage enterUsername(List<User> user) {
-//        this.username.type(user.get(0).getUsername());
-//        return this;
-//    }
-//
-//    public LoginPage enterPassword(List<User> user) {
-//        this.username.type(user.get(0).getPassword());
-//        return this;
-//    }
-
     public WebElementFacade getNote() {
         return note;
     }
@@ -117,7 +107,7 @@ public class LoginPage extends PageObject {
         return this;
     }
 
-    public String getCurrentURL(){
+    public String getCurrentURL() {
         return this.getDriver().getCurrentUrl();
     }
 

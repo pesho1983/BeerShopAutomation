@@ -28,8 +28,6 @@ public class LoginSteps {
     @Step
     public void enterUsernameAndPassword(List<User> user) {
         loginPage.enterUsernameAndPassword(user);
-//        loginPage.enterUsername(user);
-//        loginPage.enterPassword(user);
     }
 
     @Step

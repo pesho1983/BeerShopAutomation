@@ -3,11 +3,12 @@ package BeerShop.pages;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
+import net.thucydides.core.annotations.NamedUrl;
 import net.thucydides.core.pages.PageObject;
 
 @DefaultUrl("http://192.168.10.158/BeerShop/addBeer.php")
-public class AddBeerPage extends PageObject {
 
+public class AddBeerPage extends PageObject {
 
     @FindBy(name="name")
     private WebElementFacade name;
@@ -30,8 +31,8 @@ public class AddBeerPage extends PageObject {
     @FindBy(xpath="//div[contains (text(),'must be unique')]")
     private WebElementFacade dangerMessageSameName;
 
-//    @FindBy(className ="btn btn-danger")
-//    private WebElementFacade backButton;
+    @FindBy(css =".btn.btn-danger")
+    private WebElementFacade readProducts;
 
     @FindBy(css=".alert.alert-success")
     private WebElementFacade successfullMessage;
@@ -39,11 +40,9 @@ public class AddBeerPage extends PageObject {
     @FindBy(xpath="//div[contains (text(),'Image')]")
     private WebElementFacade dangerMessage;
 
-//    public WebElementFacade getBackButton() {
-//        return backButton;
-//    }
-
-
+    public WebElementFacade getReadProducts() {
+        return readProducts;
+    }
     public WebElementFacade getName() {
         return name;
     }

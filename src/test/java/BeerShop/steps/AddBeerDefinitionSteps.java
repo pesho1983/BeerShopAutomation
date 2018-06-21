@@ -58,4 +58,20 @@ public class AddBeerDefinitionSteps {
     public void messageAboutTheSameNameIsDisplayed(String message){
         addBeerSteps.assertMessageSameName(message);
     }
+
+    @When("^user add credentials but existing name:$")
+    public void userAddCredentialsButExistingName(@Transpose Map<String,String> data)  {
+       addBeerSteps.fillCredentialsExistingName(data);
+    }
+
+    @When("^user click button Back to read products$")
+    public void userClickButtonBackToReadProducts() {
+        addBeerSteps.clickOnBackToRead();
+    }
+
+    @Then("^page with title \"([^\"]*)\" is loaded$")
+    public void pageWithTitleIsLoaded(String title)  {
+        addBeerSteps.assertTitleAllBeer(title);
+
+    }
 }

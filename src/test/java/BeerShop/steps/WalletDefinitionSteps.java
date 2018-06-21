@@ -1,23 +1,27 @@
 package BeerShop.steps;
 
+import BeerShop.Utils.constants.BasketConstants;
 import BeerShop.entities.User;
-import BeerShop.pages.WalletPage;
-import BeerShop.steps.serenity.IndexSteps;
-import BeerShop.steps.serenity.LoginSteps;
-import BeerShop.steps.serenity.WalletSteps;
+import BeerShop.pages.BasketPage;
+import BeerShop.steps.serenity.*;
 import cucumber.api.PendingException;
 import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
-import org.junit.Assert;
 
 import java.util.List;
 import java.util.Map;
 
+
 public class WalletDefinitionSteps {
+    public float totalPriceFromBasket;
+    private String currentMoney;
+    private float depositMoney;
+    public String message;
 
     @Steps
     IndexSteps indexSteps;
@@ -26,104 +30,113 @@ public class WalletDefinitionSteps {
     @Steps
     WalletSteps walletSteps;
     @Steps
-    WalletPage walletPage;
+    CatalogSteps catalogSteps;
+    @Steps
+    BasketSteps basketSteps;
+    @Steps
+    BasketDefinitionSteps basketDefinitionSteps;
+
+    BasketPage basketPage;
 
 
-    @Given("^the user is logged in with valid credentials:$")
-    public void theUserIsLoggedInWithValidCredentials(@Transpose List<User> user){
+    @Given("^a user is logged in with valid credentials:$")
+    public void aUserIsLoggedInWithValidCredentials(@Transpose List<User> user) {
         indexSteps.openURL();
         indexSteps.clickOnLoginNavLink();
         loginSteps.enterUsernameAndPassword(user);
         loginSteps.pressSubmitButton();
     }
 
-    @And("^(?:user|the user) is on wallet page with zero funds:$")
-    public void theUserIsOnWalletPage(Map<String, String> data){
+    @When("^(?:user|the user) is on wallet page with zero \"([^\"]*)\" funds:$")
+    public void theUserIsOnWalletPage(Float data){
         loginSteps.clickOnWalletLink();
         walletSteps.addMoney(data);
         walletSteps.pressDepositButton();
     }
 
     @When("^adding additional funds to the personal account:$")
-    public void addingAdditionalFundsToThePersonalAccount(Map<String, String> data) {
+    public void addingAdditionalFundsToThePersonalAccount(Float data) {
         walletSteps.addMoney(data);
         walletSteps.pressDepositButton();
     }
 
-    @Then("^the funds are added to users personal account$")
-    public void theFundsAreAddedToUsersPersonalAccount()  {
-        Assert.assertEquals("Current balance: BGN 100.00",walletPage.getCurrentBalance().getText());
+    @Given("^the user is on wallet page$")
+    public void theUserIsOnWalletPage() {
+        loginSteps.clickOnWalletLink();
+        walletSteps.pressDepositButton();
     }
 
-    @Then("^current balance will increased with additional funds$")
-    public void currentBalanceWillIncreasedWithAdditionalFunds() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @Then("^current balance increase or decrease with the additional funds:$")
+    public void currentBalanceIncreaseOrDecreaseWithTheAdditionalFunds() {
+        walletSteps.assertBalanceChange(currentMoney, depositMoney);
     }
 
-//    @Then("^current balance will be (\\d+)\.(\\d+)$")
-//    public void currentBalanceWillBe(int arg0, int arg1) throws Throwable {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new PendingException();
-//    }
-
-    @When("^adding special characters in Deposit field:$")
-    public void addingSpecialCharactersInDepositField() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @Then("^current balance should be \"([^\"]*)\":$")
+    public void currentBalanceShouldBe(String data) {
+        walletSteps.assertCurrentBalance(data);
     }
 
-    @Then("^current balance will be the same as before$")
-    public void currentBalanceWillBeTheSameAsBefore() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @When("^the user adds special characters in deposit field:$")
+    public void theUserAddsSpecialCharactersInDepositField(@Transpose Map<String, String> data) {
+        walletSteps.addSymbols(data);
+        walletSteps.pressDepositButton();
     }
 
-    @And("^the user has enough money in wallet$")
-    public void theUserHasEnoughMoneyInWallet() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @When("the user is on the wallet page and check his current balance$")
+    public String theUserIsOnTheWalletPageAndCheckHisCurrentBalance() {
+        loginSteps.clickOnWalletLink();
+        return currentMoney = walletSteps.getCurrentBalance();
     }
 
-    @And("^the user is on order prevew page$")
-    public void theUserIsOnOrderPrevewPage() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @When("^the user adds \"([^\"]*)\" funds to the personal account$")
+    public void theUserAddsFundsToThePersonalAccount(Float data) {
+        walletSteps.addMoney(data);
+        walletSteps.getCurrentBalance();
+        walletSteps.pressDepositButton();
     }
 
-    @When("^click on button place order:$")
-    public void clickOnButtonPlaceOrder() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @When("^the user is on order preview page:$")
+    public void theUserIsOnOrderPrevewPage(Map<String, Integer> product) {
+        catalogSteps.redirectToCatalog();
+        basketSteps.clickOnAddToCart(product.get("product"));
+        totalPriceFromBasket = basketPage.getCartTotal();
     }
 
-    @Then("^order has been placed$")
-    public void orderHasBeenPlaced() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @Then("^current amount in wallet is less with total order price$")
+    public void currentAmountInWalletIsLessWithTotalOrderPrice() {
+        catalogSteps.redirectToCatalog();
+        loginSteps.clickOnWalletLink();
+        float cartPrice = basketDefinitionSteps.cartTotalPrice;
+        float moneyBeforeBuy = Float.parseFloat(currentMoney);
+        float moneyInWallet = Float.valueOf(walletSteps.getCurrentBalance());
+        walletSteps.assertPurchaseBalanceChange(moneyInWallet, moneyBeforeBuy, totalPriceFromBasket);
     }
 
-    @And("^current amount in wallet is less with total order price$")
-    public void currentAmountInWalletIsLessWithTotalOrderPrice() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @Then("^\"([^\"]*)\" funds are added to the account$")
+    public void fundsAreAddedToTheAccount(Float value) {
+        walletSteps.assertBalanceIsChanged(value, currentMoney);
     }
 
-    @And("^there is not enough money in wallet$")
-    public void thereIsNotEnoughMoneyInWallet() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @When("^the user has enough money to buy beer$")
+    public void theUserHasEnoughMoneyToBuyBeer() {
+        loginSteps.clickOnWalletLink();
+        walletSteps.checkIfTheBalanceIsEnough();
+        currentMoney = walletSteps.getCurrentBalance();
     }
 
-    @Then("^order hasn't been placed$")
-    public void orderHasnTBeenPlaced() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @When("^user press \"([^\"]*)\" and \"([^\"]*)\" buttons to confirm order$")
+    public void userPressAndButtonsToConfirmOrder(String checkout, String placeOrder)  {
+        basketSteps.clickButton(checkout);
+        basketSteps.clickButton(placeOrder);
     }
 
-    @And("^there is warning message$")
-    public void thereIsWarningMessage() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @Then("^order has not been placed$")
+    public void orderHasNotBeenPlaced(String message)  {
+        basketSteps.assertMessageEquals(message);
+    }
+
+    @Then("^order has not been placed and error message \"([^\"]*)\" should appears$")
+    public void orderHasNotBeenPlacedAndErrorMessageShouldAppears(String message) {
+        basketSteps.assertMessageEquals(message);
     }
 }

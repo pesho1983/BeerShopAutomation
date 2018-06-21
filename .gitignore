@@ -4,9 +4,9 @@
 .settings/
  
 # Intellij
-.idea
-build
-history
+.idea/
+build/
+history/
 *.iml
 *.iws
 
@@ -20,5 +20,4 @@ target/
 
 # User
 **/MyDefinitionTestSuite.java
-
-
+**/MishoDefinitionTestSuite.java

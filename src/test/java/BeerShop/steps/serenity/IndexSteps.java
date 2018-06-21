@@ -11,6 +11,7 @@ import java.util.Random;
 
 import static BeerShop.Utils.constants.BasketConstants.*;
 
+
 public class IndexSteps {
     IndexPage indexPage;
     @Steps
@@ -50,12 +51,12 @@ public class IndexSteps {
         loginSteps.pressSubmitButton();
     }
 
-    @Step
-    public void theUserAddMoney(Map<String, String> data){
-        loginSteps.clickOnWalletLink();
-        walletSteps.addMoney(data);
-        walletSteps.pressDepositButton();
-    }
+//    @Step
+//    public void theUserAddMoney(Map<String, String> data){
+//        loginSteps.clickOnWalletLink();
+//        walletSteps.addMoney(data);
+//        walletSteps.pressDepositButton();
+//    }
 
     @Step
     public void assertLastThreeSoldBeersAreOnIndexPage() {
