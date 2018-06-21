@@ -5,6 +5,7 @@ import BeerShop.pages.LoginPage;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
+import sun.security.util.PendingException;
 
 import java.util.List;
 
@@ -73,7 +74,24 @@ public class LoginSteps {
 
     @Step
     public void assertValidationMessage(String validation, String defaulMessage) {
-        loginPage.assertValidationMessage(validation, defaulMessage);
+        switch (validation) {
+            case "wrong data in":
+                Assert.assertEquals(defaulMessage, loginPage.getWrongUsernameOrPasswordMessage());
+                break;
+            case "empty username":
+                Assert.assertEquals(defaulMessage, loginPage.getUsernameValidationMessage());
+                break;
+            case "empty password":
+                Assert.assertEquals(defaulMessage, loginPage.getPasswordValidationMessage());
+                break;
+            case "all empty":
+                Assert.assertEquals(defaulMessage, loginPage.getUsernameValidationMessage());
+                Assert.assertEquals(defaulMessage, loginPage.getPasswordValidationMessage());
+                break;
+            default:
+                throw new PendingException("The method for " + validation + " is not implemented yet.");
+        }
+
     }
 
     @Step

@@ -2,11 +2,15 @@ package BeerShop.pages;
 
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.core.pages.WebElementFacadeImpl;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+
+import static java.sql.DriverManager.getDriver;
+
 
 public class HeaderMenuImp extends WebElementFacadeImpl implements HeaderMenu {
 

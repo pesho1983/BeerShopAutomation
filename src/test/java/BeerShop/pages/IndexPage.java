@@ -4,6 +4,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
+import org.openqa.selenium.By;
 
 import java.util.List;
 
@@ -35,7 +36,8 @@ public class IndexPage extends PageObject {
     }
 
     public void clickOnLoginNavLink() {
-        //  this.headerMenu.clickLoginButton();
+
+        //this.headerMenu.clickLoginButton();
         this.login.click();
     }
 

@@ -1,12 +1,10 @@
 package BeerShop.pages;
 
-import BeerShop.Utils.constants.PasswordChangeConstants;
 import BeerShop.entities.User;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
-import org.junit.Assert;
 
 import java.util.List;
 
@@ -99,37 +97,6 @@ public class PasswordChangePage extends PageObject {
     public PasswordChangePage clickOnBackToProfileButton() {
         this.backToProfileButton.click();
         return this;
-    }
-
-    public void assertPasswordFieldValidationMessage(String defaultValidation, String fieldValidation){
-        switch (fieldValidation){
-            case PasswordChangeConstants.EMPTY_CURRENT_PASSWORD_FIELD:
-                Assert.assertEquals(defaultValidation, getOldPasswordValidationMessage());
-                break;
-            case PasswordChangeConstants.EMPTY_NEW_PASSWORD_FIELD:
-                Assert.assertEquals(defaultValidation, getNewPasswordValidationMessage());
-                break;
-            case PasswordChangeConstants.EMPTY_CONFIRM_PASSWORD_FIELD:
-                Assert.assertEquals(defaultValidation, getConfirmPasswordValidationMessage());
-                break;
-            case PasswordChangeConstants.ALL_EMPTY_FIELD:
-                Assert.assertEquals(defaultValidation, getOldPasswordValidationMessage());
-                Assert.assertEquals(defaultValidation, getNewPasswordValidationMessage());
-                Assert.assertEquals(defaultValidation, getConfirmPasswordValidationMessage());
-                break;
-            case PasswordChangeConstants.CHANGE_PASSWORD_FIELD:
-                Assert.assertEquals(defaultValidation, getSuccessMessage());
-                break;
-            case PasswordChangeConstants.CURRENT_PASSWORD_FIELD:
-                Assert.assertEquals(defaultValidation, getWrongPasswordMessage());
-                break;
-            case PasswordChangeConstants.NEW_PASSWORD_FIELD:
-                Assert.assertEquals(defaultValidation, getRequiredPasswordSymbolsMessage());
-                break;
-            case PasswordChangeConstants.CONFIRM_NEW_PASSWORD_FIELD:
-                Assert.assertEquals(defaultValidation, getMatchPasswordMessage());
-                break;
-        }
     }
 
 }

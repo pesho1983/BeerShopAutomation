@@ -5,8 +5,6 @@ import net.thucydides.core.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.thucydides.core.pages.PageObject;
-import org.junit.Assert;
-import sun.security.util.PendingException;
 
 import java.util.List;
 
@@ -125,26 +123,6 @@ public class LoginPage extends PageObject {
 
     public String getProfileUsermame() {
         return this.profileUsermame.getText();
-    }
-
-    public void assertValidationMessage(String validation, String defaulMessage) {
-        switch (validation) {
-            case "wrong data in":
-                Assert.assertEquals(defaulMessage, getWrongUsernameOrPasswordMessage());
-                break;
-            case "empty username":
-                Assert.assertEquals(defaulMessage, getUsernameValidationMessage());
-                break;
-            case "empty password":
-                Assert.assertEquals(defaulMessage, getPasswordValidationMessage());
-                break;
-            case "all empty":
-                Assert.assertEquals(defaulMessage, getUsernameValidationMessage());
-                Assert.assertEquals(defaulMessage, getPasswordValidationMessage());
-                break;
-            default:
-                throw new PendingException("The method for " + validation + " is not implemented yet.");
-        }
     }
 
 }
