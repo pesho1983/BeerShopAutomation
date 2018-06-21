@@ -11,6 +11,7 @@ import java.util.Random;
 
 import static BeerShop.Utils.constants.BasketConstants.*;
 
+
 public class IndexSteps {
     IndexPage indexPage;
     @Steps

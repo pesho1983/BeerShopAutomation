@@ -102,8 +102,9 @@ public class LoginPage extends PageObject {
         return rememberMeCheckbox;
     }
 
-    public WebElementFacade getWalletLink() {
-        return walletLink;
+    public LoginPage clickOnWalletLink() {
+        this.walletLink.click();
+        return this;
     }
 
     public WebElementFacade getProfileUsermame() {

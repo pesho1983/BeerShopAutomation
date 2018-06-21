@@ -71,7 +71,7 @@ public class LoginSteps {
 
     @Step
     public void clickOnWalletLink() {
-        loginPage.getWalletLink().click();
+        loginPage.clickOnWalletLink();
     }
 
     @Step

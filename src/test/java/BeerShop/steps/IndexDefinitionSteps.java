@@ -28,10 +28,12 @@ public class IndexDefinitionSteps {
     }
 
     @And("^user is on wallet page and add funds:$")
-    public void theUserIsOnWalletPage(Map<String, String> data){
-        indexSteps.theUserAddMoney(data);
+    public void theUserIsOnWalletPage( float data){
+        loginSteps.clickOnWalletLink();
+        walletSteps.addMoney(data);
+        walletSteps.pressDepositButton();
     }
-
+//    Map<String, Float>
 
     @Then("^go back to Index page current bought beer have to be shown$")
     public void currentBoughtBeerHaveToBeShown() {
